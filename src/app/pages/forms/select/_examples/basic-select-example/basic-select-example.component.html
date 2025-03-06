@@ -1,9 +1,0 @@
-<h4>Basic mat-select</h4>
-<mat-form-field class="w-1/2">
-  <mat-label>Favorite food</mat-label>
-  <mat-select>
-    @for (food of foods; track food) {
-      <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-    }
-  </mat-select>
-</mat-form-field>

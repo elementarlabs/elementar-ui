@@ -1,8 +1,0 @@
-:host {
-  display: block;
-
-  .export {
-    --mdc-outlined-button-outline-color: var(--color-border);
-    --mdc-outlined-button-container-height: calc(var(--spacing) * 8);
-  }
-}

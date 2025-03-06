@@ -1,9 +1,0 @@
-<mat-selection-list #shoes [multiple]="false">
-  @for (shoe of typesOfShoes; track shoe) {
-    <mat-list-option [value]="shoe">{{ shoe }}</mat-list-option>
-  }
-</mat-selection-list>
-<mat-divider></mat-divider>
-<p>
-  Option selected: {{ shoes.selectedOptions.hasValue() ? shoes.selectedOptions.selected[0].value : 'None' }}
-</p>

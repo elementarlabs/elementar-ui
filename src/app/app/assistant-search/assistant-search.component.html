@@ -1,0 +1,61 @@
+<mat-icon class="font-icon search-icon">search</mat-icon>
+<input type="text" [(ngModel)]="searchText" placeholder="Recommend to search: My orders"
+       (focus)="focus($event, suggestionDropdown)">
+@if (searchText) {
+  <div class="absolute end-1 w-max">
+    <button mat-icon-button (click)="clearText()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+}
+
+<ng-template #suggestionDropdown>
+  <emr-suggestions class="rounded-b-3xl border-t border-t-default w-[600px] p-4 flex flex-col gap-4 dropdown">
+    <emr-suggestion-block heading="Recently Viewed">
+      <emr-suggestion (click)="close()">
+        <mat-icon emrSuggestionIcon>tune</mat-icon>
+        <span>Settings</span> &ndash; <span class="text-neutral-500 dark:text-neutral-400">My Profile</span>
+      </emr-suggestion>
+      <emr-suggestion>
+        <mat-icon emrSuggestionIcon>timeline</mat-icon>
+        <span>Application statistics</span> &ndash; <span class="text-neutral-500 dark:text-neutral-400">Admin Panel</span>
+      </emr-suggestion>
+    </emr-suggestion-block>
+    <emr-suggestion-block heading="Users">
+      <emr-suggestion>
+        <emr-avatar text="PS" emrSuggestionThumb class="size-8"/>
+        Pavel Salauyou
+      </emr-suggestion>
+      <emr-suggestion>
+        <emr-avatar text="JJ" emrSuggestionThumb class="size-8" />
+        Jessica Jones
+      </emr-suggestion>
+    </emr-suggestion-block>
+    <emr-suggestion-block heading="Files">
+      <emr-suggestion>
+        <div class="size-8 bg-neutral-200 dark:bg-neutral-500 text-neutral-800 rounded-full shadow-sm
+                    flex items-center justify-center dark:text-neutral-200" emrSuggestionThumb>
+          <mat-icon>image</mat-icon>
+        </div>
+        <span>Application flow.png</span> &ndash; <span class="text-neutral-500 dark:text-neutral-400">30KB</span>
+      </emr-suggestion>
+      <emr-suggestion>
+        <div class="size-8 bg-neutral-200 dark:bg-neutral-500 text-neutral-800 rounded-full shadow-sm
+                    flex items-center justify-center dark:text-neutral-200" emrSuggestionThumb>
+          <mat-icon>description</mat-icon>
+        </div>
+        <span>Monthly Report.pdf</span> &ndash; <span class="text-neutral-500 dark:text-neutral-400">502KB</span>
+      </emr-suggestion>
+    </emr-suggestion-block>
+    <emr-suggestion-block heading="Create Team" showDivider>
+      <div class="gap-3 flex px-2">
+        <button mat-stroked-button>
+          <mat-icon>add</mat-icon>Create new team
+        </button>
+        <button mat-stroked-button>
+          <mat-icon>add</mat-icon>Add new member
+        </button>
+      </div>
+    </emr-suggestion-block>
+  </emr-suggestions>
+</ng-template>

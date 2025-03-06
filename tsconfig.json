@@ -12,7 +12,7 @@
         "./src/app/@app/*"
       ],
       "@elementar-ui/components/*": ["./projects/components/*"],
-      "@elementar-ui/components": ["./projects/components"],
+      "@elementar-ui/components": ["./projects/components"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

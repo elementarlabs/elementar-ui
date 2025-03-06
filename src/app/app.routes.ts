@@ -2,21 +2,20 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'pages/dashboard/basic',
-    pathMatch: 'full'
-  },
-  {
-    path: 'pages',
-    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
-  },
-  {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
-  },
-  {
     path: 'error',
     loadChildren: () => import('./error/error.module').then(m => m.ErrorModule)
+  },
+  {
+    path: '',
+    loadComponent: () => import('./common/common.component').then(c => c.CommonComponent),
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () => import('./main/main.component').then(c => c.MainComponent),
+        title: 'Home'
+      }
+    ]
   },
   {
     path: '**',

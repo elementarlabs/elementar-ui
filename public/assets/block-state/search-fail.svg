@@ -1,22 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="800px" height="800px" viewBox="-0.5 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-    <title>search-disabled</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-</defs>
-    <g id="Vivid.JS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Vivid-Icons" transform="translate(-670.000000, -489.000000)">
-            <g id="Icons" transform="translate(37.000000, 169.000000)">
-                <g id="search-disabled" transform="translate(624.000000, 312.000000)">
-                    <g transform="translate(9.000000, 8.000000)" id="Shape">
-                        <path d="M17.283,20.611 L27.889,31.218 L30.717,28.39 L20.111,17.783 L17.283,20.611 Z M14.829,16.243 L12,13.414 L9.172,16.242 L7.758,14.828 L10.586,12 L7.758,9.172 L9.172,7.758 L12,10.586 L14.828,7.758 L16.242,9.172 L13.414,12 L16.242,14.828 L14.829,16.243 Z" fill="#0C0058" fill-rule="nonzero">
-</path>
-                        <path d="M12,24 C5.372583,24 3.94430453e-31,18.627417 -1.77635684e-15,12 C-3.55271368e-15,5.372583 5.372583,3.94430453e-31 12,-1.77635684e-15 C18.627417,-3.55271368e-15 24,5.372583 24,12 C24,15.1825979 22.7357179,18.2348448 20.4852814,20.4852814 C18.2348448,22.7357179 15.1825979,24 12,24 Z M12,4 C7.581722,4 4,7.581722 4,12 C4,16.418278 7.581722,20 12,20 C16.418278,20 20,16.418278 20,12 C20,9.87826808 19.1571453,7.84343678 17.6568542,6.34314575 C16.1565632,4.84285472 14.1217319,4 12,4 Z" fill="#FF6E6E" fill-rule="nonzero">
-</path>
-                    </g>
-                </g>
-            </g>
-        </g>
-    </g>
-</svg>

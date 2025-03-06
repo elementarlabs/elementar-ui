@@ -1,8 +1,0 @@
-:host {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: calc(var(--spacing) * 7);
-  margin-bottom: calc(var(--spacing) * 2);
-}

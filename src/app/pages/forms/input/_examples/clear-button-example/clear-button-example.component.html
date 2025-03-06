@@ -1,9 +1,0 @@
-<mat-form-field class="w-1/2">
-  <mat-label>Clearable input</mat-label>
-  <input matInput type="text" [(ngModel)]="value">
-  @if (value) {
-    <button matSuffix mat-icon-button aria-label="Clear" (click)="value=''" class="me-1">
-      <mat-icon>close</mat-icon>
-    </button>
-  }
-</mat-form-field>
