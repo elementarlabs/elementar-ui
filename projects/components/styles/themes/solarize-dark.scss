@@ -1,0 +1,44 @@
+@use "@angular/material" as mat;
+@use 'solarize-colors' as theme;
+@use 'sass:map';
+@use "../_common" with (
+  $m3-light-theme: mat.define-theme((
+    color: (
+      theme-type: light,
+      primary: theme.$primary-palette,
+      tertiary: theme.$tertiary-palette,
+      use-system-variables: true,
+      system-variables-prefix: sys,
+    ),
+    typography: (
+      brand-family: 'var(--font-sans)',
+      plain-family: 'var(--font-sans)',
+      use-system-variables: true,
+      system-variables-prefix: sys,
+    ),
+    density: (
+      scale: 0,
+    )
+  )),
+  $m3-dark-theme: mat.define-theme((
+    color: (
+      theme-type: dark,
+      primary: theme.$primary-palette,
+      tertiary: theme.$tertiary-palette,
+      use-system-variables: true,
+      system-variables-prefix: sys,
+    ),
+    typography: (
+      brand-family: 'var(--font-sans)',
+      plain-family: 'var(--font-sans)',
+      use-system-variables: true,
+      system-variables-prefix: sys,
+    ),
+    density: (
+      scale: 0,
+    )
+  ))
+);
+
+@include mat.elevation-classes();
+@include mat.app-background();
