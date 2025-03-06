@@ -112,6 +112,7 @@
     "typescript-eslint": "^8.26.0"
   },
   "husky": {
-    "pre-push": "npm run changelog"
+    "pre-push": "npm run changelog",
+    "pre-commit": "npm run lint"
   }
 }
