@@ -30,7 +30,7 @@ import { InviteToEditFilesInFolderNotificationComponent } from '../invite-to-edi
   styleUrl: './notifications-popover.component.scss',
 })
 export class NotificationsPopoverComponent {
-                  notifications: Notification[] = [
+  notifications: Notification[] = [
     {
       actor: {
         id: 1,
