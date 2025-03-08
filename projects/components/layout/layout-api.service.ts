@@ -6,7 +6,8 @@ import { LayoutSidebarStore } from './layout.store';
   providedIn: 'root'
 })
 export class LayoutApiService {
-  private _layoutSidebarStore = inject<any>(LayoutSidebarStore);
+
+  private _layoutSidebarStore = inject(LayoutSidebarStore);
   readonly sidebarVisibility = new EventEmitter<LayoutSidebarVisibilityChange>();
 
   hideSidebar(layoutId: string): void {
@@ -25,11 +26,16 @@ export class LayoutApiService {
     });
   }
 
-  toggleSidebar(layoutId: string): void {
-    this.isSidebarShown(layoutId) ? this.hideSidebar(layoutId) : this.showSidebar(layoutId);
+toggleSidebar(layoutId: string): void {
+  if (this.isSidebarShown(layoutId)) {
+    this.hideSidebar(layoutId);
+  } else {
+    this.showSidebar(layoutId);
   }
+}
 
   isSidebarShown(layoutId: string): boolean {
-    return this._layoutSidebarStore[layoutId]();
+    return this._layoutSidebarStore.getSidebarVisibility(layoutId)
   }
+
 }

@@ -15,11 +15,11 @@ import { LayoutSidebarStore } from '../layout.store';
 })
 export class LayoutSidebarComponent {
   private _parent = inject<LayoutComponent>(LAYOUT);
-  private _layoutSidebarStore = inject<any>(LayoutSidebarStore);
+  private _layoutSidebarStore = inject(LayoutSidebarStore);
 
   protected _isShown = computed<boolean>(() => {
     if (this._parent.layoutId() in this._layoutSidebarStore) {
-      return this._layoutSidebarStore[this._parent.layoutId()]();
+      return this._layoutSidebarStore.getSidebarVisibility(this._parent.layoutId());
     }
 
     return true;

@@ -3,6 +3,10 @@
   border-right: var(--emr-tab-panel-border-end);
   flex: none;
   width: var(--emr-tab-panel-aside-width);
+
+  &.is-hidden {
+    display: none;
+  }
 }
 
 :host-context(.emr-tab-panel.is-hide-content-if-tab-not-selected):empty {

@@ -90,9 +90,9 @@ export class HeaderComponent {
 
   toggleSidebar(): void {
     if (!this.sidebarHidden) {
-      this._layoutApi.hideSidebar('root');
+      this._layoutApi.hideSidebar('drawer');
     } else {
-      this._layoutApi.showSidebar('root');
+      this._layoutApi.showSidebar('drawer');
     }
 
     this.sidebarHidden = !this.sidebarHidden;
