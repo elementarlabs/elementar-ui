@@ -262,7 +262,7 @@ export class NumberInputComponent implements MatFormFieldControl<any>, ControlVa
 
   private updateErrorState() {
     const parent = this._parentFormGroup || this._parentForm;
-    let oldState = this.errorState;
+    const oldState = this.errorState;
     let newState = !!(this.ngControl?.invalid) && this.touched;
 
     if (parent) {

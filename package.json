@@ -1,5 +1,5 @@
 {
-  "name": "elementar-admin",
+  "name": "pos-web-v3",
   "description": "Elementar Admin - Free and open source Angular admin panel based on Material 3 and Tailwind",
   "version": "1.0.0",
   "license": "MIT",
@@ -25,8 +25,9 @@
     "build:components:prod": "ng build components --configuration production",
     "build:prod": "ng build --configuration production",
     "serve:ssr:elementar-admin": "node dist/elementar-admin/server/server.mjs",
-    "changelog": "auto-changelog -p && git add CHANGELOG.md",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "npx eslint \"{src,apps,libs}/**/*.ts\" --fix",
+    "format": "npx prettier --write ."
   },
   "private": true,
   "dependencies": {
@@ -95,8 +96,9 @@
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
     "@types/uuid": "^10.0.0",
+    "angular-eslint": "19.2.1",
     "autoprefixer": "^10.4.17",
-    "eslint": "^9.21.0",
+    "eslint": "^9.22.0",
     "globals": "^16.0.0",
     "husky": "^9.1.7",
     "jasmine-core": "~5.4.0",
@@ -107,12 +109,12 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^19.0.1",
     "postcss": "^8.5.2",
+    "prettier": "^3.5.3",
     "tailwindcss": "4.0.7",
     "typescript": "~5.6.2",
-    "typescript-eslint": "^8.26.0"
+    "typescript-eslint": "8.26.0"
   },
   "husky": {
-    "pre-push": "npm run changelog",
-    "pre-commit": "npm run lint"
+    "pre-commit": "npm run format && npm run lint"
   }
 }

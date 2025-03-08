@@ -8,10 +8,9 @@ describe('ScreenLoaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ScreenLoaderComponent]
-    })
-    .compileComponents();
-    
+      imports: [ScreenLoaderComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ScreenLoaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -4,14 +4,11 @@ import { DicebearComponent } from '@elementar-ui/components/avatar';
 import { Notification } from '@elementar-ui/components/notifications';
 
 @Component({
-  selector: 'emr-mentioned-in-comment',
-  imports: [
-    MatIcon,
-    DicebearComponent
-  ],
+  selector: 'app-mentioned-in-comment',
+  imports: [MatIcon, DicebearComponent],
   templateUrl: './mentioned-in-comment.notification.html',
-  styleUrl: './mentioned-in-comment.notification.scss'
+  styleUrl: './mentioned-in-comment.notification.scss',
 })
-export class MentionedInCommentNotification {
+export class MentionedInCommentNotificationComponent {
   notification = input.required<Notification>();
 }

@@ -8,10 +8,9 @@ describe('MentionedInCommentNotification', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MentionedInCommentNotification]
-    })
-    .compileComponents();
-    
+      imports: [MentionedInCommentNotification],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(MentionedInCommentNotification);
     component = fixture.componentInstance;
     fixture.detectChanges();

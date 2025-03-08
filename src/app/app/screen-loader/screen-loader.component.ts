@@ -4,7 +4,7 @@ import {
   ElementRef,
   inject,
   Input,
-  viewChild
+  viewChild,
 } from '@angular/core';
 import { getState } from '@ngrx/signals';
 import { GlobalState, GlobalStore } from '@elementar-ui/components/core';
@@ -13,7 +13,7 @@ import { GlobalState, GlobalStore } from '@elementar-ui/components/core';
   selector: 'app-screen-loader',
   imports: [],
   templateUrl: './screen-loader.component.html',
-  styleUrl: './screen-loader.component.scss'
+  styleUrl: './screen-loader.component.scss',
 })
 export class ScreenLoaderComponent {
   private _globalStore = inject(GlobalStore);

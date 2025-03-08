@@ -123,7 +123,7 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
   private _close() {
     clearTimeout(this._closeTimeout);
     this.closed.emit();
-    this._overlayRef!?.detach();
+    this._overlayRef?.detach();
   }
 
   private _destroyOverlay() {

@@ -8,10 +8,9 @@ describe('InviteToEditFilesInFolderNotification', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InviteToEditFilesInFolderNotification]
-    })
-    .compileComponents();
-    
+      imports: [InviteToEditFilesInFolderNotification],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(InviteToEditFilesInFolderNotification);
     component = fixture.componentInstance;
     fixture.detectChanges();

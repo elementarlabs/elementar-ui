@@ -5,17 +5,23 @@ const routes: Routes = [
   {
     path: 'internal-server-error',
     title: 'Internal Server Error',
-    loadComponent: () => import('./internal-server-error/internal-server-error.component').then(c => c.InternalServerErrorComponent)
+    loadComponent: () =>
+      import('./internal-server-error/internal-server-error.component').then(
+        c => c.InternalServerErrorComponent
+      ),
   },
   {
     path: 'access-denied',
     title: 'Access Denied',
-    loadComponent: () => import('./access-denied/access-denied.component').then(c => c.AccessDeniedComponent)
+    loadComponent: () =>
+      import('./access-denied/access-denied.component').then(
+        c => c.AccessDeniedComponent
+      ),
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ErrorRoutingModule { }
+export class ErrorRoutingModule {}

@@ -91,7 +91,7 @@ export class ScrollSpyNavComponent implements AfterContentInit {
   }
 
   private _findActiveItem() {
-    for (let item of this._items()) {
+    for (const item of this._items()) {
       const targetElement = this._document.querySelector('#' + item.targetId()) as HTMLElement;
 
       if (targetElement) {

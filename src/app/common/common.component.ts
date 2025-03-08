@@ -4,7 +4,7 @@ import {
   LayoutBodyComponent,
   LayoutComponent,
   LayoutHeaderComponent,
-  LayoutSidebarComponent
+  LayoutSidebarComponent,
 } from '@elementar-ui/components/layout';
 import { HeaderComponent } from '../app/header/header.component';
 import { SidebarComponent } from '../app/sidebar/sidebar.component';
@@ -17,11 +17,9 @@ import { SidebarComponent } from '../app/sidebar/sidebar.component';
     LayoutComponent,
     LayoutHeaderComponent,
     LayoutSidebarComponent,
-    SidebarComponent
+    SidebarComponent,
   ],
   templateUrl: './common.component.html',
-  styleUrl: './common.component.scss'
+  styleUrl: './common.component.scss',
 })
-export class CommonComponent {
-
-}
+export class CommonComponent {}

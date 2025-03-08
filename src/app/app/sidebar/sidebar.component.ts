@@ -4,16 +4,26 @@ import { IconComponent } from '@elementar-ui/components/icon';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { MatTooltip } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
-import { AvatarComponent, DicebearComponent } from '@elementar-ui/components/avatar';
+import {
+  AvatarComponent,
+  DicebearComponent,
+} from '@elementar-ui/components/avatar';
 import {
   TabPanelAsideComponent,
   TabPanelAsideContentDirective,
-  TabPanelBodyComponent, TabPanelComponent,
-  TabPanelCustomItemComponent, TabPanelFooterComponent, TabPanelHeaderComponent,
+  TabPanelBodyComponent,
+  TabPanelComponent,
+  TabPanelCustomItemComponent,
+  TabPanelFooterComponent,
+  TabPanelHeaderComponent,
   TabPanelItemComponent,
-  TabPanelNavComponent
+  TabPanelNavComponent,
 } from '@elementar-ui/components/tab-panel';
-import { PanelBodyComponent, PanelComponent, PanelHeaderComponent } from '@elementar-ui/components/panel';
+import {
+  PanelBodyComponent,
+  PanelComponent,
+  PanelHeaderComponent,
+} from '@elementar-ui/components/panel';
 
 @Component({
   selector: 'app-sidebar',
@@ -38,11 +48,9 @@ import { PanelBodyComponent, PanelComponent, PanelHeaderComponent } from '@eleme
     PanelBodyComponent,
     TabPanelAsideComponent,
     TabPanelAsideContentDirective,
-    TabPanelFooterComponent
+    TabPanelFooterComponent,
   ],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent {
-
-}
+export class SidebarComponent {}

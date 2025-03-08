@@ -87,7 +87,7 @@ export class ColorPickerTriggerForDirective implements OnDestroy{
 
   private _close() {
     this.closed.emit();
-    this._overlayRef!?.detach();
+    this._overlayRef?.detach();
   }
 
   private _destroyOverlay() {

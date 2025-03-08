@@ -2,15 +2,9 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@store/*": [
-        "./src/app/@store/*"
-      ],
-      "@meta/*": [
-        "./src/app/@meta/*"
-      ],
-      "@app/*": [
-        "./src/app/@app/*"
-      ],
+      "@store/*": ["./src/app/@store/*"],
+      "@meta/*": ["./src/app/@meta/*"],
+      "@app/*": ["./src/app/@app/*"],
       "@elementar-ui/components/*": ["./projects/components/*"],
       "@elementar-ui/components": ["./projects/components"]
     },

@@ -41,6 +41,7 @@ ng add @elementar-ui/components
 The components will be installed and configured, then copy what you need from the demo layouts projects.
 
 ### Mono Layout
+
 [https://github.com/elementarlabs/elementar-admin-mono](https://github.com/elementarlabs/elementar-admin-mono)
 
 <a target="_blank" href="https://mono.elementarui.com/">
@@ -48,6 +49,7 @@ The components will be installed and configured, then copy what you need from th
 </a>
 
 ### Minimal Layout
+
 [https://github.com/elementarlabs/elementar-admin-minimal](https://github.com/elementarlabs/elementar-admin-minimal)
 
 <a target="_blank" href="https://minimal.elementarui.com/">
@@ -55,6 +57,7 @@ The components will be installed and configured, then copy what you need from th
 </a>
 
 ### Dual tier Layout
+
 [https://github.com/elementarlabs/elementar-admin-dual-tier](https://github.com/elementarlabs/elementar-admin-dual-tier)
 
 <a target="_blank" href="https://dual-tier.elementarui.com/">

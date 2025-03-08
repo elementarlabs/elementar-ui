@@ -87,8 +87,8 @@ export class ImageViewerComponent {
       .subscribe((event: any) => {
         if (this._dragging) {
           const scaleFactor = (1 / this.scale);
-          let offsetY = (event.clientY - this._startClientY) * scaleFactor;
-          let offsetX = (event.clientX - this._startClientX) * scaleFactor;
+          const offsetY = (event.clientY - this._startClientY) * scaleFactor;
+          const offsetX = (event.clientX - this._startClientX) * scaleFactor;
           this._transform(offsetY, offsetX);
         }
       })
@@ -103,10 +103,10 @@ export class ImageViewerComponent {
           const elementRect = element.getBoundingClientRect();
           this._renderer.removeClass(element, 'dragging');
           this._dragging = false;
-          let imageWidth = Math.floor(image.getBoundingClientRect().width);
-          let imageHeight = Math.floor(image.getBoundingClientRect().height);
-          let imageViewportWidth = this.hasAside() ? elementRect.width - 420 : elementRect.width;
-          let imageViewportHeight = elementRect.height;
+          const imageWidth = Math.floor(image.getBoundingClientRect().width);
+          const imageHeight = Math.floor(image.getBoundingClientRect().height);
+          const imageViewportWidth = this.hasAside() ? elementRect.width - 420 : elementRect.width;
+          const imageViewportHeight = elementRect.height;
 
           if (imageWidth <= imageViewportWidth && imageHeight <= imageViewportHeight) {
             this._tmpOffsetY = 0;
@@ -189,10 +189,10 @@ export class ImageViewerComponent {
   private _transform(offsetY: number, offsetX: number): void {
     const image = this.image as HTMLImageElement;
     const scaleFactor = (1 / this.scale);
-    let translateX = this._offsetX + offsetX;
+    const translateX = this._offsetX + offsetX;
     // let offsetStartX = ((image.width / 2) - translateX) / scaleFactor;
     // let offsetEndX = ((image.width / 2) + translateX) / scaleFactor;
-    let translateY = this._offsetY + offsetY;
+    const translateY = this._offsetY + offsetY;
     // let offsetStartY = ((image.height / 2) - translateY) / scaleFactor;
     // let offsetEndY = ((image.height / 2) + translateY) / scaleFactor;
 

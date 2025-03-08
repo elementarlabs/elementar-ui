@@ -1,20 +1,28 @@
 <div class="flex-shrink-0">
   <div class="relative">
-    <emr-dicebear [key]="notification().actor.id"
-                  [src]="notification().actor.avatarUrl" class="size-10"/>
-    <div class="flex absolute justify-center z-10 text-white items-center -right-0
-                  -bottom-0 w-5 h-5 bg-green-400 rounded-full border border-default border-white ">
+    <emr-dicebear
+      [key]="notification().actor.id"
+      [src]="notification().actor.avatarUrl"
+      class="size-10" />
+    <div
+      class="flex absolute justify-center z-10 text-white items-center -right-0 -bottom-0 w-5 h-5 bg-green-400 rounded-full border border-default border-white">
       <mat-icon class="filled action-icon">comment</mat-icon>
     </div>
   </div>
 </div>
 <div class="grow">
-  <div class="text-neutral-600 font-normal text-sm mb-1.5 dark:text-neutral-450">
-    <span class="font-semibold text-on-surface">{{ notification().actor.name }}</span>
+  <div
+    class="text-neutral-600 font-normal text-sm mb-1.5 dark:text-neutral-450">
+    <span class="font-semibold text-on-surface">{{
+      notification().actor.name
+    }}</span>
     mentioned you in a comment:
     <span class="font-medium text-primary hover:text-tertiary cursor-pointer">
-        &#64;{{ notification().notifier.username }}
-      </span>
-    {{ notification().payload['content'] }}</div>
-  <div class="text-xs font-medium text-on-surface-variant">{{ notification().createdAt }}</div>
+      &#64;{{ notification().notifier.username }}
+    </span>
+    {{ notification().payload['content'] }}
+  </div>
+  <div class="text-xs font-medium text-on-surface-variant">
+    {{ notification().createdAt }}
+  </div>
 </div>

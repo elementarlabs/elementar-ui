@@ -4,14 +4,11 @@ import { DicebearComponent } from '@elementar-ui/components/avatar';
 import { Notification } from '@elementar-ui/components/notifications';
 
 @Component({
-  selector: 'emr-invite-to-edit-files-in-folder',
-  imports: [
-    MatIcon,
-    DicebearComponent
-  ],
+  selector: 'app-invite-to-edit-files-in-folder',
+  imports: [MatIcon, DicebearComponent],
   templateUrl: './invite-to-edit-files-in-folder.notification.html',
-  styleUrl: './invite-to-edit-files-in-folder.notification.scss'
+  styleUrl: './invite-to-edit-files-in-folder.notification.scss',
 })
-export class InviteToEditFilesInFolderNotification {
+export class InviteToEditFilesInFolderNotificationComponent {
   notification = input.required<Notification>();
 }

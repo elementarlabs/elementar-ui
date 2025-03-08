@@ -3,84 +3,188 @@
     <emr-tab-panel-nav>
       <div class="pb-4">
         <emr-tab-panel-custom-item class="size-full">
-          <a routerLink="/" class="rounded-lg size-full flex items-center justify-center text-white font-extrabold text-sm">
+          <a
+            routerLink="/"
+            class="rounded-lg size-full flex items-center justify-center text-white font-extrabold text-sm">
             BPOS
           </a>
         </emr-tab-panel-custom-item>
       </div>
-      <emr-tab-panel-item for="dashboard" matTooltip="Dashboard" matTooltipPosition="after">
+      <emr-tab-panel-item
+        for="dashboard"
+        matTooltip="Dashboard"
+        matTooltipPosition="after">
         <emr-icon name="ph:house-duotone" emrTabPanelItemIcon></emr-icon>
       </emr-tab-panel-item>
-      <emr-tab-panel-item for="projects" matTooltip="Projects" matTooltipPosition="after">
+      <emr-tab-panel-item
+        for="projects"
+        matTooltip="Projects"
+        matTooltipPosition="after">
         <emr-icon name="ph:kanban-duotone" emrTabPanelItemIcon></emr-icon>
       </emr-tab-panel-item>
-      <emr-tab-panel-item for="my-assets" matTooltip="My Assets" matTooltipPosition="after">
+      <emr-tab-panel-item
+        for="my-assets"
+        matTooltip="My Assets"
+        matTooltipPosition="after">
         <emr-icon name="ph:folder-duotone" emrTabPanelItemIcon></emr-icon>
       </emr-tab-panel-item>
 
-      <emr-tab-panel-item for="window" matTooltip="Window" matTooltipPosition="after">
-        <svg name="ph:window" emrTabPanelItemIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" fill="currentColor">
+      <emr-tab-panel-item
+        for="window"
+        matTooltip="Window"
+        matTooltipPosition="after">
+        <svg
+          name="ph:window"
+          emrTabPanelItemIcon
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 32 32"
+          fill="currentColor">
           <path
-            d="M3.232 32C2.336 32 1.57333 31.6853 0.944 31.056C0.314667 30.4267 0 29.6647 0 28.77V3.23C0 2.33667 0.314667 1.57467 0.944 0.944C1.57333 0.314667 2.336 0 3.232 0H28.77C29.6633 0 30.4253 0.314667 31.056 0.944C31.6853 1.57333 32 2.336 32 3.232V28.77C32 29.6633 31.6853 30.4253 31.056 31.056C30.4267 31.6853 29.6647 32 28.77 32H3.232ZM17 17V30H28.77C29.1287 30 29.4233 29.8847 29.654 29.654C29.8847 29.4233 30 29.1287 30 28.77V17H17ZM17 15H30V3.232C30 2.872 29.8847 2.57667 29.654 2.346C29.4233 2.11533 29.1287 2 28.77 2H17V15ZM15 15V2H3.232C2.872 2 2.57667 2.11533 2.346 2.346C2.11533 2.57667 2 2.872 2 3.232V15H15ZM15 17H2V28.77C2 29.1287 2.11533 29.4233 2.346 29.654C2.57667 29.8847 2.872 30 3.232 30H15V17Z"
-            />
+            d="M3.232 32C2.336 32 1.57333 31.6853 0.944 31.056C0.314667 30.4267 0 29.6647 0 28.77V3.23C0 2.33667 0.314667 1.57467 0.944 0.944C1.57333 0.314667 2.336 0 3.232 0H28.77C29.6633 0 30.4253 0.314667 31.056 0.944C31.6853 1.57333 32 2.336 32 3.232V28.77C32 29.6633 31.6853 30.4253 31.056 31.056C30.4267 31.6853 29.6647 32 28.77 32H3.232ZM17 17V30H28.77C29.1287 30 29.4233 29.8847 29.654 29.654C29.8847 29.4233 30 29.1287 30 28.77V17H17ZM17 15H30V3.232C30 2.872 29.8847 2.57667 29.654 2.346C29.4233 2.11533 29.1287 2 28.77 2H17V15ZM15 15V2H3.232C2.872 2 2.57667 2.11533 2.346 2.346C2.11533 2.57667 2 2.872 2 3.232V15H15ZM15 17H2V28.77C2 29.1287 2.11533 29.4233 2.346 29.654C2.57667 29.8847 2.872 30 3.232 30H15V17Z" />
         </svg>
       </emr-tab-panel-item>
-      <emr-tab-panel-item for="invoice" matTooltip="Invoice" matTooltipPosition="after">
-        <svg emrTabPanelItemIcon width="24" height="24" viewBox="0 0 28 36" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <emr-tab-panel-item
+        for="invoice"
+        matTooltip="Invoice"
+        matTooltipPosition="after">
+        <svg
+          emrTabPanelItemIcon
+          width="24"
+          height="24"
+          viewBox="0 0 28 36"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M3.232 36C2.31067 36 1.542 35.692 0.926 35.076C0.31 34.46 0.00133333 33.6913 0 32.77V3.23C0 2.31 0.308666 1.542 0.926 0.926C1.54333 0.31 2.312 0.00133333 3.232 0H19L28 9V32.77C28 33.69 27.692 34.4587 27.076 35.076C26.46 35.6933 25.6907 36.0013 24.768 36H3.232ZM18 10V2H3.232C2.924 2 2.64133 2.128 2.384 2.384C2.12667 2.64 1.99867 2.922 2 3.23V32.77C2 33.0767 2.128 33.3587 2.384 33.616C2.64 33.8733 2.922 34.0013 3.23 34H24.77C25.0767 34 25.3587 33.872 25.616 33.616C25.8733 33.36 26.0013 33.0773 26 32.768V10H18Z"
             fill="currentColor" />
         </svg>
       </emr-tab-panel-item>
-      <emr-tab-panel-item for="sales" matTooltip="Sales" matTooltipPosition="after">
-        <svg emrTabPanelItemIcon width="24" height="24" viewBox="0 0 42 42" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <emr-tab-panel-item
+        for="sales"
+        matTooltip="Sales"
+        matTooltipPosition="after">
+        <svg
+          emrTabPanelItemIcon
+          width="24"
+          height="24"
+          viewBox="0 0 42 42"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M42 6V3H37.5V0H34.5V3H33C31.3455 3 30 4.347 30 6V9C30 10.6545 31.3455 12 33 12H39V15H30V18H34.5V21H37.5V18H39C40.6545 18 42 16.6545 42 15V12C42 10.347 40.6545 9 39 9H33V6H42ZM33 27V30H36.879L31.5 35.379L28.062 31.9395C27.7811 31.6585 27.4003 31.5005 27.003 31.5H27C26.6027 31.5005 26.2219 31.6585 25.941 31.9395L18 39.879L20.121 42L27.0015 35.121L30.4395 38.5605C30.7208 38.8417 31.1023 38.9997 31.5 38.9997C31.8977 38.9997 32.2792 38.8417 32.5605 38.5605L39 32.121V36H42V27H33ZM3 42H0V34.5C0 28.71 4.71 24 10.5 24H19.5C22.4835 24 25.335 25.275 27.3255 27.4995L25.0905 29.5005C24.387 28.7138 23.5255 28.0845 22.5621 27.6536C21.5988 27.2227 20.5553 27 19.5 27H10.5C6.3645 27 3 30.3645 3 34.5V42ZM15 21C17.7848 21 20.4555 19.8938 22.4246 17.9246C24.3938 15.9555 25.5 13.2848 25.5 10.5C25.5 7.71523 24.3938 5.04451 22.4246 3.07538C20.4555 1.10625 17.7848 0 15 0C12.2152 0 9.54451 1.10625 7.57538 3.07538C5.60625 5.04451 4.5 7.71523 4.5 10.5C4.5 13.2848 5.60625 15.9555 7.57538 17.9246C9.54451 19.8938 12.2152 21 15 21ZM15 3C16.9891 3 18.8968 3.79018 20.3033 5.1967C21.7098 6.60322 22.5 8.51088 22.5 10.5C22.5 12.4891 21.7098 14.3968 20.3033 15.8033C18.8968 17.2098 16.9891 18 15 18C13.0109 18 11.1032 17.2098 9.6967 15.8033C8.29018 14.3968 7.5 12.4891 7.5 10.5C7.5 8.51088 8.29018 6.60322 9.6967 5.1967C11.1032 3.79018 13.0109 3 15 3Z"
             fill="currentColor" />
         </svg>
       </emr-tab-panel-item>
-      <emr-tab-panel-item for="customer" matTooltip="Customer" matTooltipPosition="after">
-        <svg emrTabPanelItemIcon width="24" height="24" viewBox="0 0 42 45" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <emr-tab-panel-item
+        for="customer"
+        matTooltip="Customer"
+        matTooltipPosition="after">
+        <svg
+          emrTabPanelItemIcon
+          width="24"
+          height="24"
+          viewBox="0 0 42 45"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M35.3438 16.2422C36.3594 16.7578 37.2734 17.3906 38.0859 18.1406C38.8984 18.8906 39.6016 19.7344 40.1953 20.6719C40.7891 21.6094 41.2344 22.6094 41.5312 23.6719C41.8281 24.7344 41.9844 25.8438 42 27H39C39 25.7656 38.7656 24.6016 38.2969 23.5078C37.8281 22.4141 37.1797 21.4609 36.3516 20.6484C35.5234 19.8359 34.5703 19.1953 33.4922 18.7266C32.4141 18.2578 31.25 18.0156 30 18C28.7656 18 27.6016 18.2344 26.5078 18.7031C25.4141 19.1719 24.4609 19.8203 23.6484 20.6484C22.8359 21.4766 22.1953 22.4297 21.7266 23.5078C21.2578 24.5859 21.0156 25.75 21 27C21 28.4219 20.6797 29.7734 20.0391 31.0547C19.3984 32.3359 18.5 33.3984 17.3438 34.2422C18.3594 34.7578 19.2734 35.3906 20.0859 36.1406C20.8984 36.8906 21.6016 37.7344 22.1953 38.6719C22.7891 39.6094 23.2344 40.6094 23.5312 41.6719C23.8281 42.7344 23.9844 43.8438 24 45H21C21 43.7656 20.7656 42.6016 20.2969 41.5078C19.8281 40.4141 19.1797 39.4609 18.3516 38.6484C17.5234 37.8359 16.5703 37.1953 15.4922 36.7266C14.4141 36.2578 13.25 36.0156 12 36C10.7656 36 9.60156 36.2344 8.50781 36.7031C7.41406 37.1719 6.46094 37.8203 5.64844 38.6484C4.83594 39.4766 4.19531 40.4297 3.72656 41.5078C3.25781 42.5859 3.01562 43.75 3 45H0C0 43.8594 0.15625 42.7578 0.46875 41.6953C0.78125 40.6328 1.22656 39.6328 1.80469 38.6953C2.38281 37.7578 3.07812 36.9141 3.89062 36.1641C4.70312 35.4141 5.625 34.7734 6.65625 34.2422C5.51562 33.3984 4.625 32.3359 3.98438 31.0547C3.34375 29.7734 3.01562 28.4219 3 27C3 25.7656 3.23438 24.6016 3.70312 23.5078C4.17188 22.4141 4.82031 21.4609 5.64844 20.6484C6.47656 19.8359 7.42969 19.1953 8.50781 18.7266C9.58594 18.2578 10.75 18.0156 12 18C13.4219 18 14.7734 18.3203 16.0547 18.9609C17.3359 19.6016 18.3984 20.5 19.2422 21.6562C19.8359 20.4844 20.5938 19.4375 21.5156 18.5156C22.4375 17.5938 23.4844 16.8359 24.6562 16.2422C23.5156 15.3984 22.625 14.3359 21.9844 13.0547C21.3438 11.7734 21.0156 10.4219 21 9C21 7.76562 21.2344 6.60156 21.7031 5.50781C22.1719 4.41406 22.8203 3.46094 23.6484 2.64844C24.4766 1.83594 25.4297 1.19531 26.5078 0.726562C27.5859 0.257812 28.75 0.015625 30 0C31.2344 0 32.3984 0.234375 33.4922 0.703125C34.5859 1.17188 35.5391 1.82031 36.3516 2.64844C37.1641 3.47656 37.8047 4.42969 38.2734 5.50781C38.7422 6.58594 38.9844 7.75 39 9C39 10.4219 38.6797 11.7734 38.0391 13.0547C37.3984 14.3359 36.5 15.3984 35.3438 16.2422ZM12 33C12.8125 33 13.5859 32.8438 14.3203 32.5312C15.0547 32.2188 15.6875 31.7891 16.2188 31.2422C16.75 30.6953 17.1797 30.0625 17.5078 29.3438C17.8359 28.625 18 27.8438 18 27C18 26.1875 17.8438 25.4141 17.5312 24.6797C17.2188 23.9453 16.7891 23.3125 16.2422 22.7812C15.6953 22.25 15.0547 21.8203 14.3203 21.4922C13.5859 21.1641 12.8125 21 12 21C11.1719 21 10.3984 21.1562 9.67969 21.4688C8.96094 21.7812 8.32812 22.2109 7.78125 22.7578C7.23438 23.3047 6.80469 23.9453 6.49219 24.6797C6.17969 25.4141 6.01562 26.1875 6 27C6 27.8281 6.15625 28.6016 6.46875 29.3203C6.78125 30.0391 7.21094 30.6719 7.75781 31.2188C8.30469 31.7656 8.9375 32.1953 9.65625 32.5078C10.375 32.8203 11.1562 32.9844 12 33ZM24 9C24 9.82812 24.1562 10.6016 24.4688 11.3203C24.7812 12.0391 25.2109 12.6719 25.7578 13.2188C26.3047 13.7656 26.9375 14.1953 27.6562 14.5078C28.375 14.8203 29.1562 14.9844 30 15C30.8125 15 31.5859 14.8438 32.3203 14.5312C33.0547 14.2188 33.6875 13.7891 34.2188 13.2422C34.75 12.6953 35.1797 12.0625 35.5078 11.3438C35.8359 10.625 36 9.84375 36 9C36 8.1875 35.8438 7.41406 35.5312 6.67969C35.2188 5.94531 34.7891 5.3125 34.2422 4.78125C33.6953 4.25 33.0547 3.82031 32.3203 3.49219C31.5859 3.16406 30.8125 3 30 3C29.1719 3 28.3984 3.15625 27.6797 3.46875C26.9609 3.78125 26.3281 4.21094 25.7812 4.75781C25.2344 5.30469 24.8047 5.94531 24.4922 6.67969C24.1797 7.41406 24.0156 8.1875 24 9Z"
             fill="currentColor" />
         </svg>
       </emr-tab-panel-item>
-      <emr-tab-panel-item for="history" matTooltip="History" matTooltipPosition="after">
-        <svg emrTabPanelItemIcon width="24" height="24" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <emr-tab-panel-item
+        for="history"
+        matTooltip="History"
+        matTooltipPosition="after">
+        <svg
+          emrTabPanelItemIcon
+          width="24"
+          height="24"
+          viewBox="0 0 32 32"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M15.924 32C11.8627 32 8.32201 30.6733 5.30201 28.02C2.28334 25.368 0.536678 22.028 0.0620117 18H2.08401C2.62801 21.44 4.19534 24.3 6.78601 26.58C9.37668 28.86 12.4227 30 15.924 30C19.824 30 23.132 28.642 25.848 25.926C28.564 23.21 29.9227 19.9013 29.924 16C29.9253 12.0987 28.5667 8.79 25.848 6.074C23.1293 3.358 19.8213 2 15.924 2C13.8533 2 11.908 2.43733 10.088 3.312C8.26801 4.18533 6.66134 5.38867 5.26801 6.922H10.23V8.922H1.92401V0.618H3.92401V5.394C5.47068 3.69667 7.28268 2.374 9.36001 1.426C11.4373 0.478 13.6253 0.00266667 15.924 0C18.1413 0 20.22 0.417333 22.16 1.252C24.1 2.08667 25.7947 3.22933 27.244 4.68C28.6933 6.13067 29.836 7.82533 30.672 9.764C31.508 11.7027 31.9253 13.7813 31.924 16C31.9227 18.2187 31.5053 20.2973 30.672 22.236C29.8387 24.1747 28.696 25.8693 27.244 27.32C25.792 28.7707 24.0973 29.9133 22.16 30.748C20.2227 31.5827 18.144 32 15.924 32ZM22.332 23.708L15.038 16.416V6H17.038V15.584L23.746 22.292L22.332 23.708Z"
             fill="currentColor" />
         </svg>
       </emr-tab-panel-item>
-      <emr-tab-panel-item for="expense" matTooltip="Expense" matTooltipPosition="after">
-        <svg emrTabPanelItemIcon width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <emr-tab-panel-item
+        for="expense"
+        matTooltip="Expense"
+        matTooltipPosition="after">
+        <svg
+          emrTabPanelItemIcon
+          width="28"
+          height="28"
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M29.947 25.947C28.8861 25.947 27.8687 26.3684 27.1186 27.1186C26.3684 27.8687 25.947 28.8861 25.947 29.947V38.5C25.947 39.5609 26.3684 40.5783 27.1186 41.3284C27.8687 42.0786 28.8861 42.5 29.947 42.5H38.5C39.5609 42.5 40.5783 42.0786 41.3284 41.3284C42.0786 40.5783 42.5 39.5609 42.5 38.5V29.947C42.5 28.8861 42.0786 27.8687 41.3284 27.1186C40.5783 26.3684 39.5609 25.947 38.5 25.947H29.947ZM9.5 5.5C8.43913 5.5 7.42172 5.92143 6.67157 6.67157C5.92143 7.42172 5.5 8.43913 5.5 9.5V18.053C5.5 19.1139 5.92143 20.1313 6.67157 20.8814C7.42172 21.6316 8.43913 22.053 9.5 22.053H18.053C19.1139 22.053 20.1313 21.6316 20.8814 20.8814C21.6316 20.1313 22.053 19.1139 22.053 18.053V9.5C22.053 8.43913 21.6316 7.42172 20.8814 6.67157C20.1313 5.92143 19.1139 5.5 18.053 5.5H9.5Z"
-            stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
           <path
             d="M38.5 5.5H29.947C27.7379 5.5 25.947 7.29086 25.947 9.5V18.053C25.947 20.2621 27.7379 22.053 29.947 22.053H38.5C40.7092 22.053 42.5 20.2621 42.5 18.053V9.5C42.5 7.29086 40.7092 5.5 38.5 5.5Z"
-            stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
           <path
             d="M18.053 25.947H9.5C7.29086 25.947 5.5 27.7379 5.5 29.947V38.5C5.5 40.7091 7.29086 42.5 9.5 42.5H18.053C20.2621 42.5 22.053 40.7091 22.053 38.5V29.947C22.053 27.7379 20.2621 25.947 18.053 25.947Z"
-            stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M13.776 8.42099V19.132M8.42102 13.776H19.132M28.868 31.303H39.579M28.868 37.145H39.579" stroke="currentColor"
-            stroke-linecap="round" stroke-linejoin="round" />
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+          <path
+            d="M13.776 8.42099V19.132M8.42102 13.776H19.132M28.868 31.303H39.579M28.868 37.145H39.579"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
         </svg>
       </emr-tab-panel-item>
-      <emr-tab-panel-item for="invoice" matTooltip="Invoice" matTooltipPosition="after">
-        <svg emrTabPanelItemIcon width="26" height="26" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <emr-tab-panel-item
+        for="invoice"
+        matTooltip="Invoice"
+        matTooltipPosition="after">
+        <svg
+          emrTabPanelItemIcon
+          width="26"
+          height="26"
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M10.762 42.335H31.977C37.789 42.335 42.5 37.623 42.5 31.812V5.66501H21.292C20.6009 5.66475 19.9166 5.80067 19.278 6.06502C18.6395 6.32937 18.0593 6.71695 17.5706 7.20563C17.082 7.6943 16.6944 8.27448 16.43 8.91302C16.1657 9.55155 16.0298 10.2359 16.03 10.927L16.023 16.027"
-            stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
           <path
             d="M5.5 25.391H16.023M22.437 25.391H35.798M22.437 32.177H35.798M10.762 16.027H16.023V37.073C16.0225 38.4682 15.468 39.8062 14.4816 40.7929C13.4951 41.7795 12.1572 42.3342 10.762 42.335C9.36659 42.3345 8.02849 41.7799 7.04179 40.7932C6.05509 39.8065 5.50053 38.4684 5.5 37.073V21.288C5.5008 19.8928 6.05547 18.5549 7.04214 17.5684C8.02882 16.582 9.36677 16.0275 10.762 16.027ZM22.437 13.315H28.275V19.153H22.437V13.315Z"
-            stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
         </svg>
       </emr-tab-panel-item>
-      <emr-tab-panel-item for="sales-return" matTooltip="Sales Return" matTooltipPosition="after">
-        <svg emrTabPanelItemIcon width="24" height="24" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 1L2 11L12 21M30 31V11H4" stroke="currentColor" stroke-width="3" />
+      <emr-tab-panel-item
+        for="sales-return"
+        matTooltip="Sales Return"
+        matTooltipPosition="after">
+        <svg
+          emrTabPanelItemIcon
+          width="24"
+          height="24"
+          viewBox="0 0 31 31"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 1L2 11L12 21M30 31V11H4"
+            stroke="currentColor"
+            stroke-width="3" />
         </svg>
       </emr-tab-panel-item>
     </emr-tab-panel-nav>
@@ -106,15 +210,21 @@
   </emr-tab-panel-body>
   <emr-tab-panel-footer class="flex flex-col gap-0.5 pb-2.5">
     <emr-tab-panel-nav>
-      <emr-tab-panel-item for="account" matTooltip="Account" matTooltipPosition="after">
-        <emr-icon name="ph:user-duotone" emrTabPanelItemIcon/>
+      <emr-tab-panel-item
+        for="account"
+        matTooltip="Account"
+        matTooltipPosition="after">
+        <emr-icon name="ph:user-duotone" emrTabPanelItemIcon />
       </emr-tab-panel-item>
-      <emr-tab-panel-item for="settings" matTooltip="Settings" matTooltipPosition="after">
-        <emr-icon name="ph:gear-six-duotone" emrTabPanelItemIcon/>
+      <emr-tab-panel-item
+        for="settings"
+        matTooltip="Settings"
+        matTooltipPosition="after">
+        <emr-icon name="ph:gear-six-duotone" emrTabPanelItemIcon />
       </emr-tab-panel-item>
     </emr-tab-panel-nav>
     <div class="flex items-center justify-center">
-      <emr-dicebear key="PS" class="size-10"/>
+      <emr-dicebear key="PS" class="size-10" />
     </div>
   </emr-tab-panel-footer>
   <emr-tab-panel-aside>
@@ -130,10 +240,10 @@
           <div class="p-4 flex flex-col gap-3">
             <div class="text-sm font-bold">My assets</div>
             <div class="relative h-10">
-              <input type="text"
-                     class="outline-0 h-full w-full rounded-full px-3 text-sm focus:bg-surface-container-lowest focus:shadow-sm
-                            bg-surface-container focus-within:border-primary dark:bg-surface-container-high placeholder-neutral-500"
-                     placeholder="Search assets...">
+              <input
+                type="text"
+                class="outline-0 h-full w-full rounded-full px-3 text-sm focus:bg-surface-container-lowest focus:shadow-sm bg-surface-container focus-within:border-primary dark:bg-surface-container-high placeholder-neutral-500"
+                placeholder="Search assets..." />
             </div>
           </div>
         </emr-panel-header>
@@ -149,12 +259,8 @@
         </emr-panel-body>
       </emr-panel>
     </ng-template>
-    <ng-template emrTabPanelAsideContent="account">
-      Account
-    </ng-template>
-    <ng-template emrTabPanelAsideContent="settings">
-      Settings
-    </ng-template>
+    <ng-template emrTabPanelAsideContent="account"> Account </ng-template>
+    <ng-template emrTabPanelAsideContent="settings"> Settings </ng-template>
     <ng-template emrTabPanelAsideContent="workspace1">
       Workspace 1
     </ng-template>

@@ -157,7 +157,7 @@ export class FilterBuilderComponent implements OnInit, AfterViewInit {
 
   selectConditionField(item: FilterBuilderCondition, field: FilterBuilderFieldDef): void {
     this.editItem = undefined;
-    let allowedTypes = this._operationAllowedTypesMap.get(field.dataType) as string[];
+    const allowedTypes = this._operationAllowedTypesMap.get(field.dataType) as string[];
     item['value'][1] = allowedTypes[0];
     this._resetValue(field, item);
     this._emitChangeEvent();
@@ -197,7 +197,7 @@ export class FilterBuilderComponent implements OnInit, AfterViewInit {
       f.dataField === dataField
     ) as FilterBuilderFieldDef;
 
-    let allowedTypes = this._operationAllowedTypesMap.get(fieldDef.dataType);
+    const allowedTypes = this._operationAllowedTypesMap.get(fieldDef.dataType);
 
     if (!allowedTypes) {
       throw new Error('There are not operations for the datatype: ' + fieldDef.dataType);

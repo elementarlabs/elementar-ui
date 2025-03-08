@@ -1,6 +1,8 @@
 <emr-popover class="overflow-hidden">
-  <div class="w-[360px] text-base list-none bg-surface-container shadow-lg dark:divide-inverse">
-    <div class="flex items-center justify-between bg-surface-container-highest text-sm h-12 px-4">
+  <div
+    class="w-[360px] text-base list-none bg-surface-container shadow-lg dark:divide-inverse">
+    <div
+      class="flex items-center justify-between bg-surface-container-highest text-sm h-12 px-4">
       <div class="text-on-surface font-semibold">Notifications</div>
       <button mat-icon-button class="-me-1">
         <mat-icon>settings</mat-icon>
@@ -8,18 +10,28 @@
     </div>
     <div class="h-[300px] overflow-y-auto">
       @if (notifications.length > 0) {
-        <emr-notification-list [notifications]="notifications" class="p-3 gap-3">
+        <emr-notification-list
+          [notifications]="notifications"
+          class="p-3 gap-3">
           <ng-template emrNotificationDef="mentionedInComment" let-notification>
-            <emr-mentioned-in-comment [notification]="notification" matRipple
-                                      class="bg-surface-bright cursor-pointer hover:bg-surface-container-lowest rounded-xl shadow-sm p-4"/>
+            <app-mentioned-in-comment
+              [notification]="notification"
+              matRipple
+              class="bg-surface-bright cursor-pointer hover:bg-surface-container-lowest rounded-xl shadow-sm p-4" />
           </ng-template>
-          <ng-template emrNotificationDef="inviteToEditFilesInFolder" let-notification>
-            <emr-invite-to-edit-files-in-folder [notification]="notification" matRipple
-                                                class="bg-surface-bright cursor-pointer hover:bg-surface-container-lowest rounded-xl shadow-sm p-4"/>
+          <ng-template
+            emrNotificationDef="inviteToEditFilesInFolder"
+            let-notification>
+            <app-invite-to-edit-files-in-folder
+              [notification]="notification"
+              matRipple
+              class="bg-surface-bright cursor-pointer hover:bg-surface-container-lowest rounded-xl shadow-sm p-4" />
           </ng-template>
         </emr-notification-list>
         <div class="px-4 mb-3">
-          <a routerLink="/pages/account/notifications" mat-button class="w-full">View all</a>
+          <a routerLink="/pages/account/notifications" mat-button class="w-full"
+            >View all</a
+          >
         </div>
       } @else {
         There are no notifications.

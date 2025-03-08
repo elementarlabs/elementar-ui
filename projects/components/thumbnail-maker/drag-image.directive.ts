@@ -59,8 +59,8 @@ export class DragImageDirective implements OnInit, OnChanges {
       .subscribe((event: any) => {
         if (this._dragging) {
           const scaleFactor = (1 / this.scale());
-          let offsetY = (event.clientY - this._startClientY) * scaleFactor;
-          let offsetX = (event.clientX - this._startClientX) * scaleFactor;
+          const offsetY = (event.clientY - this._startClientY) * scaleFactor;
+          const offsetX = (event.clientX - this._startClientX) * scaleFactor;
           this._transform(offsetY, offsetX);
         }
       })
@@ -127,12 +127,12 @@ export class DragImageDirective implements OnInit, OnChanges {
     const image = this._elementRef.nativeElement as HTMLImageElement;
     const scaleFactor = (1 / this.scale());
     let translateX = this._offsetX + offsetX;
-    let offsetStartX = ((image.width / 2) - translateX) / scaleFactor;
-    let offsetEndX = ((image.width / 2) + translateX) / scaleFactor;
+    const offsetStartX = ((image.width / 2) - translateX) / scaleFactor;
+    const offsetEndX = ((image.width / 2) + translateX) / scaleFactor;
     let translateY = this._offsetY + offsetY;
-    let offsetStartY = ((image.height / 2) - translateY) / scaleFactor;
-    let offsetEndY = ((image.height / 2) + translateY) / scaleFactor;
-    let thumbHalfWidth = 150;
+    const offsetStartY = ((image.height / 2) - translateY) / scaleFactor;
+    const offsetEndY = ((image.height / 2) + translateY) / scaleFactor;
+    const thumbHalfWidth = 150;
 
     if (offsetStartX <= thumbHalfWidth && translateX > 0) {
       translateX = (image.width / 2) - (thumbHalfWidth * scaleFactor);
