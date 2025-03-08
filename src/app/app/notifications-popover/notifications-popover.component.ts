@@ -69,5 +69,25 @@ export class NotificationsPopoverComponent {
       type: 'inviteToEditFilesInFolder',
       createdAt: '2 hours ago',
     },
+
+    {
+      actor: {
+        id: 4,
+        name: 'Johnny Gladden',
+        username: 'johnny.gladden',
+        avatarUrl: 'assets/avatars/6.svg',
+      },
+      notifier: {
+        id: 4,
+        name: 'Angela Naylor',
+        username: 'angela.naylor',
+        avatarUrl: 'assets/avatars/3.svg',
+      },
+      payload: {
+        folderName: 'My New Project',
+      },
+      type: 'inviteToEditFilesInFolder',
+      createdAt: '2 hours ago',
+    },
   ];
 }
