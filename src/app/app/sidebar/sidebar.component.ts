@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import { HorizontalDividerComponent } from '@elementar-ui/components/divider';
 import { IconComponent } from '@elementar-ui/components/icon';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { MatTooltip } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
-import {
-  AvatarComponent,
-  DicebearComponent,
-} from '@elementar-ui/components/avatar';
+import { DicebearComponent } from '@elementar-ui/components/avatar';
 import {
   TabPanelAsideComponent,
   TabPanelAsideContentDirective,
@@ -29,13 +25,11 @@ import {
   selector: 'app-sidebar',
   imports: [
     DicebearComponent,
-    HorizontalDividerComponent,
     IconComponent,
     MatTab,
     MatTabGroup,
     MatTooltip,
     RouterLink,
-    AvatarComponent,
     TabPanelItemComponent,
     TabPanelCustomItemComponent,
     TabPanelNavComponent,

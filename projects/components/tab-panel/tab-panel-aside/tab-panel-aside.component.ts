@@ -1,18 +1,11 @@
-import { Component, computed, inject } from '@angular/core';
-import { TAB_PANEL_ASIDE } from '../types';
-import { LayoutSidebarStore } from '@elementar-ui/components/layout';
+import { Component, computed, inject, input } from '@angular/core';
+import { LayoutSidebarStore, StateLayoutId } from '@elementar-ui/components/layout';
 
 @Component({
   selector: 'emr-tab-panel-aside',
   exportAs: 'emrTabPanelAside',
   templateUrl: './tab-panel-aside.component.html',
   styleUrl: './tab-panel-aside.component.scss',
-  providers: [
-    {
-      provide: TAB_PANEL_ASIDE,
-      useExisting: TabPanelAsideComponent
-    }
-  ],
   host: {
     'class': 'emr-tab-panel-aside',
     '[class.is-hidden]': '!_isShown()',
@@ -20,18 +13,14 @@ import { LayoutSidebarStore } from '@elementar-ui/components/layout';
   }
 })
 export class TabPanelAsideComponent {
-  nextId = 0;
-
+  nextId =0;
+  layoutId = input<StateLayoutId>('drawer');
   private _layoutSidebarStore = inject(LayoutSidebarStore);
 
   protected _isShown = computed<boolean>(() => {
-    if ('drawer' in this._layoutSidebarStore) {
-      console.log('drawer found in layout sidebar store');
-      return this._layoutSidebarStore.getSidebarVisibility('drawer');
+    if (this.layoutId() in this._layoutSidebarStore) {
+      return this._layoutSidebarStore.getSidebarVisibility(this.layoutId());
     }
-
-    console.log('drawer not found in layout sidebar store');
-
     return true;
   });
 }

@@ -1,7 +1,6 @@
 import { booleanAttribute, Component, input } from '@angular/core';
 import { LAYOUT } from '../types';
-
-let nextId = 0;
+import { StateLayoutId } from '../layout.store';
 
 @Component({
   selector: 'emr-layout',
@@ -21,7 +20,7 @@ let nextId = 0;
   }
 })
 export class LayoutComponent {
-  layoutId = input<string>(`layout-${nextId++}`);
+  layoutId = input<StateLayoutId>('root');
   windowMode = input(false, {
     transform: booleanAttribute
   });
