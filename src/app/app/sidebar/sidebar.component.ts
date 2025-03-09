@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IconComponent } from '@elementar-ui/components/icon';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -20,6 +20,7 @@ import {
   PanelComponent,
   PanelHeaderComponent,
 } from '@elementar-ui/components/panel';
+import { LayoutApiService } from '@elementar-ui/components/layout';
 
 @Component({
   selector: 'app-sidebar',
@@ -47,4 +48,9 @@ import {
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent {}
+export class SidebarComponent {
+  private layoutApiService = inject(LayoutApiService);
+  likeOpenDrawer() {
+    this.layoutApiService.showSidebar('drawer');
+  }
+}

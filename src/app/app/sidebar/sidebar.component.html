@@ -5,7 +5,7 @@
         <emr-tab-panel-custom-item class="size-full">
           <a
             routerLink="/"
-            class="rounded-lg size-full flex items-center justify-center text-white font-extrabold text-sm">
+            class="rounded-lg size-full flex items-center justify-center font-extrabold text-sm">
             BPOS
           </a>
         </emr-tab-panel-custom-item>
@@ -23,6 +23,7 @@
         <emr-icon name="ph:kanban-duotone" emrTabPanelItemIcon></emr-icon>
       </emr-tab-panel-item>
       <emr-tab-panel-item
+        (click)="likeOpenDrawer()"
         for="my-assets"
         matTooltip="My Assets"
         matTooltipPosition="after">
@@ -46,8 +47,8 @@
         </svg>
       </emr-tab-panel-item>
       <emr-tab-panel-item
-        for="invoice"
-        matTooltip="Invoice"
+        for="recipt"
+        matTooltip="Recipt"
         matTooltipPosition="after">
         <svg
           emrTabPanelItemIcon

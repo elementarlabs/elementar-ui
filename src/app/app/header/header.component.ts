@@ -13,7 +13,10 @@ import {
   ThemeManagerService,
 } from '@elementar-ui/components/core';
 import { PopoverTriggerForDirective } from '@elementar-ui/components/popover';
-import { LayoutApiService } from '@elementar-ui/components/layout';
+import {
+  LayoutApiService,
+  LayoutSidebarStore,
+} from '@elementar-ui/components/layout';
 import { Notification } from '@elementar-ui/components/notifications';
 
 @Component({
@@ -43,6 +46,7 @@ import { Notification } from '@elementar-ui/components/notifications';
 export class HeaderComponent {
   protected _themeManager = inject(ThemeManagerService);
   private _layoutApi = inject(LayoutApiService);
+  private _layoutStore = inject(LayoutSidebarStore);
 
   @Input()
   sidebarHidden = false;
@@ -90,11 +94,19 @@ export class HeaderComponent {
 
   toggleSidebar(): void {
     if (!this.sidebarHidden) {
+      this._layoutApi.hideSidebar('root');
+    } else {
+      this._layoutApi.showSidebar('root');
+    }
+
+    this.sidebarHidden = !this.sidebarHidden;
+  }
+
+  toggleDrawer(): void {
+    if (this._layoutStore.getSidebarVisibility('drawer')) {
       this._layoutApi.hideSidebar('drawer');
     } else {
       this._layoutApi.showSidebar('drawer');
     }
-
-    this.sidebarHidden = !this.sidebarHidden;
   }
 }
