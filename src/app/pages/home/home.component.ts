@@ -21,6 +21,14 @@ export class HomeComponent {
           c => c.TableWidgetComponent
         ),
     },
+    {
+      type: 'recipt-widget',
+      skeleton: null,
+      component: () =>
+        import('../../widgets/recipt-widget/recipt-widget.component').then(
+          c => c.ReciptWidgetComponent
+        ),
+    },
   ];
 
   widgets: Widget[] = [
@@ -28,6 +36,11 @@ export class HomeComponent {
       id: 1,
       type: 'table-widget',
       columns: 8,
+    },
+    {
+      id: 2,
+      type: 'recipt-widget',
+      columns: 4,
     },
   ];
 }

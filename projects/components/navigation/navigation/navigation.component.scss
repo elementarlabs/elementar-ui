@@ -82,7 +82,7 @@
       .emr-navigation-item {
         --emr-navigation-item-border-radius: calc(infinity * 1px);
         --emr-navigation-item-height: calc(var(--spacing) * 11);
-        --emr-navigation-item-active-bg: var(--color-background);
+        --emr-navigation-item-active-bg: var(--sys-inverse-on-surface);
 
         &.is-active {
           --emr-navigation-item-border-color: var(--color-neutral-900);

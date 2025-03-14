@@ -1,6 +1,7 @@
 :host {
   display: block;
   height: 100%;
+  background: var(--color-background);
 
   mat-tab-group {
     --mat-tab-header-divider-color: var(--color-default);

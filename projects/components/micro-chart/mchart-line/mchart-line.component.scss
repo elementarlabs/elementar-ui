@@ -4,7 +4,7 @@
   --emr-mchart-line-marker-line-bg: var(--color-neutral);
   --emr-mchart-line-marker-dot-bg: var(--color-primary);
   --emr-mchart-line-area-gradient-start-color: var(--color-primary);
-  --emr-mchart-line-area-gradient-end-color: var(--color-background);
+  --emr-mchart-line-area-gradient-end-color: var(--sys-inverse-on-surface);
 
   display: block;
   overflow: hidden;

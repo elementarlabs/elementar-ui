@@ -191,7 +191,7 @@ body {
   font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: var(--text-md);
   line-height: var(--leading-normal);
-  background: var(--color-background);
+  background: var(--sys-inverse-on-surface);
   color: var(--color-on-background);
 
   *:not(.emr-native-scroll) {
