@@ -1,13 +1,14 @@
 <div class="dashgrid">
   @for (widget of widgets(); track widget.id) {
-    <div class="col-span-{{ widget.columns }}">
+    <div class="dashgrid-item" [style.--emr-dashgrid-item-colspan]="widget.columns">
       <div class="widget" [class.plain]="getWidgetConfig(widget.type).plain" [class.hidden]="!_allLoaded()">
         <ng-container [ngComponentOutlet]="getWidgetComponent(widget.type) | async"
                       [ngComponentOutletInputs]="{ widget }"/>
       </div>
 
       @if (!_allLoaded()) {
-        <div class="widget skeleton" [style.--emr-dashboard-widget-skeleton-min-height]="widget.skeleton?.minHeight">
+        <div class="widget skeleton"
+             [style.--emr-dashboard-widget-skeleton-min-height]="widget.skeleton?.minHeight">
           @let skeletonComponent = getSkeletonComponent(widget.type);
 
           @if (skeletonComponent) {

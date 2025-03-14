@@ -12,10 +12,16 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        pathMatch: 'full',
         loadComponent: () =>
           import('./main/main.component').then(c => c.MainComponent),
-        title: 'Home',
+        children: [
+          {
+            path: 'home',
+            loadComponent: () =>
+              import('./pages/home/home.component').then(c => c.HomeComponent),
+            title: 'Home',
+          },
+        ],
       },
     ],
   },
