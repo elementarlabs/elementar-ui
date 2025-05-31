@@ -1,7 +1,7 @@
-import { inject, Injectable, isDevMode, PLATFORM_ID } from '@angular/core';
+import { inject, Injectable, isDevMode, PLATFORM_ID, DOCUMENT } from '@angular/core';
 import { filter } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
-import { DOCUMENT, isPlatformServer } from '@angular/common';
+import { isPlatformServer } from '@angular/common';
 import { EnvironmentService } from './environment.service';
 
 declare const gtag: any;

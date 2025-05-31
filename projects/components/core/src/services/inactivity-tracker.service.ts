@@ -1,6 +1,6 @@
-import { DestroyRef, EventEmitter, inject, Injectable } from '@angular/core';
+import { DestroyRef, EventEmitter, inject, Injectable, DOCUMENT } from '@angular/core';
 import { debounceTime, fromEvent, merge, Observable } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({

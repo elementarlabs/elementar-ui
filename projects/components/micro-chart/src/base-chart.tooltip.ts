@@ -1,5 +1,5 @@
 import { TemplatePortal } from '@angular/cdk/portal';
-import { inject, Injector, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
+import { inject, Injector, Renderer2, TemplateRef, ViewContainerRef, DOCUMENT } from '@angular/core';
 import {
   ConnectedPosition,
   FlexibleConnectedPositionStrategy,
@@ -7,7 +7,7 @@ import {
   OverlayConfig,
   OverlayRef
 } from '@angular/cdk/overlay';
-import { DOCUMENT } from '@angular/common';
+
 import { OverlayPosition, PositionManager } from '@elementar-ui/components/overlay';
 
 export abstract class BaseChartTooltip {

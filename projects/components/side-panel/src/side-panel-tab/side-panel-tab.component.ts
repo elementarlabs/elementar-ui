@@ -1,5 +1,5 @@
 import { Component, input, TemplateRef, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'emr-side-panel-tab',

@@ -6,10 +6,11 @@ import {
   input,
   numberAttribute, OnChanges,
   OnInit,
-  Renderer2, SimpleChanges
+  Renderer2, SimpleChanges,
+  DOCUMENT
 } from '@angular/core';
 import { fromEvent } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({

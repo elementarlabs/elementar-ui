@@ -1,6 +1,6 @@
-import { afterNextRender, Directive, ElementRef, inject } from '@angular/core';
+import { afterNextRender, Directive, ElementRef, inject, DOCUMENT } from '@angular/core';
 import { fromEvent, merge, Subject, takeUntil } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
+
 
 @Directive()
 export abstract class BaseComponent {

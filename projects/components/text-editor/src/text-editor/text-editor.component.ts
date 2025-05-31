@@ -6,10 +6,11 @@ import {
   inject,
   Injector,
   input, output,
-  viewChild
+  viewChild,
+  DOCUMENT
 } from '@angular/core';
 import { TEXT_EDITOR, TextEditorAPI } from '../types';
-import { DOCUMENT } from '@angular/common';
+
 import { Editor } from '@tiptap/core';
 import Document from '@tiptap/extension-document';
 import Paragraph from '@tiptap/extension-paragraph';

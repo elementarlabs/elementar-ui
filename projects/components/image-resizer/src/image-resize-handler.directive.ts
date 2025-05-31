@@ -6,9 +6,10 @@ import {
   input,
   NgZone, numberAttribute, output,
   PLATFORM_ID,
-  Renderer2
+  Renderer2,
+  DOCUMENT
 } from '@angular/core';
-import { DOCUMENT, isPlatformServer } from '@angular/common';
+import { isPlatformServer } from '@angular/common';
 import { fromEvent, throttleTime } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 

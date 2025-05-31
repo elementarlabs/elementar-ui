@@ -1,5 +1,5 @@
-import { afterNextRender, inject, Injectable } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { afterNextRender, inject, Injectable, DOCUMENT } from '@angular/core';
+
 
 const LOCAL_STORAGE_KEY = 'emr-admin';
 
