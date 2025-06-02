@@ -14,11 +14,20 @@
 
   .line {
     padding: 0;
+    position: relative;
+    display: flex;
+    align-items: start;
+    justify-content: center;
 
     &:after {
+      content: '';
+      position: absolute;
       background: var(--emr-timeline-item-line-bg);
       top: 0.3125rem;
+      left: 50%;
+      transform: translateX(-50%);
       bottom: -0.3125rem;
+      width: 1px;
     }
   }
 
