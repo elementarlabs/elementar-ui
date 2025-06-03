@@ -2,16 +2,14 @@
 
 @if (indicatorRef()) {
   <div class="line">
-    <div class="relative custom-indicator">
-      <div class="w-max relative z-[1]">
-        <ng-container [ngTemplateOutlet]="indicatorTemplateRef"/>
-      </div>
+    <div class="custom-indicator">
+      <ng-container [ngTemplateOutlet]="indicatorTemplateRef"/>
     </div>
   </div>
 } @else {
   <div class="line">
-    <div class="relative flex justify-center items-center indicator">
-      <div class="rounded-full indicator-shape"></div>
+    <div class="indicator">
+      <div class="indicator-shape"></div>
     </div>
   </div>
 }

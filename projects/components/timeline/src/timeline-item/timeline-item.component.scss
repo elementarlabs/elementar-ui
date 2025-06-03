@@ -9,7 +9,11 @@
 
   .indicator {
     z-index: 1;
-    top: 0.3125rem;
+    top: 9px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .line {
@@ -23,16 +27,17 @@
       content: '';
       position: absolute;
       background: var(--emr-timeline-item-line-bg);
-      top: 0.3125rem;
+      top: 9px;
       left: 50%;
       transform: translateX(-50%);
-      bottom: -0.3125rem;
+      bottom: -9px;
       width: 1px;
     }
   }
 
   .indicator-shape {
     flex: none;
+    border-radius: 99999px;
     width: var(--emr-timeline-indicator-shape-size);
     height: var(--emr-timeline-indicator-shape-size);
     background: var(--emr-timeline-indicator-bg);
@@ -45,9 +50,12 @@
     }
   }
 
-  .line:has(.custom-indicator):after {
-    top: 0;
-    bottom: 0;
+  .custom-indicator {
+    position: relative;
+    width: max-content;
+    z-index: 1;
+    line-height: 0;
+    top: 3px;
   }
 
   .content {
