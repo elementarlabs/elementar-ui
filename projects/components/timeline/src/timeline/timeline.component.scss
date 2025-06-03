@@ -2,34 +2,34 @@
 
 :host {
   --emr-timeline-header-font-size: theme(--text-sm);
-  --emr-timeline-header-padding: 0 0 calc(var(--spacing) * 4) 0;
-  --emr-timeline-header-height: calc(var(--spacing) * 8);
+  --emr-timeline-header-padding: 0 0 --spacing(4) 0;
+  --emr-timeline-header-height: --spacing(8);
   --emr-timeline-header-bg: transparent;
   --emr-timeline-header-color: var(--color-neutral-500);
   --emr-timeline-header-text-transform: uppercase;
   --emr-timeline-header-font-weight: 500;
-  --emr-timeline-item-gap: calc(var(--spacing) * 2.5);
+  --emr-timeline-item-gap: --spacing(2.5);
   --emr-timeline-item-no-timestamp-offset-start: -0.5rem;
   --emr-timeline-timestamp-font-size: var(--text-xs);
-  --emr-timeline-timestamp-width: calc(var(--spacing) * 12);
+  --emr-timeline-timestamp-width: --spacing(12);
   --emr-timeline-timestamp-color: var(--color-neutral-500);
   --emr-timeline-timestamp-padding: 1px 0 0 0;
-  --emr-timeline-item-content-padding: 0 0 calc(var(--spacing) * 6) 0;
+  --emr-timeline-item-content-padding: 0 0 --spacing(6) 0;
   --emr-timeline-title-font-size: theme(--text-sm);
   --emr-timeline-title-color: var(--color-neutral-800);
   --emr-timeline-title-font-weight: 500;
-  --emr-timeline-item-attributes-padding: calc(var(--spacing) * 1) 0 0 0;
+  --emr-timeline-item-attributes-padding: --spacing(1) 0 0 0;
   --emr-timeline-item-description-font-size: theme(--text-sm);
   --emr-timeline-item-description-color: var(--color-neutral-500);
   --emr-timeline-item-line-bg: var(--color-neutral-400);
-  --emr-timeline-item-content-gap: calc(var(--spacing) * 1);
-  --emr-timeline-indicator-shape-size: calc(var(--spacing) * 3);
+  --emr-timeline-item-content-gap: --spacing(1);
+  --emr-timeline-indicator-shape-size: --spacing(3);
   --emr-timeline-indicator-bg: white;
   --emr-timeline-indicator-border: 2px solid var(--color-neutral-400);
+  --emr-timeline-indicator-offset: 6px;
 
   display: grid;
   grid-template-columns: auto 1fr;
-  width: max-content;
   column-gap: 16px;
 
   &:has(.emr-timeline-timestamp) {

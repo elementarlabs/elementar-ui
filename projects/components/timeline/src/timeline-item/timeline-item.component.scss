@@ -9,7 +9,7 @@
 
   .indicator {
     z-index: 1;
-    top: 9px;
+    top: var(--emr-timeline-indicator-offset);
     position: relative;
     display: flex;
     justify-content: center;
@@ -27,10 +27,10 @@
       content: '';
       position: absolute;
       background: var(--emr-timeline-item-line-bg);
-      top: 9px;
+      top: var(--emr-timeline-indicator-offset);
       left: 50%;
       transform: translateX(-50%);
-      bottom: -9px;
+      bottom: calc(var(--emr-timeline-indicator-offset) * -1);
       width: 1px;
     }
   }
