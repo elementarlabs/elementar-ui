@@ -4,6 +4,7 @@ import { BasicRadioExampleComponent } from '../_examples/basic-radio-example/bas
 import { PageComponent } from '@meta/page/page.component';
 import { PageContentDirective } from '@meta/page/page-content.directive';
 import { PageTitleDirective } from '@meta/page/page-title.directive';
+import { RadioCardExampleComponent } from '../_examples/radio-card-example/radio-card-example.component';
 
 @Component({
     selector: 'app-overview',
@@ -12,7 +13,8 @@ import { PageTitleDirective } from '@meta/page/page-title.directive';
     BasicRadioExampleComponent,
     PageComponent,
     PageContentDirective,
-    PageTitleDirective
+    PageTitleDirective,
+    RadioCardExampleComponent
   ],
     templateUrl: './overview.component.html',
     styleUrl: './overview.component.scss'

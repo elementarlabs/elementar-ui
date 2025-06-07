@@ -1,0 +1,50 @@
+@reference 'tailwindcss';
+
+:host {
+  --border-radius: theme(--radius-2xl);
+  --padding: --spacing(5);
+  --transition: all 0.2s ease-in-out;
+  --color-border-hover: var(--color-primary);
+  --color-background-selected: var(--color-primary-100);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+  width: 100%;
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: --spacing(1);
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin-left: calc(--spacing(2) * -1);
+  }
+
+  &:not(.disabled):hover {
+    border-color: var(--color-border-hover);
+  }
+
+  &.selected {
+    border-color: var(--color-primary);
+    background-color: var(--color-background-selected);
+
+    &::before {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary);
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+:host-context(html.dark) {
+  --color-background-selected: var(--color-neutral-1000);
+}

@@ -1,0 +1,9 @@
+@reference 'tailwindcss';
+
+:host {
+  display: flex;
+  align-items: center;
+  gap: --spacing(1.5);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}

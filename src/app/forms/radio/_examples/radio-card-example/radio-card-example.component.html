@@ -1,0 +1,27 @@
+<form [formGroup]="form">
+  <emr-radio-card-group formControlName="privacy">
+    <emr-radio-card value="open">
+      <emr-radio-card-title>
+        <mat-icon>public</mat-icon>
+        Open
+      </emr-radio-card-title>
+      <emr-radio-card-content>
+        Posts and community members are public and visible to search engines.
+      </emr-radio-card-content>
+    </emr-radio-card>
+    <emr-radio-card value="closed">
+      <emr-radio-card-title>
+        <mat-icon>lock</mat-icon>
+        Closed
+      </emr-radio-card-title>
+      <emr-radio-card-content>
+        Only members can view community members and posts. Content is not visible to search engines.
+      </emr-radio-card-content>
+    </emr-radio-card>
+  </emr-radio-card-group>
+</form>
+<div class="mt-10">
+  <button mat-flat-button (click)="toggleDisabled()">
+    {{ form.get('privacy')?.disabled ? 'Enable' : 'Disable' }} Control
+  </button>
+</div>

@@ -1,0 +1,12 @@
+@reference 'tailwindcss';
+
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  gap: --spacing(5);
+
+  &.is-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
