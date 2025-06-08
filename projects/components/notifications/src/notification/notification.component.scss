@@ -9,6 +9,7 @@
   --emr-notification-is-unread-hover-bg: var(--color-primary-300);
 
   display: flex;
+  width: 100%;
   position: relative;
   border-radius: theme(--radius-xl);
   gap: var(--emr-notification-gap);
