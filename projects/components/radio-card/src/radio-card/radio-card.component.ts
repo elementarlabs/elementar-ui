@@ -6,14 +6,16 @@ import { MatRadioButton } from '@angular/material/radio';
 
 @Component({
   selector: 'emr-radio-card',
+  exportAs: 'emrRadioCard',
   imports: [
     MatRadioButton
   ],
   templateUrl: './radio-card.component.html',
   styleUrl: './radio-card.component.scss',
   host: {
-    '[class.selected]': 'isSelected()',
-    '[class.disabled]': 'parentGroup.disabled()',
+    'class': 'emr-radio-card',
+    '[class.is-selected]': 'isSelected()',
+    '[class.is-disabled]': 'parentGroup.disabled()',
     '(click)': 'selectCard()',
     'role': 'radio',
     '[attr.aria-checked]': 'isSelected()',

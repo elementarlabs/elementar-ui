@@ -3,7 +3,7 @@
 :host {
   display: flex;
   align-items: center;
-  gap: --spacing(1.5);
-  font-size: var(--text-sm);
+  gap: var(--emr-radio-card-title-gap);
+  font-size: var(--emr-radio-card-title-font-size);
   font-weight: 600;
 }

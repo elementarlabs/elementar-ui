@@ -1,12 +1,20 @@
 @reference 'tailwindcss';
 
 :host {
+  --emr-radio-card-group-gap: --spacing(5);
+  --emr-radio-card-border-radius: theme(--radius-2xl);
+  --emr-radio-card-padding: --spacing(5);
+  --emr-radio-card-transition: all 0.2s ease-in-out;
+  --emr-radio-card-color-border-hover: var(--color-primary);
+  --emr-radio-card-color-selected-border: var(--color-primary);
+  --emr-radio-card-color-selected-bg: var(--color-primary-100);
+  --emr-radio-card-content-font-size: theme(--text-sm);
+  --emr-radio-card-content-color: var(--color-neutral-600);
+
+  --emr-radio-card-title-font-size: theme(--text-sm);
+  --emr-radio-card-title-gap: --spacing(1.5);
+
   display: flex;
   flex-wrap: wrap;
-  gap: --spacing(5);
-
-  &.is-disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
+  gap: var(--emr-radio-card-group-gap);
 }

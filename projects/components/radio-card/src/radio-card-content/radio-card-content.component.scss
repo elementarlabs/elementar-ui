@@ -2,10 +2,6 @@
 
 :host {
   display: block;
-  font-size: theme(--text-sm);
-  color: var(--color-neutral-600);
-}
-
-:host-context(html.dark) {
-  color: var(--color-neutral-500);
+  font-size: var(--emr-radio-card-content-font-size);
+  color: var(--emr-radio-card-content-color);
 }

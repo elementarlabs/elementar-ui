@@ -21,7 +21,10 @@
   </emr-radio-card-group>
 </form>
 <div class="mt-10">
-  <button mat-flat-button (click)="toggleDisabled()">
-    {{ form.get('privacy')?.disabled ? 'Enable' : 'Disable' }} Control
-  </button>
+  <p>
+    <button mat-flat-button (click)="toggleDisabled()">
+      {{ form.get('privacy')?.disabled ? 'Enable' : 'Disable' }} Control
+    </button>
+  </p>
+  <p>Control value: {{ form.get('privacy')?.value }}</p>
 </div>
