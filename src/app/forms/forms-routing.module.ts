@@ -62,6 +62,10 @@ const routes: Routes = [
     path: 'timezone',
     loadChildren: () => import('./timezone/timezone.module').then(m => m.TimezoneModule)
   },
+  {
+    path: 'form-renderer',
+    loadChildren: () => import('./form-renderer/form-renderer.module').then(m => m.FormRendererModule)
+  },
 ];
 
 @NgModule({

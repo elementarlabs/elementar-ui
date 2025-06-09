@@ -1,0 +1,13 @@
+@if(control() && fieldConfig()) {
+  <mat-form-field>
+    <mat-label>{{ fieldConfig().label }}</mat-label>
+    <input matInput
+           [type]="fieldConfig().inputType || 'text'"
+           [formControl]="control()"
+           [placeholder]="fieldConfig().placeholder || ''">
+    @if (fieldConfig().hint) { <mat-hint>{{ fieldConfig().hint }}</mat-hint> }
+    @if (control().invalid && control().touched) {
+      <mat-error>{{ getErrorMessage() }}</mat-error>
+    }
+  </mat-form-field>
+}

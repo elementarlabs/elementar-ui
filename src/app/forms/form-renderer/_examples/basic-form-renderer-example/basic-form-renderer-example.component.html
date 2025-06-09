@@ -1,0 +1,14 @@
+<emr-form-renderer
+  #formRenderer
+  [config]="formConfig()"
+  (formSubmit)="onFormSubmit($event)">
+</emr-form-renderer>
+
+<div class="mt-5">
+  <button mat-flat-button (click)="formRenderer.submit()">Submit</button>
+</div>
+
+@if(submittedData()) {
+  <div class="font-bold mb-3 mt-6">Submitted data:</div>
+  <pre>{{ submittedData() | json }}</pre>
+}

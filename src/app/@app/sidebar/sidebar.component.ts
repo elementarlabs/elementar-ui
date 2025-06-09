@@ -214,6 +214,12 @@ export class SidebarComponent implements OnInit {
           name: 'Country',
           link: '/forms/country'
         },
+        {
+          key: uuid(),
+          type: 'link',
+          name: 'Form Renderer',
+          link: '/forms/form-renderer'
+        },
       ]
     },
     {

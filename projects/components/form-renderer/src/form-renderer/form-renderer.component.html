@@ -1,0 +1,30 @@
+@if (config(); as cfg) {
+  <form [formGroup]="formGroup()" (ngSubmit)="onSubmit()">
+    <ng-container
+      *ngTemplateOutlet="renderNode; context: {$implicit: cfg.layout}">
+    </ng-container>
+    <ng-content/>
+  </form>
+}
+
+<ng-template #renderNode let-node>
+  @if (isGridNode(node)) {
+    <div
+      class="grid-layout"
+      [style.grid-template-columns]="'repeat(' + node.columns + ', 1fr)'"
+      [style.gap]="node.gap">
+
+      @for (childNode of node.children; track childNode) {
+        <ng-container
+          *ngTemplateOutlet="renderNode; context: {$implicit: childNode}">
+        </ng-container>
+      }
+    </div>
+  } @else {
+    <emr-field-loader
+      [fieldConfig]="getFieldConfig(node.field)!"
+      [control]="getControl(node.field)"
+      [style.grid-column]="node.colspan ? 'span ' + node.colspan : null">
+    </emr-field-loader>
+  }
+</ng-template>

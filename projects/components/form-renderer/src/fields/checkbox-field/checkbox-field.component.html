@@ -1,0 +1,5 @@
+@if(control() && fieldConfig()) {
+  <mat-checkbox [formControl]="control()">
+    {{ fieldConfig().label }}
+  </mat-checkbox>
+}
