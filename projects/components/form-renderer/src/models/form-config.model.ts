@@ -7,9 +7,9 @@ export type FieldType =
   | 'datepicker'
   | 'autocomplete'
   | 'checkbox'
-  | 'radio-group'
+  | 'radioGroup'
   | 'toggle'
-  | 'slider';
+  | string;
 
 export interface ValidatorConfig {
   type: string;
@@ -20,7 +20,7 @@ export interface ValidatorConfig {
 
 export interface FieldConfig {
   name: string;
-  label: string;
+  label?: string;
   type: FieldType;
   value?: any;
   placeholder?: string;
@@ -34,6 +34,7 @@ export interface FieldConfig {
   thumbLabel?: boolean;
   readonly?: boolean;
   disabled?: boolean;
+  inline?: boolean;
 }
 
 export interface FieldNode {

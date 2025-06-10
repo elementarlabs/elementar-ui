@@ -2,5 +2,8 @@
 
 :host {
   display: block;
-  margin: --spacing(2) 0;
+
+  mat-form-field {
+    width: 100%;
+  }
 }

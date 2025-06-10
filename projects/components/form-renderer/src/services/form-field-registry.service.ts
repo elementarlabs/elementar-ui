@@ -1,5 +1,4 @@
 import { Injectable, Type } from '@angular/core';
-import { IFormField } from '../models/form-config.model';
 
 type FieldComponentImporter = () => Promise<Type<any>>;
 
@@ -34,8 +33,16 @@ export class FormFieldRegistryService {
         .then(c => c.DatepickerFieldComponent)
     );
     this.fieldComponentMap.set('toggle', () =>
-      import('../fields/slide-toggle-field/slide-toggle-field.component')
-        .then(c => c.SlideToggleFieldComponent)
+      import('../fields/toggle-field/toggle-field.component')
+        .then(c => c.ToggleFieldComponent)
+    );
+    this.fieldComponentMap.set('radioGroup', () =>
+      import('../fields/radio-group-field/radio-group-field.component')
+        .then(c => c.RadioGroupFieldComponent)
+    );
+    this.fieldComponentMap.set('timezone', () =>
+      import('../fields/timezone-field/timezone-field.component')
+        .then(c => c.TimezoneFieldComponent)
     );
   }
 

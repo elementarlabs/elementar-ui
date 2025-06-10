@@ -1,23 +1,23 @@
 import { Component, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { FieldConfig } from '../../models/form-config.model';
+import { FieldConfig } from '@elementar-ui/components/form-renderer';
+import { TimezoneSelectComponent } from '@elementar-ui/components/timezone-select';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatOption, MatSelect } from '@angular/material/select';
 
 @Component({
-  selector: 'emr-select-field',
+  selector: 'emr-timezone-field',
   imports: [
     MatError,
-    MatOption,
-    MatSelect,
-    MatLabel,
     MatFormField,
-    ReactiveFormsModule
+    MatLabel,
+    TimezoneSelectComponent,
+    ReactiveFormsModule,
+    MatError
   ],
-  templateUrl: './select-field.component.html',
-  styleUrl: './select-field.component.scss'
+  templateUrl: './timezone-field.component.html',
+  styleUrl: './timezone-field.component.scss'
 })
-export class SelectFieldComponent {
+export class TimezoneFieldComponent {
   control = input.required<FormControl>();
   fieldConfig = input.required<FieldConfig>();
 

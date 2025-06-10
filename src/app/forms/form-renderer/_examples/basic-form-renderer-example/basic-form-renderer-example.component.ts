@@ -82,6 +82,21 @@ export class BasicFormRendererExampleComponent {
         label: 'Date of birth'
       },
       {
+        name: 'gender',
+        type: 'radioGroup',
+        label: 'Gender',
+        value: null,
+        inline: true,
+        options: [
+          { value: 'male', label: 'Male' },
+          { value: 'female', label: 'Female' }
+        ],
+        validators: [{
+          type: 'required',
+          message: 'Please specify your gender'
+        }]
+      },
+      {
         name: 'subscribe',
         type: 'checkbox',
         label: 'Subscribe to the newsletter',
@@ -92,7 +107,13 @@ export class BasicFormRendererExampleComponent {
         type: 'toggle',
         label: 'Accept the terms of the EULA',
         value: false
-      }
+      },
+      {
+        name: 'timezone',
+        type: 'timezone',
+        label: 'Timezone',
+        placeholder: 'Select timezone',
+      },
     ],
     layout: {
       columns: 2,
@@ -103,8 +124,10 @@ export class BasicFormRendererExampleComponent {
         { field: 'userType' },
         { field: 'bio', colspan: 2 },
         { field: 'birthDate' },
+        { field: 'timezone' },
         { field: 'subscribe' },
-        { field: 'eula'}
+        { field: 'eula'},
+        { field: 'gender'}
       ]
     }
   });

@@ -24,6 +24,6 @@ export class InputFieldComponent {
     if (!errors) return '';
     const errorKey = Object.keys(errors)[0];
     const validator = this.fieldConfig().validators?.find(v => v.type === errorKey);
-    return validator?.message || 'Некорректное значение';
+    return validator?.message || 'Invalid value';
   }
 }

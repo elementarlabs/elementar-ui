@@ -1,0 +1,10 @@
+@if(control() && fieldConfig()) {
+  <mat-form-field>
+    <mat-label>{{ fieldConfig().label }}</mat-label>
+    <emr-timezone-select [formControl]="control()"
+                         [placeholder]="fieldConfig().placeholder || ''"/>
+    @if (control().invalid && control().touched) {
+      <mat-error>{{ getErrorMessage() }}</mat-error>
+    }
+  </mat-form-field>
+}

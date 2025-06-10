@@ -1,0 +1,25 @@
+@reference 'tailwindcss';
+
+:host {
+  display: block;
+  margin-bottom: --spacing(6);
+
+  .radio-group-label {
+    display: block;
+    color: var(--mdc-outlined-text-field-label-text-color);
+    font-size: calc(var(--mdc-outlined-text-field-label-text-size) * .75);
+  }
+
+  mat-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: --spacing(1);
+
+    &.inline {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: --spacing(4);
+    }
+  }
+}
