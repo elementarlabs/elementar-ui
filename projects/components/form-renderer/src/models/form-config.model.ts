@@ -22,7 +22,7 @@ export interface FieldConfig {
   name: string;
   label: string;
   type: FieldType;
-  defaultValue?: any;
+  value?: any;
   placeholder?: string;
   inputType?: 'text' | 'number' | 'email' | 'password';
   options?: { value: any; label: string }[];
@@ -32,6 +32,8 @@ export interface FieldConfig {
   max?: number;
   step?: number;
   thumbLabel?: boolean;
+  readonly?: boolean;
+  disabled?: boolean;
 }
 
 export interface FieldNode {
@@ -41,7 +43,7 @@ export interface FieldNode {
 
 export interface GridNode {
   columns: number;
-  gap: string;
+  gap?: string;
   children: LayoutNode[];
 }
 

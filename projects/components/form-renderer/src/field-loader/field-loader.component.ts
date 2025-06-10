@@ -5,8 +5,9 @@ import { FormFieldRegistryService } from '../services/form-field-registry.servic
 
 @Component({
   selector: 'emr-field-loader',
-  standalone: true,
-  template: `<ng-container #anchor></ng-container>`,
+  exportAs: 'emrFieldLoader',
+  templateUrl: './field-loader.component.html',
+  styleUrl: './field-loader.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FieldLoaderComponent {
@@ -19,10 +20,9 @@ export class FieldLoaderComponent {
       const fieldConfig = this.fieldConfig();
       const control = this.control();
       const anchor = this.anchor();
-
       anchor.clear();
-
       const importer = this.registry.getImporter(fieldConfig.type);
+
       if (importer) {
         try {
           const componentType = await importer();

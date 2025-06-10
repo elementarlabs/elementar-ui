@@ -4,6 +4,7 @@
     <textarea matInput
               [formControl]="control()"
               [placeholder]="fieldConfig().placeholder || ''"
+              [readonly]="fieldConfig().readonly"
               cdkTextareaAutosize></textarea>
     @if (fieldConfig().hint) {
       <mat-hint>{{ fieldConfig().hint }}</mat-hint>

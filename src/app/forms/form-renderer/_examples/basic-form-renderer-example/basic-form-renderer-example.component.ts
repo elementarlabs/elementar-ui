@@ -35,18 +35,18 @@ export class BasicFormRendererExampleComponent {
       {
         name: 'firstName',
         type: 'input',
-        label: 'Имя',
-        defaultValue: 'Иван',
+        label: 'Name',
+        value: 'Name',
         validators: [
-          { type: 'required', message: 'Имя обязательно' },
-          { type: 'minLength', value: 2, message: 'Минимум 2 символа' }
+          { type: 'required', message: 'Name is required' },
+          { type: 'minLength', value: 2, message: 'Minimum 2 characters' }
         ]
       },
       {
         name: 'lastName',
         type: 'input',
-        label: 'Фамилия',
-        validators: [{ type: 'required', message: 'Фамилия обязательна' }]
+        label: 'Last name',
+        validators: [{ type: 'required', message: 'Last name is required' }]
       },
       {
         name: 'email',
@@ -54,49 +54,48 @@ export class BasicFormRendererExampleComponent {
         inputType: 'email',
         label: 'Email',
         validators: [
-          { type: 'required', message: 'Email обязателен' },
-          { type: 'email', message: 'Введите корректный Email' },
-          { type: 'forbiddenDomain', value: 'test.com', message: 'Email на домене test.com запрещен' }
+          { type: 'required', message: 'Email is required' },
+          { type: 'email', message: 'Enter a valid email address' },
+          { type: 'forbiddenDomain', value: 'test.com', message: 'Email on the test.com domain is prohibited.' }
         ]
       },
       {
         name: 'userType',
         type: 'select',
-        label: 'Тип пользователя',
-        defaultValue: 'editor',
+        label: 'User type',
+        value: 'editor',
         options: [
-          { value: 'admin', label: 'Администратор' },
-          { value: 'editor', label: 'Редактор' },
-          { value: 'guest', label: 'Гость' },
+          { value: 'admin', label: 'Administrator' },
+          { value: 'editor', label: 'Editor' },
+          { value: 'guest', label: 'Guest' },
         ]
       },
       {
         name: 'bio',
         type: 'textarea',
-        label: 'Биография',
-        placeholder: 'Расскажите о себе...'
+        label: 'Biography',
+        placeholder: 'Tell us about yourself...'
       },
       {
         name: 'birthDate',
         type: 'datepicker',
-        label: 'Дата рождения'
+        label: 'Date of birth'
       },
       {
         name: 'subscribe',
         type: 'checkbox',
-        label: 'Подписаться на рассылку',
-        defaultValue: true
+        label: 'Subscribe to the newsletter',
+        value: true
       },
       {
         name: 'eula',
         type: 'toggle',
-        label: 'Принять условия EULA',
-        defaultValue: false
+        label: 'Accept the terms of the EULA',
+        value: false
       }
     ],
     layout: {
       columns: 2,
-      gap: '16px 24px',
       children: [
         { field: 'firstName' },
         { field: 'lastName' },

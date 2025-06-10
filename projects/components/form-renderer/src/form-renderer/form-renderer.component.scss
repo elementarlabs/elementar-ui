@@ -1,12 +1,11 @@
+@reference 'tailwindcss';
+
 :host {
   display: block;
-}
 
-.grid-layout {
-  display: grid;
-  width: 100%;
-}
-
-.form-actions {
-  margin-top: 24px;
+  .grid-layout {
+    display: grid;
+    width: 100%;
+    gap: --spacing(4) --spacing(6);
+  }
 }

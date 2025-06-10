@@ -16,8 +16,12 @@ export class FormGeneratorService {
     const group = this.fb.group({});
     for (const fieldConfig of fields) {
       const validators = this.mapValidators(fieldConfig.validators);
+      const formState = {
+        value: fieldConfig.value ?? null,
+        disabled: fieldConfig.disabled ?? false
+      };
       const control = new FormControl(
-        fieldConfig.defaultValue ?? null,
+        formState,
         validators
       );
       group.addControl(fieldConfig.name, control);
