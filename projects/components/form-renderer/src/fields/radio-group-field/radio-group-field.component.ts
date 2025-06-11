@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { FieldConfig } from '@elementar-ui/components/form-renderer';
+import { FieldConfig } from '../../models/form-config.model';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { MatError, MatHint } from '@angular/material/form-field';
 
