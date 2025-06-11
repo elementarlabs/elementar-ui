@@ -1,13 +1,15 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FieldConfig } from '../../models/form-config.model';
-import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatError, MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'emr-select-field',
+  exportAs: 'emrSelectField',
   imports: [
     MatError,
+    MatHint,
     MatOption,
     MatSelect,
     MatLabel,
@@ -15,7 +17,8 @@ import { MatOption, MatSelect } from '@angular/material/select';
     ReactiveFormsModule
   ],
   templateUrl: './select-field.component.html',
-  styleUrl: './select-field.component.scss'
+  styleUrl: './select-field.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectFieldComponent {
   control = input.required<FormControl>();

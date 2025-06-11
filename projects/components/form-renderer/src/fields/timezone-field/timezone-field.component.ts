@@ -2,17 +2,18 @@ import { Component, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FieldConfig } from '@elementar-ui/components/form-renderer';
 import { TimezoneSelectComponent } from '@elementar-ui/components/timezone-select';
-import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatError, MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 
 @Component({
   selector: 'emr-timezone-field',
+  exportAs: 'emrTimezoneField',
   imports: [
     MatError,
     MatFormField,
     MatLabel,
     TimezoneSelectComponent,
     ReactiveFormsModule,
-    MatError
+    MatHint
   ],
   templateUrl: './timezone-field.component.html',
   styleUrl: './timezone-field.component.scss'

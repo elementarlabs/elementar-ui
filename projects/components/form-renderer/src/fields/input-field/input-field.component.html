@@ -6,7 +6,7 @@
            [formControl]="control()"
            [placeholder]="fieldConfig().placeholder || ''"
            [readonly]="fieldConfig().readonly">
-    @if (fieldConfig().hint) { <mat-hint>{{ fieldConfig().hint }}</mat-hint> }
+    <mat-hint>{{ fieldConfig().hint }}</mat-hint>
     @if (control().invalid && control().touched) {
       <mat-error>{{ getErrorMessage() }}</mat-error>
     }

@@ -7,6 +7,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @Component({
   selector: 'emr-textarea-field',
+  exportAs: 'emrTextareaField',
   imports: [
     MatError,
     MatHint,

@@ -53,6 +53,7 @@ export class BasicFormRendererExampleComponent {
         type: 'input',
         inputType: 'email',
         label: 'Email',
+        hint: 'We will never share your email address with third parties.',
         validators: [
           { type: 'required', message: 'Email is required' },
           { type: 'email', message: 'Enter a valid email address' },
@@ -87,6 +88,7 @@ export class BasicFormRendererExampleComponent {
         label: 'Gender',
         value: null,
         inline: true,
+        hint: 'We will never share your email address with third parties.',
         options: [
           { value: 'male', label: 'Male' },
           { value: 'female', label: 'Female' }

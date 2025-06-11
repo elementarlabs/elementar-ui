@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FieldConfig } from '@elementar-ui/components/form-renderer';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatError } from '@angular/material/form-field';
+import { MatError, MatHint } from '@angular/material/form-field';
 
 @Component({
   selector: 'emr-radio-group-field',
@@ -12,6 +12,7 @@ import { MatError } from '@angular/material/form-field';
     MatRadioGroup,
     ReactiveFormsModule,
     MatError,
+    MatHint,
   ],
   templateUrl: './radio-group-field.component.html',
   styleUrl: './radio-group-field.component.scss',

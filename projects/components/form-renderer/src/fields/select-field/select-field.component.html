@@ -6,6 +6,7 @@
         <mat-option [value]="option.value">{{ option.label }}</mat-option>
       }
     </mat-select>
+    <mat-hint>{{ fieldConfig().hint }}</mat-hint>
     @if (control().invalid && control().touched) {
       <mat-error>{{ getErrorMessage() }}</mat-error>
     }

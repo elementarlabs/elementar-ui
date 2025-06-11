@@ -7,6 +7,7 @@ import { MatHint } from '@angular/material/form-field';
 
 @Component({
   selector: 'emr-datepicker-field',
+  exportAs: 'emrDatepickerField',
   imports: [
     MatHint,
     MatInput,

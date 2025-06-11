@@ -1,7 +1,7 @@
 @if (control() && fieldConfig()) {
   <div class="radio-group-container">
     @if (fieldConfig().label) {
-      <label class="radio-group-label">{{ fieldConfig().label }}</label>
+      <div class="radio-group-label">{{ fieldConfig().label }}</div>
     }
     <mat-radio-group
       [formControl]="control()"
@@ -10,6 +10,9 @@
         <mat-radio-button [value]="option.value">{{ option.label }}</mat-radio-button>
       }
     </mat-radio-group>
+    @if (fieldConfig().hint && (control().valid || control().invalid && !control().touched)) {
+      <mat-hint>{{ fieldConfig().hint }}</mat-hint>
+    }
     @if (control().invalid && control().touched) {
       <mat-error>{{ getErrorMessage() }}</mat-error>
     }
