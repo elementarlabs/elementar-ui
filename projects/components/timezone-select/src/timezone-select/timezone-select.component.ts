@@ -50,16 +50,18 @@ let nextId = 0;
   }
 })
 export class TimezoneSelectComponent implements OnInit, MatFormFieldControl<any>, ControlValueAccessor {
-  private searchInput = viewChild.required<ElementRef<HTMLInputElement>>('searchInput');
-
-  private selectRef = viewChild.required<MatSelect>('select');
   protected localeId = inject(LOCALE_ID);
   protected renderer = inject(Renderer2);
-  protected timezoneGroups = signal<TimezoneGroup[]>([]);
+  private readonly _focusMonitor = inject(FocusMonitor);
+  private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   ngControl = inject(NgControl, { optional: true, self: true });
-  readonly stateChanges = new Subject<void>();
-  readonly touched = signal(false);
 
+  private searchInput = viewChild.required<ElementRef<HTMLInputElement>>('searchInput');
+  private selectRef = viewChild.required<MatSelect>('select');
+
+  protected timezoneGroups = signal<TimezoneGroup[]>([]);
+  readonly touched = signal(false);
+  readonly stateChanges = new Subject<void>();
   readonly controlType = 'emr-timezone-select';
   readonly id = `emr-timezone-select-${nextId++}`;
   readonly _userAriaDescribedBy = input<string>('', { alias: 'aria-describedby' });
@@ -74,16 +76,13 @@ export class TimezoneSelectComponent implements OnInit, MatFormFieldControl<any>
     transform: booleanAttribute,
   });
   readonly _value = model<string | null>(null, { alias: 'value' });
-  onChange = (_: any) => {};
-  onTouched = () => {};
-
+  protected searchTerm = model('');
   private readonly _focused = signal(false);
   private readonly _disabledByCva = signal(false);
   private readonly _disabled = computed(() => this._disabledByInput() || this._disabledByCva());
-  private readonly _focusMonitor = inject(FocusMonitor);
-  private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  protected searchTerm = model('');
+  onChange = (_: any) => {};
+  onTouched = () => {};
 
   get focused(): boolean {
     return this._focused();

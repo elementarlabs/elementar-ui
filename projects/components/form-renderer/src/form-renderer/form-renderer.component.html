@@ -21,10 +21,12 @@
       }
     </div>
   } @else {
-    <emr-field-loader
-      [fieldConfig]="getFieldConfig(node.field)!"
-      [control]="getControl(node.field)"
-      [style.grid-column]="node.colspan ? 'span ' + node.colspan : null">
-    </emr-field-loader>
+    @if (isFieldVisible(node.field)) {
+      <emr-field-loader
+        [fieldConfig]="getFieldConfig(node.field)!"
+        [control]="getControl(node.field)"
+        [style.grid-column]="node.colspan ? 'span ' + node.colspan : null">
+      </emr-field-loader>
+    }
   }
 </ng-template>

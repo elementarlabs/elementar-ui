@@ -27,7 +27,9 @@
     <div class="px-4 font-bold text-on-surface-container my-4" i18n>{{ timezoneGroup.name }}</div>
     <div>
       @for (timezone of timezoneGroup.timezones; track timezone) {
-        <mat-option [value]="timezone.id" (click)="onModelChange(timezone.id)">{{ timezone.id }}</mat-option>
+        <mat-option [value]="timezone.id" (click)="onModelChange(timezone.id)">
+          {{ timezone.id }}
+        </mat-option>
       }
     </div>
   } @empty {

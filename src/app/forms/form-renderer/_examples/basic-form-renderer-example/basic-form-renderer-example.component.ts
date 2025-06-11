@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { FormConfig, FormRendererComponent, ValidatorRegistryService } from '@elementar-ui/components/form-renderer';
 import { JsonPipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
@@ -67,7 +67,7 @@ export class BasicFormRendererExampleComponent {
         options: [
           { value: 'admin', label: 'Administrator' },
           { value: 'editor', label: 'Editor' },
-          { value: 'guest', label: 'Guest' },
+          { value: 'other', label: 'Other' },
         ]
       },
       {
@@ -114,6 +114,13 @@ export class BasicFormRendererExampleComponent {
         label: 'Timezone',
         placeholder: 'Select timezone',
       },
+      {
+        name: 'otherTypeDescription',
+        type: 'input',
+        label: 'Specify the type',
+        validators: [{ type: 'required', message: 'This field is required if the type “Other” is selected.' }],
+        visibleWhen: (form: FormGroup) => form.get('userType')?.value === 'other',
+      },
     ],
     layout: {
       columns: 2,
@@ -122,12 +129,13 @@ export class BasicFormRendererExampleComponent {
         { field: 'lastName' },
         { field: 'email' },
         { field: 'userType' },
-        { field: 'bio', colspan: 2 },
         { field: 'birthDate' },
         { field: 'timezone' },
         { field: 'subscribe' },
         { field: 'eula'},
-        { field: 'gender'}
+        { field: 'bio', colspan: 2 },
+        { field: 'otherTypeDescription' },
+        { field: 'gender'},
       ]
     }
   });

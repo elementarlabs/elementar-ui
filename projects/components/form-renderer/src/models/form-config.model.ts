@@ -1,4 +1,4 @@
-import { ValidatorFn, AbstractControl } from '@angular/forms';
+import { ValidatorFn, AbstractControl, FormGroup } from '@angular/forms';
 
 export type FieldType =
   | 'input'
@@ -35,6 +35,7 @@ export interface FieldConfig {
   readonly?: boolean;
   disabled?: boolean;
   inline?: boolean;
+  visibleWhen?: (formGroup: FormGroup) => boolean;
 }
 
 export interface FieldNode {
