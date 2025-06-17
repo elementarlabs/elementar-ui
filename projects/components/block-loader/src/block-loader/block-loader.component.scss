@@ -7,18 +7,18 @@
   inset: 0;
   background: var(--emr-block-loader-bg);
   visibility: hidden;
-  z-index: -9999;
+  z-index: -99;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: inherit;
   flex-direction: column;
   gap: --spacing(4);
+  user-select: none;
 
   &.is-loading {
     visibility: visible;
     z-index: 99;
-    pointer-events: none;
   }
 
   .message {
@@ -27,6 +27,8 @@
     }
 
     font-size: theme(--text-sm);
+    text-align: center;
+    max-width: 800px;
   }
 }
 
