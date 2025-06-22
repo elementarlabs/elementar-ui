@@ -30,9 +30,15 @@ export class BasicFormRendererExampleComponent {
     });
   }
 
+  readonly initialValue = signal({
+    userType: 'other',
+    subscribe: true,
+  });
+
   formConfig = signal<FormConfig>({
-    fields: [
+    elements: [
       {
+        kind: 'field',
         name: 'firstName',
         type: 'input',
         label: 'Name',
@@ -43,12 +49,14 @@ export class BasicFormRendererExampleComponent {
         ]
       },
       {
+        kind: 'field',
         name: 'lastName',
         type: 'input',
         label: 'Last name',
         validators: [{ type: 'required', message: 'Last name is required' }]
       },
       {
+        kind: 'field',
         name: 'email',
         type: 'input',
         inputType: 'email',
@@ -61,83 +69,112 @@ export class BasicFormRendererExampleComponent {
         ]
       },
       {
+        kind: 'field',
         name: 'userType',
         type: 'select',
         label: 'User type',
-        value: 'editor',
-        options: [
-          { value: 'admin', label: 'Administrator' },
-          { value: 'editor', label: 'Editor' },
-          { value: 'other', label: 'Other' },
-        ]
+        payload: {
+          options: [
+            { value: 'admin', label: 'Administrator' },
+            { value: 'editor', label: 'Editor' },
+            { value: 'other', label: 'Other' },
+          ]
+        }
       },
       {
+        kind: 'field',
         name: 'bio',
         type: 'textarea',
         label: 'Biography',
         placeholder: 'Tell us about yourself...'
       },
       {
+        kind: 'field',
         name: 'birthDate',
         type: 'datepicker',
         label: 'Date of birth'
       },
       {
+        kind: 'field',
         name: 'gender',
         type: 'radioGroup',
         label: 'Gender',
         value: null,
         inline: true,
         hint: 'We will never share your email address with third parties.',
-        options: [
-          { value: 'male', label: 'Male' },
-          { value: 'female', label: 'Female' }
-        ],
+        payload: {
+          options: [
+            { value: 'male', label: 'Male' },
+            { value: 'female', label: 'Female' }
+          ],
+        },
         validators: [{
           type: 'required',
           message: 'Please specify your gender'
         }]
       },
       {
+        kind: 'field',
         name: 'subscribe',
         type: 'checkbox',
         label: 'Subscribe to the newsletter',
         value: true
       },
       {
+        kind: 'field',
         name: 'eula',
         type: 'toggle',
         label: 'Accept the terms of the EULA',
         value: false
       },
       {
+        kind: 'field',
         name: 'timezone',
         type: 'timezone',
         label: 'Timezone',
         placeholder: 'Select timezone',
       },
       {
+        kind: 'field',
         name: 'otherTypeDescription',
         type: 'input',
         label: 'Specify the type',
         validators: [{ type: 'required', message: 'This field is required if the type “Other” is selected.' }],
         visibleWhen: (form: FormGroup) => form.get('userType')?.value === 'other',
       },
+      {
+        kind: 'content',
+        name: 'logoImage',
+        type: 'image',
+        content: {
+          src: 'https://angular.io/assets/images/logos/angular/angular.svg',
+          alt: 'Логотип Angular',
+          width: 200,
+        }
+      },
+      {
+        kind: 'content',
+        name: 'mainHeader',
+        type: 'text',
+        content: { htmlContent: '<h2>New User Registration</h2>' }
+      },
     ],
     layout: {
       columns: 2,
       children: [
-        { field: 'firstName' },
-        { field: 'lastName' },
-        { field: 'email' },
-        { field: 'userType' },
-        { field: 'birthDate' },
-        { field: 'timezone' },
-        { field: 'subscribe' },
-        { field: 'eula'},
-        { field: 'bio', colspan: 2 },
-        { field: 'otherTypeDescription' },
-        { field: 'gender'},
+        { name: 'logoImage', colspan: 2 },
+        { name: 'mainHeader', colspan: 2 },
+        { name: 'firstName' },
+        { name: 'lastName' },
+        { name: 'email' },
+        { name: 'userType' },
+        { name: 'birthDate' },
+        { name: 'timezone' },
+        { name: 'subscribe' },
+        { name: 'eula'},
+        { name: 'bio', colspan: 2 },
+        { name: 'otherTypeDescription' },
+        { name: 'gender'},
       ]
     }
   });

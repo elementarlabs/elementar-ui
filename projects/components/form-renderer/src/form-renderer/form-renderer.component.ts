@@ -1,33 +1,25 @@
-import {
-  Component,
-  computed,
-  input,
-  output,
-  ChangeDetectionStrategy,
-  Signal,
-  inject,
-  effect,
-  OnDestroy
-} from '@angular/core';
+import { Component, computed, input, output, ChangeDetectionStrategy, Signal, effect, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, ValidatorFn } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FormConfig, LayoutNode, GridNode, FieldConfig } from '../models/form-config.model';
+import { Subscription } from 'rxjs';
+import { startWith } from 'rxjs/operators';
+import { ComponentConfig, FormConfig, LayoutNode, GridNode, ValidatorConfig } from '../models/form-config.model';
 import { FormGeneratorService } from '../services/form-generator.service';
-import { NgTemplateOutlet } from '@angular/common';
+import { ComponentLoaderComponent } from '../component-loader/component-loader.component';
 import { ValidatorRegistryService } from '../services/validator-registry.service';
-import { startWith, Subscription } from 'rxjs';
-import { FieldLoaderComponent } from '../field-loader/field-loader.component';
 
 @Component({
   selector: 'emr-form-renderer',
   exportAs: 'emrFormRenderer',
+  standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatNativeDateModule,
-    NgTemplateOutlet,
-    FieldLoaderComponent,
+    ComponentLoaderComponent,
   ],
   templateUrl: './form-renderer.component.html',
   styleUrl: './form-renderer.component.scss',
@@ -37,53 +29,52 @@ import { FieldLoaderComponent } from '../field-loader/field-loader.component';
   }
 })
 export class FormRendererComponent implements OnDestroy {
-  private validatorRegistry = inject(ValidatorRegistryService);
-  private formGenerator = inject(FormGeneratorService);
-
   readonly config = input.required<FormConfig>();
+  readonly initialValue = input<Record<string, any> | undefined>();
+  readonly formSubmit = output<any>();
 
-  readonly formGroup: Signal<FormGroup> = computed(() =>
-    this.formGenerator.createFormGroup(this.config().fields)
-  );
-  private fieldsMap: Signal<Map<string, FieldConfig>> = computed(() => {
-    const map = new Map<string, FieldConfig>();
-    for (const field of this.config().fields) {
-      map.set(field.name, field);
+  private elementsMap: Signal<Map<string, ComponentConfig>> = computed(() => {
+    const map = new Map<string, ComponentConfig>();
+    for (const element of this.config().elements) {
+      map.set(element.name, element);
     }
     return map;
   });
+
+  protected formGroup: Signal<FormGroup> = computed(() =>
+    this.formGenerator.createFormGroup(this.config(), this.initialValue())
+  );
+
   private valueChangesSub?: Subscription;
 
-  readonly formSubmit = output<any>();
-
-  constructor() {
+  constructor(
+    private formGenerator: FormGeneratorService,
+    private validatorRegistry: ValidatorRegistryService
+  ) {
     effect(() => {
       this.valueChangesSub?.unsubscribe();
       const form = this.formGroup();
       this.valueChangesSub = form.valueChanges
-        .pipe(
-          startWith(form.value)
-        )
+        .pipe(startWith(form.value))
         .subscribe(() => {
-          for (const fieldConfig of this.config().fields) {
-            const control = form.get(fieldConfig.name);
+          for (const elementConfig of this.config().elements) {
+            if (elementConfig.kind === 'field') {
+              const control = form.get(elementConfig.name);
+              if (!control) continue;
 
-            if (!control) {
-              continue;
+              const isVisible = elementConfig.visibleWhen ? elementConfig.visibleWhen(form) : true;
+              const shouldBeEnabled = !(elementConfig.disabled ?? false) && isVisible;
+
+              if (shouldBeEnabled && control.disabled) {
+                control.enable({ emitEvent: false });
+                const validators = this.mapValidators(elementConfig.validators);
+                control.setValidators(validators);
+              } else if (!shouldBeEnabled && control.enabled) {
+                control.disable({ emitEvent: false });
+                control.clearValidators();
+              }
+              control.updateValueAndValidity({ emitEvent: false });
             }
-
-            const isVisible = fieldConfig.visibleWhen ? fieldConfig.visibleWhen(form) : true;
-            const shouldBeEnabled = !(fieldConfig.disabled ?? false) && isVisible;
-
-            if (shouldBeEnabled && control.disabled) {
-              control.enable({ emitEvent: false });
-              const validators = this.mapValidators(fieldConfig);
-              control.setValidators(validators);
-            } else if (!shouldBeEnabled && control.enabled) {
-              control.disable({ emitEvent: false });
-              control.clearValidators();
-            }
-            control.updateValueAndValidity({ emitEvent: false });
           }
         });
     });
@@ -93,34 +84,7 @@ export class FormRendererComponent implements OnDestroy {
     this.valueChangesSub?.unsubscribe();
   }
 
-  getFieldConfig(name: string): FieldConfig | undefined {
-    return this.fieldsMap().get(name);
-  }
-
-  getControl(name: string): FormControl {
-    return this.formGroup().get(name) as FormControl;
-  }
-
-  isGridNode(node: LayoutNode): node is GridNode {
-    return 'children' in node;
-  }
-
-  isFieldVisible(fieldName: string): boolean {
-    const fieldConfig = this.fieldsMap().get(fieldName);
-    if (!fieldConfig?.visibleWhen) {
-      return true;
-    }
-    return fieldConfig.visibleWhen(this.formGroup());
-  }
-
-  private mapValidators(fieldConfig: FieldConfig): ValidatorFn[] {
-    if (!fieldConfig.validators) {
-      return [];
-    }
-    return fieldConfig.validators.map(config => this.validatorRegistry.getValidator(config));
-  }
-
-  submit(): void {
+  submit() {
     const form = this.formGroup();
     if (form.valid) {
       this.formSubmit.emit(form.getRawValue());
@@ -129,7 +93,56 @@ export class FormRendererComponent implements OnDestroy {
     }
   }
 
-  protected onSubmit() {
+  get form() {
+    return this.formGroup();
+  }
+
+  get value() {
+    return this.formGroup().value;
+  }
+
+  get isValid() {
+    return this.form.valid;
+  }
+
+  get isInvalid() {
+    return this.form.invalid;
+  }
+
+  protected isFieldVisible(name: string): boolean {
+    const componentConfig = this.elementsMap().get(name);
+    if (!componentConfig) {
+      return true;
+    }
+
+    if (componentConfig.kind === 'field' && componentConfig.visibleWhen) {
+      return componentConfig.visibleWhen(this.formGroup());
+    }
+
+    return true;
+  }
+
+  protected getComponentConfig(name: string): ComponentConfig | undefined {
+    return this.elementsMap().get(name);
+  }
+
+  protected getControl(name: string): FormControl | null {
+    return this.formGroup().get(name) as FormControl | null;
+  }
+
+  protected isGridNode(node: LayoutNode): node is GridNode {
+    return 'children' in node;
+  }
+
+  protected onSubmit(): void {
     this.submit();
+  }
+
+  private mapValidators(validators: ValidatorConfig[] | undefined): ValidatorFn[] {
+    if (!validators) {
+      return [];
+    }
+
+    return validators.map(config => this.validatorRegistry.getValidator(config));
   }
 }

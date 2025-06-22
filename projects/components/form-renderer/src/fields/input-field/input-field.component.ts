@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { AbstractControl, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { FieldConfig, IFormField } from '../../models/form-config.model';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ComponentConfig } from '../../models/form-config.model';
 
 @Component({
   selector: 'emr-input-field',
@@ -16,14 +16,14 @@ import { FieldConfig, IFormField } from '../../models/form-config.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputFieldComponent {
-  readonly control = input.required<FormControl>();
-  readonly fieldConfig = input.required<FieldConfig>();
+  control = input.required<FormControl>();
+  config = input.required<ComponentConfig>();
 
   getErrorMessage(): string {
     const errors = this.control().errors;
     if (!errors) return '';
     const errorKey = Object.keys(errors)[0];
-    const validator = this.fieldConfig().validators?.find(v => v.type === errorKey);
-    return validator?.message || 'Invalid value';
+    const validator = this.config().validators?.find((v: any) => v.type === errorKey);
+    return validator?.message || 'Некорректное значение';
   }
 }

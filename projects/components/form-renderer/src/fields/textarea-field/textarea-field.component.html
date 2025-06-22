@@ -1,12 +1,12 @@
-@if(control() && fieldConfig()) {
+@if(control() && config()) {
   <mat-form-field>
-    <mat-label>{{ fieldConfig().label }}</mat-label>
+    <mat-label>{{ config().label }}</mat-label>
     <textarea matInput
               [formControl]="control()"
-              [placeholder]="fieldConfig().placeholder || ''"
-              [readonly]="fieldConfig().readonly"
+              [placeholder]="config().placeholder || ''"
+              [readonly]="config().readonly"
               cdkTextareaAutosize></textarea>
-    <mat-hint>{{ fieldConfig().hint }}</mat-hint>
+    <mat-hint>{{ config().hint }}</mat-hint>
     @if (control().invalid && control().touched) {
       <mat-error>{{ getErrorMessage() }}</mat-error>
     }

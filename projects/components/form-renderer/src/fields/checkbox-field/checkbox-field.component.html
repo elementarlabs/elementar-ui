@@ -1,5 +1,5 @@
-@if(control() && fieldConfig()) {
+@if(control() && config()) {
   <mat-checkbox [formControl]="control()">
-    {{ fieldConfig().label }}
+    {{ config().label }}
   </mat-checkbox>
 }

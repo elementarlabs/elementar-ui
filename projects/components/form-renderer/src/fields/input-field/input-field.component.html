@@ -1,12 +1,14 @@
-@if(control() && fieldConfig()) {
+@if(control() && config()) {
   <mat-form-field>
-    <mat-label>{{ fieldConfig().label }}</mat-label>
+    <mat-label>{{ config().label }}</mat-label>
     <input matInput
-           [type]="fieldConfig().inputType || 'text'"
+           [type]="config().inputType || 'text'"
            [formControl]="control()"
-           [placeholder]="fieldConfig().placeholder || ''"
-           [readonly]="fieldConfig().readonly">
-    <mat-hint>{{ fieldConfig().hint }}</mat-hint>
+           [placeholder]="config().placeholder || ''"
+           [readonly]="config().readonly">
+    @if (config().hint) {
+      <mat-hint>{{ config().hint }}</mat-hint>
+    }
     @if (control().invalid && control().touched) {
       <mat-error>{{ getErrorMessage() }}</mat-error>
     }

@@ -1,10 +1,11 @@
 <emr-form-renderer
   #formRenderer
   [config]="formConfig()"
+  [initialValue]="initialValue()"
   (formSubmit)="onFormSubmit($event)">
 </emr-form-renderer>
 
-<div class="mt-5">
+<div class="mt-3">
   <button mat-flat-button (click)="formRenderer.submit()">Submit</button>
 </div>
 

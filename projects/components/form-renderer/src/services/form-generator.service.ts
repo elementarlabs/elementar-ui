@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
-import { FieldConfig, ValidatorConfig } from '../models/form-config.model';
+import { FormConfig, ValidatorConfig } from '../models/form-config.model';
 import { ValidatorRegistryService } from './validator-registry.service';
 
 @Injectable({
@@ -12,19 +12,20 @@ export class FormGeneratorService {
     private validatorRegistry: ValidatorRegistryService
   ) {}
 
-  createFormGroup(fields: FieldConfig[]): FormGroup {
-    const group = this.fb.group({});
-    for (const fieldConfig of fields) {
-      const validators = this.mapValidators(fieldConfig.validators);
-      const formState = {
-        value: fieldConfig.value ?? null,
-        disabled: fieldConfig.disabled ?? false
-      };
-      const control = new FormControl(
-        formState,
-        validators
-      );
-      group.addControl(fieldConfig.name, control);
+  createFormGroup(config: FormConfig, initialValue?: Record<string, any>): FormGroup {
+    const group = this.fb.group({}, { validators: config.crossValidators });
+
+    for (const elementConfig of config.elements) {
+      if (elementConfig.kind === 'field') {
+        const finalValue = initialValue?.[elementConfig.name] ?? elementConfig.value ?? null;
+        const validators = this.mapValidators(elementConfig.validators);
+        const formState = {
+          value: finalValue,
+          disabled: elementConfig.disabled ?? false
+        };
+        const control = new FormControl(formState, validators);
+        group.addControl(elementConfig.name, control);
+      }
     }
     return group;
   }

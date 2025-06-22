@@ -20,7 +20,6 @@ export class ValidatorRegistryService {
     this.registerValidator('minLength', (config) => Validators.minLength(config.value));
     this.registerValidator('maxLength', (config) => Validators.maxLength(config.value));
     this.registerValidator('pattern', (config) => Validators.pattern(config.value));
-    this.registerValidator('custom', (config) => config.validator!);
   }
 
   registerValidator(name: string, factory: ValidatorFactory): void {

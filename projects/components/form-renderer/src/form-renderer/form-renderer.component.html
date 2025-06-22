@@ -1,7 +1,7 @@
 @if (config(); as cfg) {
   <form [formGroup]="formGroup()" (ngSubmit)="onSubmit()">
     <ng-container
-      *ngTemplateOutlet="renderNode; context: { $implicit: cfg.layout }">
+      *ngTemplateOutlet="renderNode; context: {$implicit: cfg.layout}">
     </ng-container>
     <ng-content/>
   </form>
@@ -13,20 +13,19 @@
       class="grid-layout"
       [style.grid-template-columns]="'repeat(' + node.columns + ', 1fr)'"
       [style.gap]="node.gap">
-
       @for (childNode of node.children; track childNode) {
         <ng-container
-          *ngTemplateOutlet="renderNode; context: { $implicit: childNode }">
+          *ngTemplateOutlet="renderNode; context: {$implicit: childNode}">
         </ng-container>
       }
     </div>
   } @else {
-    @if (isFieldVisible(node.field)) {
-      <emr-field-loader
-        [fieldConfig]="getFieldConfig(node.field)!"
-        [control]="getControl(node.field)"
-        [style.grid-column]="node.colspan ? 'span ' + node.colspan : null">
-      </emr-field-loader>
+    @if(isFieldVisible(node.name)) {
+      <emr-component-loader
+        [componentConfig]="getComponentConfig(node.name)!"
+        [control]="getControl(node.name)"
+        [colspan]="node.colspan">
+      </emr-component-loader>
     }
   }
 </ng-template>

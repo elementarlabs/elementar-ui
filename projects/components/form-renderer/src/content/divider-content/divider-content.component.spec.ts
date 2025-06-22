@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FieldLoaderComponent } from './field-loader.component';
+import { DividerContentComponent } from './divider-content.component';
 
-describe('FieldLoaderComponent', () => {
-  let component: FieldLoaderComponent;
-  let fixture: ComponentFixture<FieldLoaderComponent>;
+describe('DividerContentComponent', () => {
+  let component: DividerContentComponent;
+  let fixture: ComponentFixture<DividerContentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FieldLoaderComponent]
+      imports: [DividerContentComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FieldLoaderComponent);
+    fixture = TestBed.createComponent(DividerContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,6 @@
+@if (config().content; as opts) {
+  <img [src]="opts['src']"
+       [alt]="opts['alt'] || ''"
+       [width]="opts['width'] || null"
+       [height]="opts['height'] || null">
+}

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { FieldConfig } from '../../models/form-config.model';
+import { ComponentConfig } from '../../models/form-config.model';
 import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
@@ -15,5 +15,5 @@ import { MatCheckbox } from '@angular/material/checkbox';
 })
 export class CheckboxFieldComponent {
   control = input.required<FormControl>();
-  fieldConfig = input.required<FieldConfig>();
+  config = input.required<ComponentConfig>();
 }

@@ -257,8 +257,6 @@ export class SignaturePadComponent implements OnDestroy {
       return;
     }
 
-    console.log(22);
-
     const coords = event ? this.getCoordinates(event) : this.lazyBrushInstance.getPointerCoordinates();
 
     if (coords) {

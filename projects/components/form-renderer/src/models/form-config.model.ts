@@ -1,45 +1,44 @@
-import { ValidatorFn, AbstractControl, FormGroup } from '@angular/forms';
-
-export type FieldType =
-  | 'input'
-  | 'textarea'
-  | 'select'
-  | 'datepicker'
-  | 'autocomplete'
-  | 'checkbox'
-  | 'radioGroup'
-  | 'toggle'
-  | string;
+import { FormGroup, ValidationErrors } from '@angular/forms';
 
 export interface ValidatorConfig {
   type: string;
   value?: any;
-  validator?: ValidatorFn;
   message: string;
 }
 
-export interface FieldConfig {
+interface BaseComponentConfig {
   name: string;
-  label?: string;
-  type: FieldType;
+  type: string;
+}
+
+export interface FormFieldConfig extends BaseComponentConfig {
+  kind: 'field';
   value?: any;
+  validators?: ValidatorConfig[];
+  label?: string;
   placeholder?: string;
   inputType?: 'text' | 'number' | 'email' | 'password';
-  options?: { value: any; label: string }[];
-  validators?: ValidatorConfig[];
-  hint?: string;
-  min?: number;
-  max?: number;
-  step?: number;
-  thumbLabel?: boolean;
   readonly?: boolean;
   disabled?: boolean;
   inline?: boolean;
   visibleWhen?: (formGroup: FormGroup) => boolean;
+  payload?: {
+    [key: string]: any;
+  };
+  hint?: string;
 }
 
-export interface FieldNode {
-  field: string;
+export interface ContentConfig extends BaseComponentConfig {
+  kind: 'content';
+  content?: {
+    [key: string]: any;
+  };
+}
+
+export type ComponentConfig = FormFieldConfig | ContentConfig | any;
+
+export interface ComponentNode {
+  name: string;
   colspan?: number;
 }
 
@@ -49,14 +48,12 @@ export interface GridNode {
   children: LayoutNode[];
 }
 
-export type LayoutNode = FieldNode | GridNode;
+export type LayoutNode = ComponentNode | GridNode;
+
+export type CrossValidatorFn = (formGroup: FormGroup) => ValidationErrors | null;
 
 export interface FormConfig {
-  fields: FieldConfig[];
+  elements: ComponentConfig[];
   layout: LayoutNode;
-}
-
-export interface IFormField {
-  control: AbstractControl;
-  fieldConfig: FieldConfig;
+  crossValidators?: CrossValidatorFn[];
 }

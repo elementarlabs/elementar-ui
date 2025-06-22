@@ -1,12 +1,12 @@
-@if(control() && fieldConfig()) {
+@if(control() && config()) {
   <mat-form-field>
-    <mat-label>{{ fieldConfig().label }}</mat-label>
+    <mat-label>{{ config().label }}</mat-label>
     <mat-select [formControl]="control()">
-      @for (option of fieldConfig().options; track option.value) {
+      @for (option of options; track option.value) {
         <mat-option [value]="option.value">{{ option.label }}</mat-option>
       }
     </mat-select>
-    <mat-hint>{{ fieldConfig().hint }}</mat-hint>
+    <mat-hint>{{ config().hint }}</mat-hint>
     @if (control().invalid && control().touched) {
       <mat-error>{{ getErrorMessage() }}</mat-error>
     }

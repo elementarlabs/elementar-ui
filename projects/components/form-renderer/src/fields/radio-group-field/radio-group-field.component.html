@@ -1,17 +1,17 @@
-@if (control() && fieldConfig()) {
+@if (control() && config()) {
   <div class="radio-group-container">
-    @if (fieldConfig().label) {
-      <div class="radio-group-label">{{ fieldConfig().label }}</div>
+    @if (config().label) {
+      <div class="radio-group-label">{{ config().label }}</div>
     }
     <mat-radio-group
       [formControl]="control()"
-      [class.inline]="fieldConfig().inline">
-      @for (option of fieldConfig().options; track option.value) {
+      [class.inline]="config().inline">
+      @for (option of options; track option.value) {
         <mat-radio-button [value]="option.value">{{ option.label }}</mat-radio-button>
       }
     </mat-radio-group>
-    @if (fieldConfig().hint && (control().valid || control().invalid && !control().touched)) {
-      <mat-hint>{{ fieldConfig().hint }}</mat-hint>
+    @if (config().hint && (control().valid || control().invalid && !control().touched)) {
+      <mat-hint>{{ config().hint }}</mat-hint>
     }
     @if (control().invalid && control().touched) {
       <mat-error>{{ getErrorMessage() }}</mat-error>
