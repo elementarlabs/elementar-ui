@@ -4,29 +4,26 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'filterByProperty',
 })
 export class FilterByPropertyPipe implements PipeTransform {
-  transform<T>(items: T[] | null, propName: keyof T, searchText: string): T[] {
+  private getNestedValue(obj: any, path: string): any {
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  }
+
+  transform<T>(items: T[] | null, propPath: string, value: any, strict = false): T[] {
+    if (!strict && !value) {
+      return [];
+    }
+
     if (!items) {
       return [];
     }
 
-    if (!searchText) {
+    if (value === null || value === undefined || value === '') {
       return items;
     }
 
-    const lowercasedSearchText = searchText.toLowerCase();
-
     return items.filter(item => {
-      const propertyValue = item[propName];
-
-      if (propertyValue && typeof propertyValue === 'string') {
-        return propertyValue.toLowerCase().includes(lowercasedSearchText);
-      }
-
-      if (propertyValue && typeof propertyValue === 'number') {
-        return propertyValue.toString().toLowerCase().includes(lowercasedSearchText);
-      }
-
-      return false;
+      const propertyValue = this.getNestedValue(item, propPath);
+      return propertyValue === value;
     });
   }
 }
