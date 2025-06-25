@@ -8,16 +8,16 @@ export class FilterByPropertyPipe implements PipeTransform {
     return path.split('.').reduce((acc, part) => acc && acc[part], obj);
   }
 
-  transform<T>(items: T[] | null, propPath: string, value: any, strict = false): T[] {
-    if (!strict && !value) {
-      return [];
-    }
-
+  transform<T>(items: T[], propPath: string, value: any, strict = false): T[] {
     if (!items) {
       return [];
     }
 
-    if (value === null || value === undefined || value === '') {
+    if (value === undefined || typeof value === 'undefined') {
+      return items;
+    }
+
+    if (!strict && (value === null || value === '')) {
       return items;
     }
 
