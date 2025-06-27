@@ -5,6 +5,9 @@ import { PageComponent } from '@meta/page/page.component';
 import { PageContentDirective } from '@meta/page/page-content.directive';
 import { MatDivider } from '@angular/material/divider';
 import { PageTitleDirective } from '@meta/page/page-title.directive';
+import {
+  PanelWithExtraColumnsExampleComponent
+} from '../_examples/panel-with-extra-columns-example/panel-with-extra-columns-example.component';
 
 @Component({
     selector: 'app-overview',
@@ -14,7 +17,8 @@ import { PageTitleDirective } from '@meta/page/page-title.directive';
     PageComponent,
     PageContentDirective,
     MatDivider,
-    PageTitleDirective
+    PageTitleDirective,
+    PanelWithExtraColumnsExampleComponent
   ],
     templateUrl: './overview.component.html',
     styleUrl: './overview.component.scss'

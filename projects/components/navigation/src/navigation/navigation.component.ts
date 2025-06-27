@@ -5,11 +5,13 @@ import {
   contentChildren,
   SimpleChanges,
   input,
-  OnChanges, output, forwardRef
+  OnChanges, output, forwardRef, OnInit, AfterContentInit, booleanAttribute
 } from '@angular/core';
 import { NavigationApiService } from '../navigation-api.service';
 import { NavigationItemComponent } from '../navigation-item/navigation-item.component';
 import { NAVIGATION, NavigationItem } from '../types';
+import bootstrap from '../../../../../src/main.server';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'emr-navigation',
@@ -27,15 +29,19 @@ import { NAVIGATION, NavigationItem } from '../types';
     'class': 'emr-navigation'
   }
 })
-export class NavigationComponent implements OnChanges {
+export class NavigationComponent implements AfterContentInit, OnChanges {
   readonly api = inject(NavigationApiService);
   private _elementRef = inject(ElementRef);
   private _renderer = inject(Renderer2);
+  private location = inject(Location);
 
   readonly _items = contentChildren(NavigationItemComponent, { descendants: true });
 
   activeKey = input<any>();
   appearance = input();
+  activateByRoute = input(false, {
+    transform: booleanAttribute
+  });
 
   readonly itemClicked = output<NavigationItem>();
 
@@ -63,6 +69,32 @@ export class NavigationComponent implements OnChanges {
         }
       });
     });
+  }
+
+  ngAfterContentInit() {
+    if (this.activateByRoute()) {
+      const activeItem = this._items().find((item: NavigationItemComponent) => {
+        const element = item._hostElement.nativeElement as HTMLElement;
+
+        if (element.tagName === 'A') {
+          const href = element.getAttribute('href');
+
+          if (href) {
+            if (href === this.location.path()) {
+              return true;
+            }
+
+            return href !== '/' && this.location.path().includes(href);
+          }
+        }
+
+        return null;
+      });
+
+      if (activeItem) {
+        this.api.activateItem(activeItem.key());
+      }
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -12,6 +12,11 @@
   overflow: hidden;
   height: 100%;
 
+  &.is-absolute {
+    position: absolute;
+    inset: 0;
+  }
+
   .scrollable-content {
     height: 100%;
     overflow-y: scroll;

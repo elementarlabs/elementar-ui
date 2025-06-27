@@ -3,8 +3,9 @@ import {
   PanelBodyComponent,
   PanelComponent,
   PanelFooterComponent,
-  PanelHeaderComponent
+  PanelHeaderComponent,
 } from '@elementar-ui/components/panel';
+import { OverlayScrollbarComponent } from '@elementar-ui/components/overlay-scrollbar';
 
 @Component({
   selector: 'app-basic-panel-example',
@@ -12,7 +13,8 @@ import {
     PanelBodyComponent,
     PanelFooterComponent,
     PanelHeaderComponent,
-    PanelComponent
+    PanelComponent,
+    OverlayScrollbarComponent
   ],
   templateUrl: './basic-panel-example.component.html',
   styleUrl: './basic-panel-example.component.scss'

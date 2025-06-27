@@ -1,4 +1,7 @@
 <ng-content select="emr-panel-header"/>
-<ng-content select="emr-panel-body"/>
+<div class="body">
+  <ng-content select="emr-panel-sidebar"/>
+  <ng-content select="emr-panel-body"/>
+  <ng-content select="emr-panel-aside"/>
+</div>
 <ng-content select="emr-panel-footer"/>
-<ng-content/>

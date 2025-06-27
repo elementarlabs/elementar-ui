@@ -1,9 +1,10 @@
 @reference 'tailwindcss';
 
 :host {
-  --emr-panel-footer-height: calc(var(--spacing) * 14);
+  --emr-panel-footer-height: --spacing(14);
 
   flex: none;
+  grid-area: footer;
 
   &:not([class*="h-"]) {
     height: var(--emr-panel-footer-height);

@@ -42,6 +42,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     'class': 'emr-overlay-scrollbar',
     '[class.scrollbar-visible]': 'isVisible()',
     '[class.scrollbar-interactive]': 'isInteractive()',
+    '[class.is-absolute]': 'absolute()',
   }
 })
 export class OverlayScrollbarComponent {
@@ -58,6 +59,7 @@ export class OverlayScrollbarComponent {
 
   readonly scrollbarWidth = input<string>('8px');
   readonly autoHide = input<boolean>(true);
+  readonly absolute = input<boolean>(false);
 
   readonly isDragging = signal(false);
   readonly isHovering = signal(false);
