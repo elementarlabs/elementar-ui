@@ -10,7 +10,6 @@ import {
 import { NavigationApiService } from '../navigation-api.service';
 import { NavigationItemComponent } from '../navigation-item/navigation-item.component';
 import { NAVIGATION, NavigationItem } from '../types';
-import bootstrap from '../../../../../src/main.server';
 import { Location } from '@angular/common';
 
 @Component({
