@@ -9,12 +9,13 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'emr-inline-text-edit',
+  selector: 'emr-inline-text-edit,[emr-inline-text-edit]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './inline-text-edit.component.html',
-  styleUrls: ['./inline-text-edit.component.scss'],
+  styleUrl: './inline-text-edit.component.scss',
   host: {
+    'class': 'emr-inline-text-edit',
     '[attr.contenteditable]': 'isContentEditable',
     '[class.editing]': 'isEditing()',
     '[class.focused]': 'isFocused()',
