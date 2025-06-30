@@ -10,6 +10,9 @@
   --emr-upload-area-drop-active-border: 1px dashed var(--color-primary);
   --emr-upload-area-drop-active-color: var(--color-primary);
   --emr-upload-area-drop-active-bg: var(--color-primary-200);
+  --emr-upload-area-drop-invalid-border: 1px dashed var(--color-red-500);
+  --emr-upload-area-drop-invalid-color: var(--color-red-500);
+  --emr-upload-area-drop-invalid-bg: var(--color-red-100);
 
   display: flex;
   flex-direction: column;
@@ -23,10 +26,23 @@
   background-color: var(--emr-upload-area-bg);
   padding: var(--emr-upload-area-padding);
 
+  &.is-allow-hover:hover {
+    cursor: pointer;
+    border: var(--emr-upload-area-drop-active-border);
+    color: var(--emr-upload-area-drop-active-color);
+    background: var(--emr-upload-area-drop-active-bg);
+  }
+
   &.is-drop-active {
     border: var(--emr-upload-area-drop-active-border);
     color: var(--emr-upload-area-drop-active-color);
     background: var(--emr-upload-area-drop-active-bg);
+  }
+
+  &.is-drop-invalid {
+    border: var(--emr-upload-area-drop-invalid-border);
+    color: var(--emr-upload-area-drop-invalid-color);
+    background: var(--emr-upload-area-drop-invalid-bg);
   }
 
   .content {

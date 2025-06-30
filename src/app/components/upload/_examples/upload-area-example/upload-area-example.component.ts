@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import {
   UploadAllowedTypesComponent,
-  UploadAreaComponent, UploadAreaDropStateDirective,
-  UploadAreaIconDirective, UploadAreaMainStateDirective, UploadContainerComponent,
-  UploadFileSelectedEvent, UploadMaxFileSizeComponent,
+  UploadAreaComponent,
+  UploadAreaDropStateDirective,
+  UploadAreaIconDirective,
+  UploadAreaInvalidStateDirective,
+  UploadAreaMainStateDirective,
+  UploadContainerComponent,
+  UploadFileSelectedEvent,
+  UploadMaxFileSizeComponent,
   UploadTriggerDirective
 } from '@elementar-ui/components/upload';
 import { JsonPipe } from '@angular/common';
@@ -22,6 +27,7 @@ import { MatIcon } from '@angular/material/icon';
     UploadContainerComponent,
     UploadAreaMainStateDirective,
     UploadAreaDropStateDirective,
+    UploadAreaInvalidStateDirective
   ],
   templateUrl: './upload-area-example.component.html',
   styleUrl: './upload-area-example.component.scss'

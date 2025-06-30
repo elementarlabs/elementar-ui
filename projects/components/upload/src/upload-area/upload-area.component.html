@@ -3,10 +3,13 @@
 </div>
 <div class="content">
   <ng-content/>
-  <div class="state" [class.is-active]="!isDropActive">
+  <div class="state" [class.is-active]="!isDropActive() && !isDropInvalid()">
     <ng-content select="[emrUploadAreaMainState]"/>
   </div>
-  <div class="state" [class.is-active]="isDropActive">
+  <div class="state" [class.is-active]="isDropActive() && !isDropInvalid()">
     <ng-content select="[emrUploadAreaDropState]"/>
+  </div>
+  <div class="state" [class.is-active]="isDropInvalid()">
+    <ng-content select="[emrUploadAreaInvalidState]"/>
   </div>
 </div>

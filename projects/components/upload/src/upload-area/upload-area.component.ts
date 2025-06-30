@@ -4,7 +4,7 @@ import {
   HostListener,
   inject, input,
   output,
-  Renderer2,
+  Renderer2, signal,
 } from '@angular/core';
 import { UploadFileSelectedEvent } from '../types';
 
@@ -17,85 +17,93 @@ import { UploadFileSelectedEvent } from '../types';
   ],
   host: {
     'class': 'emr-upload-area',
-    '[class.is-drop-active]': 'isDropActive'
+    '[class.is-drop-active]': 'isDropActive()',
+    '[class.is-drop-invalid]': 'isDropInvalid()',
+    '[class.is-allow-hover]': 'allowHover()',
+    '(dragover)': 'handleDragOver($event)',
+    '(dragenter)': 'handleDragEnter($event)',
+    '(dragleave)': 'handleDragLeave($event)',
+    '(dragend)': 'handleDragEnd($event)',
+    '(drop)': 'handleDrop($event)',
   }
 })
 export class UploadAreaComponent {
   protected _renderer = inject(Renderer2);
 
   accept = input<string>();
+  allowHover = input(true, {
+    transform: booleanAttribute
+  });
   multiple = input(false, {
     transform: booleanAttribute
   });
 
   readonly fileSelected = output<UploadFileSelectedEvent>();
-
-  protected isDropActive = false;
+  protected isDropActive = signal(false);
+  protected isDropInvalid = signal(false);
 
   get api() {
     return {
-      isDropActive: this.isDropActive
+      isDropActive: this.isDropActive()
     }
   }
 
-  @HostListener('dragover', ['$event'])
-  private _handleDragOver(event: any) {
+  protected handleDragOver(event: any) {
     event.preventDefault();
   }
 
-  @HostListener('dragenter', ['$event'])
-  private _handleDragEnter(event: any) {
-    console.log(event);
-    // if (event.dataTransfer) {
-    //   const files: File[] = [];
-    //
-    //   if (files) {
-    //     for (let i = 0; i < event.dataTransfer.files.length; i++) {
-    //       files.push(event.dataTransfer.files[i]);
-    //     }
-    //   }
-    //
-    //   this.fileSelected.emit({
-    //     multiple: this.multiple(),
-    //     fileList: event.dataTransfer.files,
-    //     event,
-    //     files
-    //   });
-    // }
+  protected handleDragEnter(event: any) {
+    if (event.dataTransfer) {
+      const items = event.dataTransfer.items;
+      let allFilesAreValid = true;
 
-    this.isDropActive = true;
+      if (this.accept()) {
+        const accept = (this.accept() as string).split(',');
+
+        if (items && items.length > 0) {
+          const draggedItems = Array.from(items);
+          allFilesAreValid = draggedItems.every(
+            (item: any) => item.kind === 'file' && this.isMimeTypeAllowed(item.type, accept)
+          );
+        }
+      }
+
+      this.isDropActive.set(allFilesAreValid);
+      this.isDropInvalid.set(!allFilesAreValid);
+    }
+
     event.preventDefault();
+    event.stopPropagation();
   }
 
-  @HostListener('dragleave', ['$event'])
-  private _handleDragLeave(event: DragEvent) {
+  protected handleDragLeave(event: DragEvent) {
     const relatedTarget = event.relatedTarget as HTMLElement;
 
     if (!relatedTarget.closest('.emr-upload-area')) {
-      this.isDropActive = false;
+      this.isDropActive.set(false);
+      this.isDropInvalid.set(false);
     }
 
     event.preventDefault();
   }
 
-  @HostListener('dragend', ['$event'])
-  private _handleDragEnd(event: any) {
-    this.isDropActive = false;
+  protected handleDragEnd(event: any) {
+    this.isDropActive.set(false);
+    this.isDropInvalid.set(false);
     event.preventDefault();
   }
 
-  @HostListener('drop', ['$event'])
-  private _handleDrop(event: DragEvent) {
+  protected handleDrop(event: DragEvent) {
     event.preventDefault();
-    this.isDropActive = false;
+    this.isDropActive.set(false);
+    this.isDropInvalid.set(false);
 
     if (event.dataTransfer) {
-      const files: File[] = [];
+      const accept = (this.accept() as string).split(',');
+      const files: File[] = Array.from(event.dataTransfer?.files).filter(file => this.isMimeTypeAllowed(file.type, accept));
 
-      if (files) {
-        for (let i = 0; i < event.dataTransfer.files.length; i++) {
-          files.push(event.dataTransfer.files[i]);
-        }
+      if (files.length === 0) {
+        return;
       }
 
       this.fileSelected.emit({
@@ -105,5 +113,23 @@ export class UploadAreaComponent {
         files
       });
     }
+  }
+
+  private isMimeTypeAllowed(
+    fileMimeType: string,
+    allowedMimeTypes: string[]
+  ): boolean {
+    return allowedMimeTypes.some(allowedType => {
+      if (allowedType === '*/*' || allowedType === '*') {
+        return true;
+      }
+
+      if (allowedType.endsWith('/*')) {
+        const baseType = allowedType.slice(0, -2);
+        return fileMimeType.startsWith(`${baseType}/`);
+      }
+
+      return fileMimeType === allowedType;
+    });
   }
 }

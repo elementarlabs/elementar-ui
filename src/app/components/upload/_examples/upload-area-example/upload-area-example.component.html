@@ -1,13 +1,16 @@
 <emr-upload-container class="mb-5">
-  <emr-upload-area (fileSelected)="onFileSelected($event)">
+  <emr-upload-area emrUploadTrigger
+                   accept="image/*"
+                   (fileSelected)="onFileSelected($event)">
     <mat-icon emrUploadAreaIcon>attach_file</mat-icon>
     <ng-container emrUploadAreaMainState>
-      Drag & drop <button class="text-primary cursor-pointer"
-                          emrUploadTrigger
-                          (fileSelected)="onFileSelected($event)">or choose file(s)</button> to upload
+      Drag & drop <button class="text-primary cursor-pointer">or choose file(s)</button> to upload
     </ng-container>
     <ng-container emrUploadAreaDropState>
       Drop files here
+    </ng-container>
+    <ng-container emrUploadAreaInvalidState>
+      Invalid files to drop, image/* accepts only.
     </ng-container>
   </emr-upload-area>
   <emr-upload-allowed-types>All file type are allowed to upload</emr-upload-allowed-types>

@@ -3,7 +3,7 @@
 :host {
   --emr-text-editor-bg: transparent;
   --emr-text-editor-content-max-height: 9999px;
-  --emr-text-editor-content-padding: calc(var(--spacing) * 6);
+  --emr-text-editor-content-padding: --spacing(6);
 
   display: block;
 
@@ -36,7 +36,7 @@
         div[data-youtube-video] {
           cursor: move;
           background-color: var(--color-neutral-100);
-          padding: calc(var(--spacing) * 6);
+          padding: --spacing(6);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -62,7 +62,7 @@
         img {
           display: block;
           height: auto;
-          margin: calc(var(--spacing) * 6) 0;
+          margin: --spacing(6) 0;
           max-width: 100%;
 
           &.ProseMirror-selectednode {
