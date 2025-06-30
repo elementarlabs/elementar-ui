@@ -1,10 +1,10 @@
-import { Component, inject, contentChild, TemplateRef } from '@angular/core';
-import { NavigationApiService } from '../navigation-api.service';
+import { Component, inject, contentChild, TemplateRef, computed, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationGroupToggleIconDirective } from '../navigation-group-toggle-icon.directive';
 import { MatRipple } from '@angular/material/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { NAVIGATION_GROUP } from '../types';
 import { NavigationGroupComponent } from '../navigation-group/navigation-group.component';
+import { NavigationStore } from '../navigation.store';
 
 @Component({
   selector: 'emr-navigation-group-toggle',
@@ -17,26 +17,31 @@ import { NavigationGroupComponent } from '../navigation-group/navigation-group.c
   hostDirectives: [
     MatRipple
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'class': 'emr-navigation-group-toggle',
-    '[class.is-active]': 'active',
+    '[class.is-active]': 'active()',
     '(click)': 'toggle($event)'
   }
 })
 export class NavigationGroupToggleComponent {
+  private store= inject(NavigationStore);
   private _group = inject<NavigationGroupComponent>(NAVIGATION_GROUP);
-  readonly api = inject(NavigationApiService);
 
   readonly iconRef = contentChild(NavigationGroupToggleIconDirective);
+  readonly active = computed(() => {
+    return this.store.activeGroupKey() === this._group.key();
+  });
 
-  get active(): boolean {
-    return this.api.isGroupActive(this._group.key());
-  }
-
-  toggle(event: MouseEvent) {
+  protected toggle(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    this.api.toggleGroup(this._group.key());
+
+    if (this.active()) {
+      this.store.setActiveGroupKey(null);
+    } else {
+      this.store.setActiveGroupKey(this._group.key());
+    }
   }
 
   protected get iconRefTemplate(): TemplateRef<any> {

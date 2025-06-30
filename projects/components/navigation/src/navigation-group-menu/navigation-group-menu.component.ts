@@ -2,64 +2,57 @@ import {
   AfterContentInit,
   ChangeDetectorRef,
   Component,
-  DestroyRef,
   inject,
-  contentChildren
+  contentChildren,
+  computed,
+  ChangeDetectionStrategy,
+  effect
 } from '@angular/core';
-import { NavigationApiService } from '../navigation-api.service';
 import { NavigationItemComponent } from '../navigation-item/navigation-item.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NAVIGATION_GROUP } from '../types';
 import { NavigationGroupComponent } from '../navigation-group/navigation-group.component';
+import { NavigationStore } from '../navigation.store';
 
 @Component({
   selector: 'emr-navigation-group-menu',
   exportAs: 'emrNavigationGroupMenu',
   templateUrl: './navigation-group-menu.component.html',
   styleUrl: './navigation-group-menu.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'class': 'emr-navigation-group-menu',
-    '[class.is-active]': 'active'
+    '[class.is-active]': 'active()'
   }
 })
 export class NavigationGroupMenuComponent implements AfterContentInit {
+  private store= inject(NavigationStore);
   private _group = inject<NavigationGroupComponent>(NAVIGATION_GROUP);
-  readonly api = inject(NavigationApiService);
-  private _cdr = inject(ChangeDetectorRef);
-  private _destroyRef = inject(DestroyRef);
 
-  readonly _items = contentChildren(NavigationItemComponent, { descendants: true });
-
-  get active(): boolean {
-    return this.api.isGroupActive(this._group.key());
-  }
+  readonly active = computed(() => {
+    return this.store.activeGroupKey() === this._group.key();
+  });
+  readonly _items = contentChildren(
+    NavigationItemComponent, { descendants: true }
+  );
+  readonly hasActiveItemInGroup = computed(() => {
+    return this._items().filter(
+      itemComponent => this.store.activeKey() === itemComponent.key()
+    ).length > 0
+  });
 
   ngAfterContentInit() {
     this._detectGroupIsActive();
-    this.api
-      .activeItemChanged()
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(() => {
-        this._detectGroupIsActive();
-      })
-    ;
   }
 
   private _detectGroupIsActive() {
-    const isGroupActive = this._items().filter(
-      itemComponent => this.api.isItemActive(itemComponent.key())
-    ).length > 0;
-
-    if (isGroupActive) {
-      if (!this.api.isGroupActive(this._group.key())) {
-        this.api.showGroup(this._group.key());
-      }
+    if (this.hasActiveItemInGroup() && !this.active()) {
+      this.store.setActiveGroupKey(this._group.key());
     } else {
-      if (this.api.isGroupActive(this._group.key())) {
-        this.api.hideGroup();
+      if (this.store.activeGroupKey() === this._group.key()) {
+        this.store.setActiveGroupKey(null);
+      } else {
+        this.store.setActiveGroupKey(this._group.key());
       }
     }
-
-    this._cdr.markForCheck();
   }
 }
