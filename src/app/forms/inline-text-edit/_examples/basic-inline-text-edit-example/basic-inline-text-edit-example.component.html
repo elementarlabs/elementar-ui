@@ -1,0 +1,19 @@
+<emr-alert variant="informative">
+  Hover and edit, then press <strong>Enter</strong> or click outside to save. Press <strong>Esc</strong> to cancel.
+</emr-alert>
+
+<div class="w-1/2 mt-10">
+  <emr-inline-text-edit (save)="onSaveName($event)" class="text-2xl font-bold leading-[2]">{{ projectName() }}</emr-inline-text-edit>
+  <emr-inline-text-edit (save)="onSaveDescription($event)" class="mt-1">{{ projectDescription() }}</emr-inline-text-edit>
+</div>
+
+<div class="mt-10">
+  <mat-divider/>
+</div>
+
+<div class="mt-5 text-sm">
+  Project Name: {{ projectName() }}
+</div>
+<div class="mt-3 text-sm">
+  Project Description: {{ projectDescription() }}
+</div>

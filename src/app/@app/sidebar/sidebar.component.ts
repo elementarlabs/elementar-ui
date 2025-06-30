@@ -220,6 +220,12 @@ export class SidebarComponent implements OnInit {
           name: 'Form Renderer',
           link: '/forms/form-renderer'
         },
+        {
+          key: uuid(),
+          type: 'link',
+          name: 'Inline Text Edit',
+          link: '/forms/inline-text-edit'
+        },
       ]
     },
     {

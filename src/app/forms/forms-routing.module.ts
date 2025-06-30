@@ -66,6 +66,10 @@ const routes: Routes = [
     path: 'form-renderer',
     loadChildren: () => import('./form-renderer/form-renderer.module').then(m => m.FormRendererModule)
   },
+  {
+    path: 'inline-text-edit',
+    loadChildren: () => import('./inline-text-edit/inline-text-edit.module').then(m => m.InlineTextEditModule)
+  },
 ];
 
 @NgModule({
