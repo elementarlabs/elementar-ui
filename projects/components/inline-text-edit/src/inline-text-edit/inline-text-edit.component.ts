@@ -29,7 +29,7 @@ import {
 })
 export class InlineTextEditComponent {
   public enabled = input(true);
-  public save = output<string>();
+  public changed = output<string>();
 
   public isEditing = signal(false);
   public isFocused = signal(false);
@@ -78,7 +78,7 @@ export class InlineTextEditComponent {
     }
     const newValue = this.elementRef.nativeElement.textContent?.trim() ?? '';
     if (newValue !== this.previousValue) {
-      this.save.emit(newValue);
+      this.changed.emit(newValue);
     }
     this.isEditing.set(false);
   }
