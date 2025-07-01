@@ -25,6 +25,7 @@ import {
     '(blur)': 'onBlur()',
     '(keydown.enter)': 'onEnter($event)',
     '(keydown.escape)': 'onEscape()',
+    '(paste)': 'onPaste($event)',
   },
 })
 export class InlineTextEditComponent {
@@ -70,6 +71,12 @@ export class InlineTextEditComponent {
 
   onEscape(): void {
     this.cancelEdit();
+  }
+
+  onPaste(event: ClipboardEvent): void {
+    event.preventDefault();
+    const text = event.clipboardData?.getData('text/plain') ?? '';
+    document.execCommand('insertText', false, text);
   }
 
   private finishEdit(): void {
