@@ -1,4 +1,14 @@
-import { Component, computed, input, output, ChangeDetectionStrategy, Signal, effect, OnDestroy } from '@angular/core';
+import {
+  Component,
+  computed,
+  input,
+  output,
+  ChangeDetectionStrategy,
+  Signal,
+  effect,
+  OnDestroy,
+  OnInit, inject, DestroyRef
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, ValidatorFn } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,6 +19,7 @@ import { ComponentConfig, FormConfig, LayoutNode, GridNode, ValidatorConfig } fr
 import { FormGeneratorService } from '../services/form-generator.service';
 import { ComponentLoaderComponent } from '../component-loader/component-loader.component';
 import { ValidatorRegistryService } from '../services/validator-registry.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'emr-form-renderer',
@@ -28,10 +39,13 @@ import { ValidatorRegistryService } from '../services/validator-registry.service
     'class': 'emr-form-renderer',
   }
 })
-export class FormRendererComponent implements OnDestroy {
+export class FormRendererComponent implements OnInit, OnDestroy {
+  private destroyRef = inject(DestroyRef);
+
   readonly config = input.required<FormConfig>();
   readonly initialValue = input<Record<string, any> | undefined>();
   readonly formSubmit = output<any>();
+  readonly valueChanges = output<any>();
 
   private elementsMap: Signal<Map<string, ComponentConfig>> = computed(() => {
     const map = new Map<string, ComponentConfig>();
@@ -45,6 +59,7 @@ export class FormRendererComponent implements OnDestroy {
     this.formGenerator.createFormGroup(this.config(), this.initialValue())
   );
 
+  private initialized = false;
   private valueChangesSub?: Subscription;
 
   constructor(
@@ -55,12 +70,18 @@ export class FormRendererComponent implements OnDestroy {
       this.valueChangesSub?.unsubscribe();
       const form = this.formGroup();
       this.valueChangesSub = form.valueChanges
-        .pipe(startWith(form.value))
+        .pipe(
+          startWith(form.value),
+          takeUntilDestroyed(this.destroyRef)
+        )
         .subscribe(() => {
           for (const elementConfig of this.config().elements) {
             if (elementConfig.kind === 'field') {
               const control = form.get(elementConfig.name);
-              if (!control) continue;
+
+              if (!control) {
+                continue;
+              }
 
               const isVisible = elementConfig.visibleWhen ? elementConfig.visibleWhen(form) : true;
               const shouldBeEnabled = !(elementConfig.disabled ?? false) && isVisible;
@@ -73,11 +94,28 @@ export class FormRendererComponent implements OnDestroy {
                 control.disable({ emitEvent: false });
                 control.clearValidators();
               }
+
               control.updateValueAndValidity({ emitEvent: false });
             }
           }
+
+          this.initialized = true;
         });
     });
+  }
+
+  ngOnInit() {
+    const form = this.formGroup();
+    form
+      .valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        if (!this.initialized) {
+          return;
+        }
+
+        this.valueChanges.emit(form.value);
+      });
   }
 
   ngOnDestroy(): void {

@@ -2,6 +2,7 @@
   #formRenderer
   [config]="formConfig()"
   [initialValue]="initialValue()"
+  (valueChanges)="onValueChanges($event)"
   (formSubmit)="onFormSubmit($event)">
 </emr-form-renderer>
 

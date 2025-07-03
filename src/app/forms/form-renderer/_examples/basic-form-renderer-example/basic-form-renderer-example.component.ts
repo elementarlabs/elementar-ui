@@ -182,4 +182,8 @@ export class BasicFormRendererExampleComponent {
   onFormSubmit(data: any) {
     this.submittedData.set(data);
   }
+
+  onValueChanges(data: any) {
+    console.log('onValueChanges', data);
+  }
 }
