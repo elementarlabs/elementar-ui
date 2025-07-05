@@ -1,5 +1,6 @@
-@if (src()) {
-  <img class="image" loading="lazy" [src]="src()" [alt]="alt() || ''" (load)="onImageLoaded()">
+@if (image()) {
+  <img class="image" loading="lazy" [ngSrc]="image()" fill
+       [alt]="alt() || ''" (load)="onImageLoaded()">
 }
 
 @if (presenceIndicator()) {
@@ -9,6 +10,6 @@
        [class.is-away]="presenceIndicator() === 'away'"></div>
 }
 
-@if (!src() && svg) {
+@if (!image() && svg) {
   <div class="w-full h-full svg absolute z-0 inset-0 svg" [innerHTML]="svg | safeHtml"></div>
 }

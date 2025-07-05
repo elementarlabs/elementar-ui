@@ -2,7 +2,7 @@
   <ng-template emrNotificationDef="mentionedInComment" let-notification>
     <emr-notification [isUnread]="notification.isUnread">
       <emr-dicebear [key]="notification.actor.id"
-                    [src]="notification.actor.avatarUrl"
+                    [image]="notification.actor.avatarUrl"
                     emrNotificationAvatar/>
       <emr-notification-message>
         <a routerLink="/" emr-notification-actor>{{ notification.actor.name }}</a>

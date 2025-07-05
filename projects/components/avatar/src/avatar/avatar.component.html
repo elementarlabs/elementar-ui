@@ -1,5 +1,5 @@
-@if (src()) {
-  <img class="image" loading="lazy" [ngSrc]="src()" fill [alt]="alt()" (load)="onImageLoaded()">
+@if (image()) {
+  <img class="image" loading="lazy" [ngSrc]="image()" fill [alt]="alt()" (load)="onImageLoaded()">
 }
 
 @if (presenceIndicator()) {
@@ -9,7 +9,7 @@
        [class.is-away]="presenceIndicator() === 'away'"></div>
 }
 
-@if (text() && showText) {
+@if (label() && showLabel) {
   <svg viewBox="0 0 50 50" class="text">
     <text
       x="50%"
@@ -18,7 +18,7 @@
       text-anchor="middle"
       font-weight="inherit"
       font-size="20"
-      fill="currentColor">{{ text() }}</text>
+      fill="currentColor">{{ label() }}</text>
   </svg>
 }
 

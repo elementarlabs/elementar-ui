@@ -9,6 +9,7 @@ import { createAvatar } from '@dicebear/core';
 import { identicon, initials } from '@dicebear/collection';
 import { v7 as uuid } from 'uuid';
 import { SafeHtmlPipe } from '@elementar-ui/components/core';
+import { NgOptimizedImage } from '@angular/common';
 
 export interface Preset {
   style: any,
@@ -50,16 +51,17 @@ const presets: {[prop: string]: Preset} = {
     }
   ],
   imports: [
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    NgOptimizedImage
   ],
   host: {
     'class': 'emr-avatar emr-dicebear',
     '[class.is-clickable]': 'clickable()',
-    '[class.has-loaded-image]': 'src() && imageLoaded',
+    '[class.has-loaded-image]': 'image() && imageLoaded',
   }
 })
 export class DicebearComponent implements OnInit {
-  src = input<string>();
+  image = input<string>('');
   clickable = input(false, {
     transform: booleanAttribute
   });
@@ -72,8 +74,8 @@ export class DicebearComponent implements OnInit {
   protected svg = '';
 
   ngOnInit() {
-    if (this.src()) {
-      this.imageLoaded = alreadyLoadedImages.includes(<string>this.src());
+    if (this.image()) {
+      this.imageLoaded = alreadyLoadedImages.includes(<string>this.image());
     }
 
     const preset = presets[this.preset()];
@@ -89,7 +91,7 @@ export class DicebearComponent implements OnInit {
       return;
     }
 
-    alreadyLoadedImages.push(<string>this.src());
+    alreadyLoadedImages.push(<string>this.image());
     this.imageLoaded = true;
   }
 }

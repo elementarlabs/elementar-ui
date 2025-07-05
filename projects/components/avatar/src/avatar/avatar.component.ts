@@ -33,36 +33,35 @@ const alreadyLoadedImages: string[] = [];
     'class': 'emr-avatar',
     '[class.is-clickable]': 'clickable()',
     '[class.has-automatic-color]': '!!automaticColor()',
-    '[class.has-loaded-image]': 'src() && imageLoaded',
+    '[class.has-loaded-image]': 'image() && imageLoaded',
   }
 })
 export class AvatarComponent implements OnInit, OnChanges, AfterViewInit {
   private _elementRef = inject(ElementRef);
 
-  src = input<string>('');
+  image = input<string>('');
   clickable = input(false, {
     transform: booleanAttribute
   });
-  text = input('');
+  label = input('');
   alt = input('');
   automaticColor = input();
   presenceIndicator = input<AvatarPresenceIndicator>(null);
 
   protected imageLoaded: boolean;
-
-  showText = false;
+  protected showLabel = false;
 
   ngOnInit() {
-    if (!this.src()) {
+    if (!this.image()) {
       return;
     }
 
-    this.imageLoaded = alreadyLoadedImages.includes(<string>this.src());
+    this.imageLoaded = alreadyLoadedImages.includes(<string>this.image());
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.showText = true;
+      this.showLabel = true;
     }, 0);
   }
 
@@ -77,7 +76,7 @@ export class AvatarComponent implements OnInit, OnChanges, AfterViewInit {
       return;
     }
 
-    alreadyLoadedImages.push(<string>this.src());
+    alreadyLoadedImages.push(<string>this.image());
     this.imageLoaded = true;
   }
 
