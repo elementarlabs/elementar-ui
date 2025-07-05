@@ -7,7 +7,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   standalone: true
 })
 export class SoundEffectDirective {
-  soundSrc = input.required<string>();
+  soundSrc = input('assets/sound-effects/mouse-click.ogg');
 
   private _elementRef = inject(ElementRef);
   private _destroyRef = inject(DestroyRef);

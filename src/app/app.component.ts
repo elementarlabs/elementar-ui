@@ -20,6 +20,12 @@ import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { LogoComponent, TextLogoComponent } from '@elementar-ui/components/logo';
 import { SplashScreenComponent } from '@elementar-ui/components/splash-screen';
+import {
+  ColorScheme,
+  ColorSchemeDarkDirective,
+  ColorSchemeLightDirective,
+  ColorSchemeSwitcherComponent,
+} from '@elementar-ui/components/color-scheme';
 
 @Component({
   selector: 'app-root',
@@ -35,19 +41,20 @@ import { SplashScreenComponent } from '@elementar-ui/components/splash-screen';
     SidebarComponent,
     MatIcon,
     MatAnchor,
-    SoundEffectDirective,
     MatTooltip,
     RouterLink,
-    MatIconButton,
     LogoComponent,
     SplashScreenComponent,
-    TextLogoComponent
+    TextLogoComponent,
+    ColorSchemeSwitcherComponent,
+    ColorSchemeLightDirective,
+    ColorSchemeDarkDirective,
+    SoundEffectDirective,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  protected _themeManager = inject(ThemeManagerService);
   private _analyticsService = inject(AnalyticsService);
   private _seoService = inject(SeoService);
   private _envService = inject(EnvironmentService);
@@ -71,8 +78,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._themeManager.setColorScheme(this._themeManager.getPreferredColorScheme());
     this._seoService.trackCanonicalChanges(this._envService.getValue('siteUrl'));
     this._analyticsService.trackPageViews();
+  }
+
+  onColorSchemeChanged(colorScheme: ColorScheme) {
+    console.log('color scheme: ', colorScheme);
+    // save this color to backend
   }
 }

@@ -7,8 +7,7 @@
     <emr-announcement-global/>
     <emr-incidents-global/>
     <header class="px-7">
-      <div class="min-h-18 w-full py-10 md:py-0 space-y-10 md:space-y-0 md:flex items-center gap-10
-            relative">
+      <div class="min-h-18 w-full py-10 md:py-0 space-y-10 md:space-y-0 md:flex items-center gap-10 relative">
         <a routerLink="/" emr-logo>ELEMENTAR</a>
         <div>
           <nav class="flex items-center gap-8 md:absolute md:start-1/2 md:-translate-x-1/2 md:-translate-y-1/2 text-md">
@@ -20,14 +19,12 @@
           </nav>
         </div>
         <div class="ms-auto flex items-center gap-4">
-          <button mat-icon-button (click)="_themeManager.toggleColorScheme()" matTooltip="Color Theme"
-                  emrSoundEffect soundSrc="/assets/sound-effects/mouse-click.ogg">
-            @if (_themeManager.getColorScheme() === 'light') {
-              <mat-icon>light_mode</mat-icon>
-            } @else if (_themeManager.getColorScheme() === 'dark') {
-              <mat-icon>dark_mode</mat-icon>
-            }
-          </button>
+          <emr-color-scheme-switcher matTooltip="Color Theme"
+                                     emrSoundEffect
+                                     (colorSchemeChanged)="onColorSchemeChanged($event)">
+            <mat-icon *emrColorSchemeLight>light_mode</mat-icon>
+            <mat-icon *emrColorSchemeDark>dark_mode</mat-icon>
+          </emr-color-scheme-switcher>
           <a href="https://x.com/pavel_salauyou" target="_blank">
             <img src="assets/x.svg" alt="" class="size-5.5">
           </a>
