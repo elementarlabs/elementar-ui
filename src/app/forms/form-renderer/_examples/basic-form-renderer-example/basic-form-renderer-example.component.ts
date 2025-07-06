@@ -83,6 +83,18 @@ export class BasicFormRendererExampleComponent {
       },
       {
         kind: 'field',
+        name: 'tags',
+        type: 'autocompleteMany',
+        label: 'Tags',
+        defaultValue: [],
+        bindValue: 'id',
+        bindName: 'name',
+        payload: {
+          autocompleteUrl: 'mockdata/tags.json',
+        },
+      },
+      {
+        kind: 'field',
         name: 'bio',
         type: 'textarea',
         label: 'Biography',
@@ -172,6 +184,7 @@ export class BasicFormRendererExampleComponent {
         { name: 'timezone' },
         { name: 'subscribe' },
         { name: 'eula'},
+        { name: 'tags', colspan: 2 },
         { name: 'bio', colspan: 2 },
         { name: 'otherTypeDescription' },
         { name: 'gender'},

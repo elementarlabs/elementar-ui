@@ -17,7 +17,12 @@ export class FormGeneratorService {
 
     for (const elementConfig of config.elements) {
       if (elementConfig.kind === 'field') {
-        const finalValue = initialValue?.[elementConfig.name] ?? elementConfig.value ?? null;
+        let finalValue = initialValue?.[elementConfig.name] ?? elementConfig.value ?? null;
+
+        if (finalValue === null && 'defaultValue' in elementConfig) {
+          finalValue = elementConfig.defaultValue;
+        }
+
         const validators = this.mapValidators(elementConfig.validators);
         const formState = {
           value: finalValue,

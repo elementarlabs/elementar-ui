@@ -1,0 +1,30 @@
+[
+  {
+    "id": 101,
+    "name": "JavaScript"
+  },
+  {
+    "id": 102,
+    "name": "Angular"
+  },
+  {
+    "id": 103,
+    "name": "React"
+  },
+  {
+    "id": 104,
+    "name": "Node.js"
+  },
+  {
+    "id": 105,
+    "name": "API Design"
+  },
+  {
+    "id": 106,
+    "name": "CSS Grid"
+  },
+  {
+    "id": 107,
+    "name": "UI/UX"
+  }
+]

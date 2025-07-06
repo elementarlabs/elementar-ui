@@ -1,11 +1,13 @@
-import { Injectable, Type } from '@angular/core';
+import { inject, Injectable, Type } from '@angular/core';
+import { FORM_RENDERER_FIELD_REGISTRY } from '../models/form-config.model';
 
-type ComponentImporter = () => Promise<Type<any>>;
+export type ComponentImporter = () => Promise<Type<any>>;
 
 @Injectable({
   providedIn: 'root',
 })
 export class ComponentRegistryService {
+  private globalRegistry = inject(FORM_RENDERER_FIELD_REGISTRY, { optional: true });
   private componentMap = new Map<string, ComponentImporter>();
 
   constructor() {
@@ -53,6 +55,17 @@ export class ComponentRegistryService {
     this.componentMap.set('divider', () =>
       import('../content/divider-content/divider-content.component')
         .then(c => c.DividerContentComponent));
+    this.componentMap.set('autocompleteMany', () =>
+      import('../fields/autocomplete-many-field/autocomplete-many-field.component')
+        .then(c => c.AutocompleteManyFieldComponent)
+    );
+
+    if (this.globalRegistry) {
+      const globalRegistry = this.globalRegistry as any;
+      Object.keys(globalRegistry).forEach(typeName => {
+        this.componentMap.set(typeName, globalRegistry[typeName]);
+      });
+    }
   }
 
   getImporter(typeName: string): ComponentImporter | undefined {

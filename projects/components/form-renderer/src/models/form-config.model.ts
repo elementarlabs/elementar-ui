@@ -1,4 +1,9 @@
 import { FormGroup, ValidationErrors } from '@angular/forms';
+import { InjectionToken } from '@angular/core';
+import { ComponentImporter } from '../services/component-registry.service';
+
+export const FORM_RENDERER_FIELD_REGISTRY =
+  new InjectionToken<{[fieldName:string]: ComponentImporter}>('FORM_RENDERER_FIELDS_CONFIG');
 
 export interface ValidatorConfig {
   type: string;

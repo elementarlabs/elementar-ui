@@ -18,6 +18,9 @@ import { ENVIRONMENT, EnvironmentService, GlobalStore, PageTitleStrategyService 
 import { LayoutSidebarStore } from '@elementar-ui/components/layout';
 import { COLOR_SCHEME_LOCAL_KEY, ColorScheme, ColorSchemeStore } from '@elementar-ui/components/color-scheme';
 import { isPlatformBrowser } from '@angular/common';
+import {
+  FORM_RENDERER_FIELD_REGISTRY,
+} from '@elementar-ui/components/form-renderer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -52,6 +55,15 @@ export const appConfig: ApplicationConfig = {
     {
       provide: ENVIRONMENT,
       useValue: environment
+    },
+    {
+      provide: FORM_RENDERER_FIELD_REGISTRY,
+      useValue: {
+        // some field and import, for example
+        // myAutocomplete: () =>
+        //   import('./my-autocomplete-field/my-autocomplete-field.component')
+        //     .then(c => c.MyAutocompleteFieldComponent)
+      }
     },
     {
       provide: TitleStrategy,
