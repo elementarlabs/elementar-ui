@@ -1,0 +1,45 @@
+@if (control() && config()) {
+  <mat-form-field>
+    <mat-label>{{ config().label }}</mat-label>
+    <mat-chip-grid #chipGrid>
+      @for (option of value; track option) {
+        <mat-chip-row (removed)="remove(option)">
+          {{ option[bindName] }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      }
+    </mat-chip-grid>
+    <input [placeholder]="config().placeholder"
+           #input
+           maxlength="30"
+           [formControl]="chipsCtrl"
+           [matChipInputFor]="chipGrid"
+           [matAutocomplete]="autocomplete"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           (matChipInputTokenEnd)="add($event)">
+    @if (isLoading) {
+      <div class="loader">
+        <mat-progress-spinner
+          mode="indeterminate"
+          [diameter]="20"/>
+      </div>
+    }
+    <mat-autocomplete #autocomplete="matAutocomplete" (optionSelected)="onSelected($event)">
+      @for (option of filteredOptions$ | async; track option) {
+        <mat-option [value]="option">{{ option[bindName] }}</mat-option>
+      }
+
+      @if (!(filteredOptions$ | async)?.length && !isLoading && chipsCtrl.value) {
+        <mat-option disabled>
+          No search results found.
+        </mat-option>
+      }
+    </mat-autocomplete>
+    <mat-hint>{{ config().hint }}</mat-hint>
+    @if (control().invalid && control().touched) {
+      <mat-error>{{ getErrorMessage() }}</mat-error>
+    }
+  </mat-form-field>
+}

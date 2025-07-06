@@ -1,0 +1,14 @@
+:host {
+  display: block;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .loader {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
