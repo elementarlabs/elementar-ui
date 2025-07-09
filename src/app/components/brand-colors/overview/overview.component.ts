@@ -16,6 +16,9 @@ import {
 } from '../_examples/brand-colors-disabled-example/brand-colors-disabled-example.component';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { PageTitleDirective } from '@meta/page/page-title.directive';
+import {
+  BrandColorsWithGradientExampleComponent
+} from '../_examples/brand-colors-with-gradient-example/brand-colors-with-gradient-example.component';
 
 @Component({
   imports: [
@@ -28,7 +31,8 @@ import { PageTitleDirective } from '@meta/page/page-title.directive';
     BrandColorsDisabledExampleComponent,
     MatTab,
     MatTabGroup,
-    PageTitleDirective
+    PageTitleDirective,
+    BrandColorsWithGradientExampleComponent
   ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss'

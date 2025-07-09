@@ -31,7 +31,8 @@ const defaultColors = [
   styleUrl: './brand-colors.component.scss',
   host: {
     'class': 'emr-brand-colors',
-    '[class.is-disabled]': 'disabled() || _disabled'
+    '[class.is-disabled]': 'disabled() || _disabled',
+    '[class.with-gradient]': 'withGradient()'
   }
 })
 export class BrandColorsComponent implements ControlValueAccessor, OnChanges {
@@ -41,6 +42,9 @@ export class BrandColorsComponent implements ControlValueAccessor, OnChanges {
 
   colors = input<string[]>(defaultColors);
   selectedColor = input<string>();
+  withGradient = input(false, {
+    transform: booleanAttribute
+  });
   disabled = input(false, {
     transform: booleanAttribute
   });

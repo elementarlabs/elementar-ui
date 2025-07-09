@@ -7,7 +7,7 @@
   display: inline-flex;
   flex-wrap: wrap;
   gap: var(--emr-brand-colors-gap);
-  min-height: --spacing(8);
+  line-height: 0;
 
   .color {
     --color: transparent;
@@ -56,5 +56,11 @@
   &.is-disabled {
     pointer-events: none;
     opacity: 60%;
+  }
+
+  &.with-gradient {
+    .color {
+      box-shadow: rgba(50, 50, 93, 0.15) 0 2px 8px 0 inset;
+    }
   }
 }
