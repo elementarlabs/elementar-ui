@@ -1,22 +1,28 @@
-<mat-form-field class="w-1/2">
+<mat-form-field class="w-full">
   <mat-label>Favorite Fruits</mat-label>
   <mat-chip-grid #chipGrid aria-label="Enter fruits">
-    @for (fruit of fruits; track fruit) {
+    @for (fruit of fruits(); track fruit) {
       <mat-chip-row
         (removed)="remove(fruit)"
         [editable]="true"
         (edited)="edit(fruit, $event)"
-        [aria-description]="'press enter to edit ' + fruit.name">
-        {{ fruit.name }}
+        [aria-description]="'press enter to edit ' + fruit.name"
+      >
+        <button matChipEdit [attr.aria-label]="'edit ' + fruit.name">
+          <mat-icon>edit</mat-icon>
+        </button>
+        {{fruit.name}}
         <button matChipRemove [attr.aria-label]="'remove ' + fruit.name">
-          <mat-icon>cancel</mat-icon>
+          <mat-icon class="filled">cancel</mat-icon>
         </button>
       </mat-chip-row>
     }
-    <input placeholder="New fruit..."
-           [matChipInputFor]="chipGrid"
-           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-           [matChipInputAddOnBlur]="addOnBlur"
-           (matChipInputTokenEnd)="add($event)"/>
+    <input
+      placeholder="New fruit..."
+      [matChipInputFor]="chipGrid"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur"
+      (matChipInputTokenEnd)="add($event)"
+    />
   </mat-chip-grid>
 </mat-form-field>

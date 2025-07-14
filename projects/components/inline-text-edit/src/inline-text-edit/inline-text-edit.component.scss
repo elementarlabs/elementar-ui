@@ -2,7 +2,7 @@
   display: block;
   padding: 4px 10px;
   transition: border-color 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border: var(--mdc-outlined-text-field-outline-width, 1px) solid transparent;
+  border: var(--mat-form-field-outlined-outline-width, 1px) solid transparent;
   outline: none;
   border-radius: 4px;
   cursor: text;
@@ -10,12 +10,12 @@
   margin-right: -10px;
 
   &:hover {
-    border-color: var(--mdc-outlined-text-field-outline-color, var(--mat-sys-outline));
+    border-color: var(--mat-form-field-outlined-outline-color, var(--mat-sys-outline));
   }
 
   &.editing {
-    color: var(--mdc-outlined-text-field-input-text-color, var(--mat-sys-on-surface));
-    caret-color: var(--mdc-outlined-text-field-caret-color, var(--mat-sys-primary));
+    color: var(--mat-form-field-outlined-input-text-color, var(--mat-sys-on-surface));
+    caret-color: var(--mat-form-field-outlined-caret-color, var(--mat-sys-primary));
   }
 
   &.focused {

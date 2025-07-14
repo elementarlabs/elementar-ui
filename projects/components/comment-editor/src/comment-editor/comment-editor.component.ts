@@ -6,7 +6,8 @@ import {
   input,
   OnDestroy, OnInit,
   output, PLATFORM_ID,
-  viewChild
+  viewChild,
+  DOCUMENT
 } from '@angular/core';
 import { Editor } from '@tiptap/core';
 import Document from '@tiptap/extension-document';
@@ -29,7 +30,7 @@ import History from '@tiptap/extension-history';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import Image from '@tiptap/extension-image';
 import { MatButton } from '@angular/material/button';
-import { DOCUMENT, isPlatformServer } from '@angular/common';
+import { isPlatformServer } from '@angular/common';
 import { COMMENT_EDITOR, CommentEditorAPI } from '../types';
 import ImageUploadingPlaceholderExtension from '../extensions/image-uploading-placeholder';
 

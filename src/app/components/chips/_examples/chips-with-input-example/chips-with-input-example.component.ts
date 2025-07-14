@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import {
+  MatChipEdit,
   MatChipEditedEvent,
   MatChipGrid,
   MatChipInput,
@@ -25,24 +26,24 @@ export interface Fruit {
     MatChipInput,
     MatIcon,
     MatChipRemove,
-    MatChipRow
+    MatChipRow,
+    MatChipEdit
   ],
   templateUrl: './chips-with-input-example.component.html',
   styleUrl: './chips-with-input-example.component.scss'
 })
 export class ChipsWithInputExampleComponent {
-  addOnBlur = true;
+  readonly addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
-
-  announcer = inject(LiveAnnouncer);
+  readonly fruits = signal<Fruit[]>([{name: 'Lemon'}, {name: 'Lime'}, {name: 'Apple'}]);
+  readonly announcer = inject(LiveAnnouncer);
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
     // Add our fruit
     if (value) {
-      this.fruits.push({name: value});
+      this.fruits.update((fruits: Fruit[]) => [...fruits, {name: value}]);
     }
 
     // Clear the input value
@@ -50,12 +51,16 @@ export class ChipsWithInputExampleComponent {
   }
 
   remove(fruit: Fruit): void {
-    const index = this.fruits.indexOf(fruit);
+    this.fruits.update((fruits: Fruit[]) => {
+      const index = fruits.indexOf(fruit);
+      if (index < 0) {
+        return fruits;
+      }
 
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
-      this.announcer.announce(`Removed ${fruit}`);
-    }
+      fruits.splice(index, 1);
+      this.announcer.announce(`Removed ${fruit.name}`);
+      return [...fruits];
+    });
   }
 
   edit(fruit: Fruit, event: MatChipEditedEvent) {
@@ -68,10 +73,13 @@ export class ChipsWithInputExampleComponent {
     }
 
     // Edit existing fruit
-    const index = this.fruits.indexOf(fruit);
-
-    if (index >= 0) {
-      this.fruits[index].name = value;
-    }
+    this.fruits.update((fruits: Fruit[]) => {
+      const index = fruits.indexOf(fruit);
+      if (index >= 0) {
+        fruits[index].name = value;
+        return [...fruits];
+      }
+      return fruits;
+    });
   }
 }

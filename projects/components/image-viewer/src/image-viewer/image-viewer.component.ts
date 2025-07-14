@@ -1,8 +1,8 @@
-import { Component, computed, DestroyRef, ElementRef, inject, Renderer2 } from '@angular/core';
+import { Component, computed, DestroyRef, ElementRef, inject, Renderer2, DOCUMENT } from '@angular/core';
 import { IMAGE_VIEWER_PICTURE_DATA, IMAGE_VIEWER_PICTURE_REF } from '../types';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 

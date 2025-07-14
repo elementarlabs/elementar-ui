@@ -6,9 +6,10 @@ import {
   inject,
   NgZone,
   PLATFORM_ID,
-  contentChildren
+  contentChildren,
+  DOCUMENT
 } from '@angular/core';
-import { DOCUMENT, isPlatformServer } from '@angular/common';
+import { isPlatformServer } from '@angular/common';
 import { debounceTime, fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SCROLL_SPY_NAV } from '../types';

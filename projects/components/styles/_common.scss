@@ -150,7 +150,7 @@ $m3-dark-theme: mat.define-theme((
   --color-default-high: #{mat.get-theme-color($m3-light-theme, neutral, 70)};
 
   --emr-transition-transform: transform .15s linear;
-  --mdc-protected-button-container-height: 2.375rem;
+  --mat-button-protected-container-height: 2.375rem;
   --mat-menu-item-label-text-size: var(--text-tiny);
   --mat-option-label-text-size: var(--text-tiny);
   --mat-table-row-item-outline-color: var(--color-default);

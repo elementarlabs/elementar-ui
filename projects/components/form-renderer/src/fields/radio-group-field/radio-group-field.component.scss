@@ -6,8 +6,8 @@
 
   .radio-group-label {
     display: block;
-    color: var(--mdc-outlined-text-field-label-text-color);
-    font-size: calc(var(--mdc-outlined-text-field-label-text-size) * .75);
+    color: var(--mat-form-field-outlined-label-text-color);
+    font-size: calc(var(--mat-form-field-outlined-label-text-size) * .75);
   }
 
   mat-radio-group {

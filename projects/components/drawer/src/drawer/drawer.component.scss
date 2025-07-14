@@ -39,11 +39,11 @@
   }
 
   .drawer-content {
-    background-color: var(--mdc-dialog-container-color);
+    background-color: var(--mat-dialog-container-color);
     margin: --spacing(7);
     flex-grow: 1;
     box-shadow: var(--mat-dialog-container-elevation-shadow, none);
-    border-radius: var(--mdc-dialog-container-shape);
+    border-radius: var(--mat-dialog-container-shape);
     overflow: hidden;
   }
 

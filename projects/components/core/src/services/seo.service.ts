@@ -1,7 +1,7 @@
-import { DestroyRef, inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { DestroyRef, inject, Injectable, PLATFORM_ID, DOCUMENT } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { DOCUMENT, isPlatformServer } from '@angular/common';
+import { isPlatformServer } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Meta, Title } from '@angular/platform-browser';
 import { GlobalStore } from '../global.state';

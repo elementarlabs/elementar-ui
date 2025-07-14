@@ -9,6 +9,7 @@ import {
 import { PageComponent } from '@meta/page/page.component';
 import { PageContentDirective } from '@meta/page/page-content.directive';
 import { PageTitleDirective } from '@meta/page/page-title.directive';
+import { ContextMenuExampleComponent } from '../_examples/context-menu-example/context-menu-example.component';
 
 @Component({
   selector: 'app-overview',
@@ -20,7 +21,8 @@ import { PageTitleDirective } from '@meta/page/page-title.directive';
     MenuPositioningExampleComponent,
     PageComponent,
     PageContentDirective,
-    PageTitleDirective
+    PageTitleDirective,
+    ContextMenuExampleComponent
   ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss'

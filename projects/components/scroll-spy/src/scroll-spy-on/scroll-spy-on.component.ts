@@ -1,5 +1,5 @@
-import { Component, ElementRef, inject, input, OnInit, Renderer2 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, ElementRef, inject, input, OnInit, Renderer2, DOCUMENT } from '@angular/core';
+
 import { ScrollSpyNavComponent } from '../scroll-spy-nav/scroll-spy-nav.component';
 import { SCROLL_SPY_NAV } from '../types';
 

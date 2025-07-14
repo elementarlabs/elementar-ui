@@ -9,10 +9,11 @@ import {
   numberAttribute,
   OnInit,
   Renderer2,
-  viewChild
+  viewChild,
+  DOCUMENT
 } from '@angular/core';
 import { fromEvent, throttleTime } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({

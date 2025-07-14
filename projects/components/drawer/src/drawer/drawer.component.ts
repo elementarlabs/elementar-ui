@@ -10,9 +10,10 @@ import {
   WritableSignal,
   signal,
   computed,
-  Signal
+  Signal,
+  DOCUMENT
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+
 
 @Component({
   selector: 'emr-drawer',

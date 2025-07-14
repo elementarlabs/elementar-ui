@@ -10,9 +10,10 @@ import {
   ChangeDetectionStrategy,
   OnDestroy,
   inject,
-  PLATFORM_ID, model
+  PLATFORM_ID, model,
+  DOCUMENT
 } from '@angular/core';
-import { isPlatformBrowser, DOCUMENT } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { fromEvent, Subscription, merge, Subject } from 'rxjs';
 import { switchMap, takeUntil, map, filter, tap } from 'rxjs/operators';
 import { Point } from '../lazy-point';

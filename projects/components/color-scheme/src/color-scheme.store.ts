@@ -1,5 +1,5 @@
-import { effect, inject, PLATFORM_ID } from '@angular/core';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { effect, inject, PLATFORM_ID, DOCUMENT } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
 import { COLOR_SCHEME_LOCAL_KEY, ColorScheme } from './color-scheme.model';
 
