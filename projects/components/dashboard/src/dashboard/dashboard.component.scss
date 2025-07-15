@@ -1,7 +1,7 @@
 @reference 'tailwindcss';
 
 :host {
-  --emr-dashboard-gap: --spacing(7);
+  --emr-dashboard-gap: --spacing(6);
 
   display: block;
 
@@ -16,11 +16,13 @@
     grid-column: span var(--emr-dashgrid-item-colspan) / span var(--emr-dashgrid-item-colspan);
   }
 
+  .widget {
+    height: 100%;
+  }
+
   .widget:not(.plain) {
     border: 1px solid var(--color-border);
     border-radius: theme(--radius-2xl);
-    height: 100%;
-    overflow: hidden;
   }
 
   .skeleton {

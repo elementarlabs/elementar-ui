@@ -1,7 +1,7 @@
 <div class="dashgrid">
   @for (widget of widgets(); track widget.id) {
     <div class="dashgrid-item" [style.--emr-dashgrid-item-colspan]="widget.columns">
-      <div class="widget" [class.plain]="getWidgetConfig(widget.type).plain" [class.hidden]="!_allLoaded()">
+      <div class="widget" [class.plain]="getWidgetConfig(widget.type).plain || plain()" [class.hidden]="!_allLoaded()">
         <ng-container [ngComponentOutlet]="getWidgetComponent(widget.type) | async"
                       [ngComponentOutletInputs]="{ widget }"/>
       </div>

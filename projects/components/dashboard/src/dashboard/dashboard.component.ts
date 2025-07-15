@@ -1,4 +1,5 @@
 import {
+  booleanAttribute,
   Component,
   forwardRef,
   input,
@@ -38,6 +39,9 @@ export class DashboardComponent implements OnInit {
 
   configs = input<WidgetConfig[]>([]);
   widgets = input<Widget[]>([]);
+  plain = input(false, {
+    transform: booleanAttribute
+  });
 
   protected _allLoaded = signal(false);
   protected _loadedWidgetsCount = signal(0);
