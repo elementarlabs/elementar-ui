@@ -35,11 +35,15 @@
       }
 
       emr-sidebar-nav-heading {
-        display: flex;
-        align-items: center;
-        font-size: var(--text-4xs);
         padding: 0;
-        justify-content: center;
+
+        .line {
+          display: block;
+        }
+
+        .content {
+          opacity: 0;
+        }
       }
 
       emr-sidebar-nav-group-menu {

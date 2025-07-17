@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'emr-sidebar-nav-heading',
   exportAs: 'emrSidebarNavHeading',
-  imports: [],
+  imports: [
+  ],
   templateUrl: './sidebar-nav-heading.component.html',
   styleUrl: './sidebar-nav-heading.component.scss',
   host: {
