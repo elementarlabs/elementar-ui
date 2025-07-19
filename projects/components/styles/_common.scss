@@ -289,15 +289,21 @@ input[type=number].emr-number-input-no-spinners {
   th {
     font-weight: 600;
     height: var(--mat-table-row-item-container-height);
+    border-bottom: 1px solid var(--color-border);
   }
 
   td {
     height: var(--mat-table-row-item-container-height);
-    border-top: 1px solid var(--color-border);
   }
 
   tr {
     color: var(--mat-table-row-item-label-text-color);
+
+    &:not(:first-child) {
+      td {
+        border-top: 1px solid var(--color-border);
+      }
+    }
   }
 }
 
