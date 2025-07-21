@@ -70,6 +70,10 @@ const routes: Routes = [
     path: 'inline-text-edit',
     loadChildren: () => import('./inline-text-edit/inline-text-edit.module').then(m => m.InlineTextEditModule)
   },
+  {
+    path: 'currency-select',
+    loadChildren: () => import('./currency-select/currency-select.module').then(m => m.CurrencySelectModule)
+  },
 ];
 
 @NgModule({

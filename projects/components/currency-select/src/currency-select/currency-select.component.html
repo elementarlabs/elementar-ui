@@ -1,6 +1,6 @@
 <mat-select
   #matSelect
-  panelClass="emr-country-select-panel"
+  panelClass="emr-currency-select-panel"
   [value]="value"
   (selectionChange)="onSelectionChange($event)"
   (opened)="onSelectOpened()"
@@ -9,25 +9,30 @@
   [required]="isRequiredSignal()"
   [disabled]="isDisabledSignal()">
   <mat-select-trigger class="select-trigger">
-    @let selectedCountry = selectedCountryDisplay();
-    @if (selectedCountry) {
+    @let selectedCurrency = selectedCurrencyDisplay();
+    @if (selectedCurrency) {
       <div class="flex items-center gap-2">
-        <span class="text-xl leading-[0]">{{ selectedCountry.flag }}</span>
-        {{ selectedCountry.name }}
-        @if (showCountryCode()) {
-          <span class="code">({{ selectedCountry.code }})</span>
-        }
+        <span class="text-xl leading-[0]">{{ selectedCurrency.flag }}</span>
+        <div>
+          <span class="currency-code">
+            {{ selectedCurrency.code }}
+            {{ selectedCurrency.symbol }}
+          </span>
+          @if (showCountryName()) {
+            &ndash; {{ selectedCurrency.name }}
+          }
+        </div>
       </div>
     }
 
-    @if (!selectedCountryDisplay() && placeholder) {
+    @if (!selectedCurrencyDisplay() && placeholder) {
       <div class="placeholder-text">
         {{ placeholder }}
       </div>
     }
   </mat-select-trigger>
 
-  <div class="px-3 py-3 rounded-t sticky top-0 z-1 bg-[var(--mat-select-panel-background-color)]">
+  <div class="px-3 py-3 rounded-t sticky -top-2 z-1 bg-[var(--mat-select-panel-background-color)]">
     <input #searchInput
            type="text" placeholder="Search..." autocomplete="off" [formControl]="searchCtrl"
            class="w-full bg-surface-container-highest rounded-lg text-sm focus:outline-none
@@ -46,20 +51,25 @@
     }
   </div>
 
-  @for (country of filteredCountries(); track country.code) {
-    <mat-option [value]="country.code">
+  @for (currency of filteredCurrencies(); track currency.code) {
+    <mat-option [value]="currency.code">
       <div class="flex items-center gap-2 h-full">
-        <span class="text-xl leading-[0]">{{ country.flag }}</span>
-        {{ country.name }}
-        @if (showCountryCode()) {
-          <span class="code">({{ country.code }})</span>
-        }
+        <span class="text-xl leading-[0]">{{ currency.flag }}</span>
+        <div>
+          <span class="currency-code uppercase">
+            {{ currency.code }}
+            {{ currency.symbol }}
+          </span>
+          @if (showCountryName()) {
+            &ndash; {{ currency.name }}
+          }
+        </div>
       </div>
     </mat-option>
   } @empty {
     @if (searchCtrl.value) {
       <div class="text-sm px-4 py-3">
-        <span i18n>Country not found</span>.
+        <span i18n>Currency not found</span>.
       </div>
     }
   }

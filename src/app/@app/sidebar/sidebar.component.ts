@@ -211,8 +211,14 @@ export class SidebarComponent implements OnInit {
         {
           key: uuid(),
           type: 'link',
-          name: 'Country',
+          name: 'Country Select',
           link: '/forms/country'
+        },
+        {
+          key: uuid(),
+          type: 'link',
+          name: 'Currency Select',
+          link: '/forms/currency-select'
         },
         {
           key: uuid(),

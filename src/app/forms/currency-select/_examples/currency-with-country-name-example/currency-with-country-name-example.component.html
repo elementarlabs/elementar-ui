@@ -1,0 +1,8 @@
+<mat-form-field class="w-1/2">
+  <mat-label>Currency</mat-label>
+  <emr-currency-select [(ngModel)]="currency" showCountryName/>
+</mat-form-field>
+
+<p class="mt-5">
+  Selected currency: {{ currency() }}
+</p>
