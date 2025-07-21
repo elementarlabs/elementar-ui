@@ -27,7 +27,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { Currency } from '@elementar-ui/components/currency-select/src/currency.interface';
+import { Currency } from '../currency.interface';
 
 @Component({
   selector: 'emr-currency-select',
