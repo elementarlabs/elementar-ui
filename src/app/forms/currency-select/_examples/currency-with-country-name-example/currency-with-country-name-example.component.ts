@@ -15,5 +15,5 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './currency-with-country-name-example.component.scss'
 })
 export class CurrencyWithCountryNameExampleComponent {
-  currency = model('usd');
+  currency = model('USD');
 }

@@ -15,5 +15,5 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './basic-country-select-example.component.scss'
 })
 export class BasicCountrySelectExampleComponent {
-  country = model('us');
+  country = model('US');
 }

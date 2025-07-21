@@ -15,5 +15,5 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
   styleUrl: './basic-currency-select-example.component.scss'
 })
 export class BasicCurrencySelectExampleComponent {
-  currency = model('usd');
+  currency = model('USD');
 }
