@@ -111,9 +111,19 @@ export class DrawerComponent {
       return;
     }
 
+    const target = event.target as HTMLElement;
+
+    if (
+      target.classList.contains('.emr-drawer-ignore-outside-click') ||
+      target.closest('.emr-drawer-ignore-outside-click')
+    ) {
+      return;
+    }
+
     this.internalIsOpen.set(true);
     const clickedElement = event.target as Node;
     const drawerContainer = this.getDrawerContainer();
+
     if (drawerContainer && !drawerContainer.contains(clickedElement)) {
       this.close();
     }
