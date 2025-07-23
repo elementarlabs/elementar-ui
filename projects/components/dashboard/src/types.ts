@@ -16,9 +16,8 @@ export interface WidgetConfig {
 }
 
 export interface Widget {
-  id: any;
   type: string;
-  columns: number;
+  columns?: number;
   skeleton?: {
     minHeight: string;
   }
