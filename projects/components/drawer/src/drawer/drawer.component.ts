@@ -14,7 +14,6 @@ import {
   DOCUMENT
 } from '@angular/core';
 
-
 @Component({
   selector: 'emr-drawer',
   exportAs: 'emrDrawer',
@@ -22,6 +21,7 @@ import {
   styleUrl: './drawer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
+    'class': 'emr-drawer',
     '[class.no-backdrop]': '_isOpen() && !showBackdrop()',
     '(document:keydown.escape)': 'onKeydownHandler($event)',
     '(document:click)': 'onDocumentClickHandler($event)'
@@ -43,7 +43,7 @@ export class DrawerComponent {
   private previousInternalIsOpenState: WritableSignal<boolean | undefined> = signal(undefined);
   private justOpenedWithoutBackdrop = signal(false); // Новый флаг
 
-  public _isOpen: Signal<boolean> = computed(() => this.internalIsOpen());
+  protected _isOpen: Signal<boolean> = computed(() => this.internalIsOpen());
 
   constructor() {
     effect(() => {
@@ -94,6 +94,10 @@ export class DrawerComponent {
       this.justOpenedWithoutBackdrop.set(false);
       this.closed.emit();
     }
+  }
+
+  get isOpened(): boolean {
+    return this._isOpen();
   }
 
   protected onKeydownHandler(event: KeyboardEvent): void {
