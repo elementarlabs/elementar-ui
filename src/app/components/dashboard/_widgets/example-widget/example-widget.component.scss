@@ -1,0 +1,7 @@
+@reference 'tailwindcss';
+
+:host {
+  display: block;
+  height: 100%;
+  padding: --spacing(6);
+}

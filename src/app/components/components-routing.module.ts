@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./badge/badge.module').then(m => m.BadgeModule)
   },
   {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
     path: 'sidebar',
     loadChildren: () => import('./sidebar/sidebar.module').then(m => m.SidebarModule)
   },

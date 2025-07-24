@@ -197,7 +197,6 @@ export class OverlayScrollbarComponent {
 
     const hostEnter$ = fromEvent<MouseEvent>(hostElement, 'mouseenter').pipe(
       tap(() => this.zone.run(() => {
-        console.log(222);
         this.isHovering.set(true);
         if (untracked(this.autoHide)) this.showDueToActivity.set(true);
       }))

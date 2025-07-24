@@ -17,7 +17,8 @@
   }
 
   .widget {
-    height: 100%;
+    --emr-dashboard-widget-height: 100%;
+    height: var(--emr-dashboard-widget-height);
   }
 
   .widget:not(.plain) {

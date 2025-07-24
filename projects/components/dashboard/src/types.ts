@@ -15,12 +15,16 @@ export interface WidgetConfig {
   component: () => Promise<any>;
 }
 
-export interface Widget {
+export interface WidgetItem {
+  id: any;
   type: string;
-  columns?: number;
-  skeleton?: {
-    minHeight: string;
-  }
+  columns: number;
+  skeletonHeight?: string;
+  height?: string;
+  widget?: Widget;
+}
+
+export interface Widget {
   [propName: string]: any;
 }
 

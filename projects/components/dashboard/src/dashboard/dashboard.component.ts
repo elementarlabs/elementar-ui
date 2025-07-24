@@ -7,8 +7,7 @@ import {
   signal
 } from '@angular/core';
 import {
-  Widget,
-  DASHBOARD, WidgetConfig
+  DASHBOARD, WidgetConfig, WidgetItem
 } from '../types';
 import { AsyncPipe, NgComponentOutlet } from '@angular/common';
 import { WidgetSkeletonComponent } from '../widget-skeleton/widget-skeleton.component';
@@ -37,9 +36,12 @@ export class DashboardComponent implements OnInit {
   protected _skeletonMap = new Map<string, any>();
   protected _componentsMap = new Map<string, any>();
 
-  configs = input<WidgetConfig[]>([]);
-  widgets = input<Widget[]>([]);
-  plain = input(false, {
+  readonly configs = input<WidgetConfig[]>([]);
+  readonly items = input<WidgetItem[]>([]);
+  readonly plain = input(false, {
+    transform: booleanAttribute
+  });
+  readonly waitWhenAllWidgetLoaded = input(false, {
     transform: booleanAttribute
   });
 
@@ -51,12 +53,21 @@ export class DashboardComponent implements OnInit {
       return;
     }
 
+    if (!this.waitWhenAllWidgetLoaded()) {
+      this._allLoaded.set(true);
+    }
+
     this.configs().forEach(config => {
       this._skeletonMap.set(config.type, config.skeleton);
     });
     this.configs().forEach(async (config, index: number) => {
       this._componentsMap.set(config.type, config.component());
     });
+  }
+
+  markWidgetAsLoaded(id: any) {
+    this._loadedWidgetsCount.set(this._loadedWidgetsCount() + 1);
+    this._allLoaded.set(this._loadedWidgetsCount() === this.items().length);
   }
 
   protected getWidgetConfig(type: string): WidgetConfig {
@@ -71,8 +82,7 @@ export class DashboardComponent implements OnInit {
     return this._componentsMap.get(type);
   }
 
-  markWidgetAsLoaded(id: any) {
-    this._loadedWidgetsCount.set(this._loadedWidgetsCount() + 1);
-    this._allLoaded.set(this._loadedWidgetsCount() === this.widgets().length);
+  protected getWidgetInputs(widgetItem: WidgetItem): any {
+    return widgetItem.widget ? { widget: widgetItem.widget } : {};
   }
 }

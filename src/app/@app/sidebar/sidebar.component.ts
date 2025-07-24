@@ -285,6 +285,12 @@ export class SidebarComponent implements OnInit {
         {
           key: uuid(),
           type: 'link',
+          name: 'Dashboard',
+          link: '/components/dashboard'
+        },
+        {
+          key: uuid(),
+          type: 'link',
           name: 'Incidents',
           link: '/components/incidents'
         },
