@@ -11,7 +11,7 @@ import {
   signal,
   computed,
   Signal,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 
 @Component({
@@ -28,15 +28,15 @@ import {
   }
 })
 export class DrawerComponent {
-  initialIsOpen = input<boolean | undefined>(undefined, { alias: 'isOpen' });
-  showBackdrop = input(true);
-
-  closed = output<void>();
-  opened = output<void>();
-
   private renderer = inject(Renderer2);
   private elementRef = inject(ElementRef);
   private document = inject(DOCUMENT);
+
+  readonly initialIsOpen = input<boolean | undefined>(undefined, { alias: 'isOpen' });
+  readonly showBackdrop = input(true);
+
+  readonly closed = output<void>();
+  readonly opened = output<void>();
 
   private internalIsOpen: WritableSignal<boolean> = signal(false);
   private drawerContainerElement: HTMLElement | null = null;
