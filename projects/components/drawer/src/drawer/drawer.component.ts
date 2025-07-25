@@ -11,14 +11,21 @@ import {
   signal,
   computed,
   Signal,
-  DOCUMENT,
+  DOCUMENT, forwardRef,
 } from '@angular/core';
+import { DRAWER } from '../types';
 
 @Component({
   selector: 'emr-drawer',
   exportAs: 'emrDrawer',
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.scss',
+  providers: [
+    {
+      provide: DRAWER,
+      useExisting: forwardRef(() => DrawerComponent),
+    }
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'class': 'emr-drawer',
