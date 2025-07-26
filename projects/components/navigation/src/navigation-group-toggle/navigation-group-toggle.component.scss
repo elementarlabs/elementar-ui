@@ -36,7 +36,7 @@
     min-width: --spacing(5);
     align-items: center;
     justify-content: center;
-    font-size: var(--text-2xs);
+    font-size: var(--text-xs);
     padding: 0 --spacing(1.5);
     font-weight: bold;
   }
@@ -44,6 +44,7 @@
   &:not(.is-badge-text-only) {
     .badge {
       font-weight: 600;
+      font-size: var(--text-2xs);
       background: var(--color-surface-tint);
       color: var(--color-on-primary);
     }
