@@ -1,4 +1,13 @@
-import { Component, inject, contentChild, TemplateRef, computed, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  inject,
+  contentChild,
+  TemplateRef,
+  computed,
+  ChangeDetectionStrategy,
+  input,
+  booleanAttribute
+} from '@angular/core';
 import { NavigationGroupToggleIconDirective } from '../navigation-group-toggle-icon.directive';
 import { MatRipple } from '@angular/material/core';
 import { NgTemplateOutlet } from '@angular/common';
@@ -21,6 +30,7 @@ import { NavigationStore } from '../navigation.store';
   host: {
     'class': 'emr-navigation-group-toggle',
     '[class.is-active]': 'active()',
+    '[class.is-badge-text-only]': 'badgeTextOnly()',
     '(click)': 'toggle($event)'
   }
 })
@@ -31,6 +41,9 @@ export class NavigationGroupToggleComponent {
   readonly iconRef = contentChild(NavigationGroupToggleIconDirective);
   readonly active = computed(() => {
     return this.store.activeGroupKey() === this._group.key();
+  });
+  readonly badgeTextOnly = input(false, {
+    transform: booleanAttribute
   });
 
   protected toggle(event: MouseEvent) {

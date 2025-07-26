@@ -27,6 +27,7 @@ let nextKey = 0;
   host: {
     'class': 'emr-navigation-item',
     '[class.is-active]': 'forceActive() || active()',
+    '[class.is-badge-text-only]': 'badgeTextOnly()',
     '(click)': 'click($event)'
   }
 })
@@ -49,6 +50,9 @@ export class NavigationItemComponent {
 
   readonly key = input<any>(`emr-navigation-item-${nextKey++}`);
   readonly forceActive = input(false, {
+    transform: booleanAttribute
+  });
+  readonly badgeTextOnly = input(false, {
     transform: booleanAttribute
   });
 

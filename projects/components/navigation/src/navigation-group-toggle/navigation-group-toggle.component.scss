@@ -32,14 +32,21 @@
     display: inline-flex;
     flex: none;
     border-radius: calc(infinity * 1px);
-    height: calc(var(--spacing) * 5);
+    height: --spacing(5);
+    min-width: --spacing(5);
     align-items: center;
     justify-content: center;
-    min-width: calc(var(--spacing) * 5);
     font-size: var(--text-2xs);
-    padding: 0 calc(var(--spacing) * 1.5);
-    background: var(--color-surface-tint);
-    color: var(--color-on-primary);
+    padding: 0 --spacing(1.5);
+    font-weight: bold;
+  }
+
+  &:not(.is-badge-text-only) {
+    .badge {
+      font-weight: 600;
+      background: var(--color-surface-tint);
+      color: var(--color-on-primary);
+    }
   }
 
   .icon {

@@ -10,6 +10,11 @@
                   <mat-icon>{{ navItem.icon }}</mat-icon>
                 }
               </ng-container>
+              <ng-container emrSidebarNavItemBadge>
+                @if (navItem.badge) {
+                  {{ navItem.badge }}
+                }
+              </ng-container>
               {{ navItem.name }}
             </a>
           }
