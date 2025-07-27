@@ -1,5 +1,5 @@
 import { Component, inject, input, OnInit } from '@angular/core';
-import { DASHBOARD, Widget } from '@elementar-ui/components/dashboard';
+import { DASHBOARD } from '@elementar-ui/components/dashboard';
 
 @Component({
   selector: 'emr-recent-activity-widget',
@@ -10,11 +10,12 @@ import { DASHBOARD, Widget } from '@elementar-ui/components/dashboard';
 export class RecentActivityWidgetComponent implements OnInit {
   private _dashboard = inject<any>(DASHBOARD, { optional: true });
 
-  widget = input<Widget>();
+  id = input.required<any>();
+  widget = input();
 
   ngOnInit() {
     if (this._dashboard && this.widget()) {
-      this._dashboard.markWidgetAsLoaded(this.widget()?.id);
+      this._dashboard.markWidgetAsLoaded(this.id());
     }
   }
 }

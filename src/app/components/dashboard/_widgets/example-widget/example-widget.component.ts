@@ -1,5 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
-import { Dashboard, DASHBOARD, Widget } from '@elementar-ui/components/dashboard';
+import { Component, input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-example-widget',
@@ -10,11 +9,12 @@ import { Dashboard, DASHBOARD, Widget } from '@elementar-ui/components/dashboard
 export class ExampleWidgetComponent implements OnInit {
   // private _dashboard = inject<Dashboard>(DASHBOARD, { optional: true });
 
-  readonly widget = input.required<Widget>();
+  readonly id = input.required<any>();
+  readonly widget = input.required<any>();
 
   ngOnInit() {
     // if (this._dashboard) {
-    //   this._dashboard.markWidgetAsLoaded(this.widget()?.['id']);
+    //   this._dashboard.markWidgetAsLoaded(this.id());
     // }
   }
 }

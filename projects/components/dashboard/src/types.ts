@@ -5,7 +5,8 @@ export interface Dashboard {
 }
 
 export interface WidgetComponent {
-  widget: InputSignal<Widget | undefined>;
+  id: InputSignal<any>;
+  widget?: InputSignal<any>;
 }
 
 export interface WidgetConfig {
@@ -21,11 +22,7 @@ export interface WidgetItem {
   columns: number;
   skeletonHeight?: string;
   height?: string;
-  widget?: Widget;
-}
-
-export interface Widget {
-  [propName: string]: any;
+  widget?: any; // widget data or nothing
 }
 
 export const DASHBOARD = new InjectionToken('DASHBOARD');

@@ -11,7 +11,7 @@ import {
 import { LabelLayout, UniversalTransition } from 'echarts/features';
 import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
-import { Dashboard, DASHBOARD, Widget } from '@elementar-ui/components/dashboard';
+import { Dashboard, DASHBOARD } from '@elementar-ui/components/dashboard';
 import { ThemeManagerService } from '@elementar-ui/components/core';
 
 @Component({
@@ -26,7 +26,8 @@ export class VisitorInsightsWidgetComponent {
   private _observer: ResizeObserver;
   private _dashboard = inject<Dashboard>(DASHBOARD, { optional: true });
 
-  widget = input<Widget>();
+  id = input.required<any>();
+  widget = input();
 
   readonly _chartRef = viewChild.required('chartRef', { read: ElementRef });
 
@@ -103,7 +104,7 @@ export class VisitorInsightsWidgetComponent {
       this._observer.observe(this._elementRef.nativeElement);
 
       if (this._dashboard && this.widget()) {
-        this._dashboard.markWidgetAsLoaded(this.widget()?.id);
+        this._dashboard.markWidgetAsLoaded(this.id());
       }
     });
   }

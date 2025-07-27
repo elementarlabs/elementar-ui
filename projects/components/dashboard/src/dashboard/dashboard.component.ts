@@ -83,6 +83,6 @@ export class DashboardComponent implements OnInit {
   }
 
   protected getWidgetInputs(widgetItem: WidgetItem): any {
-    return widgetItem.widget ? { widget: widgetItem.widget } : {};
+    return widgetItem.widget ? { widget: widgetItem.widget, id: widgetItem.id } : { id: widgetItem.id };
   }
 }

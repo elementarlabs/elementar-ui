@@ -1,8 +1,8 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DASHBOARD, Dashboard, Widget } from '@elementar-ui/components/dashboard';
+import { DASHBOARD, Dashboard } from '@elementar-ui/components/dashboard';
 
-export interface HeadingWidget extends Widget {
+export interface HeadingWidget {
   title: string;
   viewMore?: {
     link: string;
@@ -22,11 +22,12 @@ export interface HeadingWidget extends Widget {
 export class HeadingWidgetComponent implements OnInit {
   private _dashboard = inject<Dashboard>(DASHBOARD, { optional: true });
 
+  id = input.required<any>();
   widget = input.required<HeadingWidget>();
 
   ngOnInit() {
     if (this._dashboard && this.widget()) {
-      this._dashboard.markWidgetAsLoaded(this.widget()?.id);
+      this._dashboard.markWidgetAsLoaded(this.id());
     }
   }
 

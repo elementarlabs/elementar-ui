@@ -1,6 +1,10 @@
 import { Component, inject, input, OnInit } from '@angular/core';
-import { AvatarComponent, AvatarGroupComponent, AvatarTotalComponent } from '@elementar-ui/components/avatar';
-import { DASHBOARD, Dashboard, Widget } from '@elementar-ui/components/dashboard';
+import {
+  AvatarComponent,
+  AvatarGroupComponent,
+  AvatarMoreComponent,
+} from '@elementar-ui/components/avatar';
+import { DASHBOARD, Dashboard } from '@elementar-ui/components/dashboard';
 
 @Component({
   selector: 'emr-events-widget',
@@ -8,18 +12,19 @@ import { DASHBOARD, Dashboard, Widget } from '@elementar-ui/components/dashboard
   imports: [
     AvatarGroupComponent,
     AvatarComponent,
-    AvatarTotalComponent
+    AvatarMoreComponent
   ],
   styleUrl: './events-widget.component.scss'
 })
 export class EventsWidgetComponent implements OnInit {
   private _dashboard = inject<Dashboard>(DASHBOARD, { optional: true });
 
-  widget = input<Widget>();
+  id = input.required<any>();
+  widget = input<any>();
 
   ngOnInit() {
     if (this._dashboard && this.widget()) {
-      this._dashboard.markWidgetAsLoaded(this.widget()?.id);
+      this._dashboard.markWidgetAsLoaded(this.id());
     }
   }
 }

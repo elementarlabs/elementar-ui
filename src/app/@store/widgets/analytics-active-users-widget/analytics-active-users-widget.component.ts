@@ -10,11 +10,12 @@ import { DASHBOARD, Dashboard } from '@elementar-ui/components/dashboard';
 export class AnalyticsActiveUsersWidgetComponent implements OnInit {
   private _dashboard = inject<Dashboard>(DASHBOARD, { optional: true });
 
+  id = input.required<any>();
   widget = input<any>();
 
   ngOnInit() {
     if (this._dashboard && this.widget()) {
-      this._dashboard.markWidgetAsLoaded(this.widget()?.id);
+      this._dashboard.markWidgetAsLoaded(this.id());
     }
   }
 }

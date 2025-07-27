@@ -2,7 +2,7 @@
 
 :host {
   --emr-avatar-group-item-offset: calc(var(--spacing) * 2.5);
-  --emr-avatar-group-item-border: 0.125rem solid white;
+  --emr-avatar-group-item-border: 2px solid white;
 
   display: flex;
   flex: none;
@@ -15,9 +15,14 @@
     }
 
     .emr-avatar,
-    .emr-avatar-total {
+    .emr-avatar-total,
+    .emr-avatar-more {
       border: var(--emr-avatar-group-item-border);
       z-index: 0;
+
+      &:hover {
+        z-index: 1;
+      }
     }
   }
 }

@@ -5,7 +5,7 @@ import {
   MchartTooltipComponent,
   MchartTooltipTitleComponent
 } from '@elementar-ui/components/micro-chart';
-import { Dashboard, DASHBOARD, Widget } from '@elementar-ui/components/dashboard';
+import { Dashboard, DASHBOARD } from '@elementar-ui/components/dashboard';
 
 @Component({
   selector: 'emr-total-tasks-widget',
@@ -24,11 +24,12 @@ export class TotalTasksWidgetComponent implements OnInit {
 
   private _dashboard = inject<Dashboard>(DASHBOARD, { optional: true });
 
-  widget = input<Widget>();
+  id = input.required<any>();
+  widget = input();
 
   ngOnInit() {
     if (this._dashboard && this.widget()) {
-      this._dashboard.markWidgetAsLoaded(this.widget()?.id);
+      this._dashboard.markWidgetAsLoaded(this.id());
     }
   }
 }

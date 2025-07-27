@@ -4,7 +4,7 @@ import {
   MchartTooltipComponent,
   MchartTooltipTitleComponent
 } from '@elementar-ui/components/micro-chart';
-import { Dashboard, DASHBOARD, Widget } from '@elementar-ui/components/dashboard';
+import { Dashboard, DASHBOARD } from '@elementar-ui/components/dashboard';
 
 @Component({
   selector: 'emr-total-projects-widget',
@@ -23,11 +23,12 @@ export class TotalProjectsWidgetComponent implements OnInit {
   data = [47, 54, 38, 24, 65, 37];
   labels = ['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'];
 
-  widget = input<Widget>();
+  id = input.required<any>();
+  widget = input();
 
   ngOnInit() {
     if (this._dashboard && this.widget()) {
-      this._dashboard.markWidgetAsLoaded(this.widget()?.id);
+      this._dashboard.markWidgetAsLoaded(this.id());
     }
   }
 }

@@ -1,9 +1,9 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import { MatRipple } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
-import { DASHBOARD, Dashboard, Widget } from '@elementar-ui/components/dashboard';
+import { DASHBOARD, Dashboard } from '@elementar-ui/components/dashboard';
 
-export interface ArticleSnippetWidget extends Widget {
+export interface ArticleSnippetWidget {
   title: string;
   publishedAt: Date | string;
   imagePreviewUrl: string;
@@ -21,11 +21,12 @@ export interface ArticleSnippetWidget extends Widget {
 export class ArticleSnippetWidgetComponent implements OnInit {
   private _dashboard = inject<Dashboard>(DASHBOARD, { optional: true });
 
+  id = input.required<any>();
   widget = input.required<ArticleSnippetWidget>();
 
   ngOnInit() {
     if (this._dashboard && this.widget()) {
-      this._dashboard.markWidgetAsLoaded(this.widget()?.id);
+      this._dashboard.markWidgetAsLoaded(this.id());
     }
   }
 }

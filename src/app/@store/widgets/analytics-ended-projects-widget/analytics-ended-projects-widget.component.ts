@@ -15,11 +15,12 @@ import { MatIconButton } from '@angular/material/button';
 export class AnalyticsEndedProjectsWidgetComponent implements OnInit {
   private _dashboard = inject<Dashboard>(DASHBOARD, { optional: true });
 
+  id = input.required<any>();
   widget = input<any>();
 
   ngOnInit() {
     if (this._dashboard && this.widget()) {
-      this._dashboard.markWidgetAsLoaded(this.widget()?.id);
+      this._dashboard.markWidgetAsLoaded(this.id());
     }
   }
 }

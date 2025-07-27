@@ -1,8 +1,8 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import { ActionRequiredComponent } from '@elementar-ui/components/action-required';
-import { DASHBOARD, Dashboard, Widget } from '@elementar-ui/components/dashboard';
+import { DASHBOARD, Dashboard } from '@elementar-ui/components/dashboard';
 
-export interface ActionRequiredWidget extends Widget {
+export interface ActionRequiredWidget {
   iconName?: string;
   description: string;
   buttonText: string;
@@ -24,11 +24,12 @@ export interface ActionRequiredWidget extends Widget {
 export class ActionRequiredWidgetComponent implements OnInit {
   private _dashboard = inject<Dashboard>(DASHBOARD, { optional: true });
 
+  id = input.required<any>();
   widget = input<ActionRequiredWidget>();
 
   ngOnInit() {
     if (this._dashboard && this.widget()) {
-      this._dashboard.markWidgetAsLoaded(this.widget()?.id);
+      this._dashboard.markWidgetAsLoaded(this.id());
     }
   }
 }

@@ -5,7 +5,7 @@ import { MatRipple } from '@angular/material/core';
 import { MatButton } from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DASHBOARD, Dashboard, Widget } from '@elementar-ui/components/dashboard';
+import { DASHBOARD, Dashboard } from '@elementar-ui/components/dashboard';
 
 @Component({
   selector: 'emr-exchange-widget',
@@ -24,7 +24,8 @@ export class ExchangeWidgetComponent implements OnInit {
   private _destroyRef = inject(DestroyRef);
   private _dashboard = inject<Dashboard>(DASHBOARD, { optional: true });
 
-  widget = input<Widget>();
+  id = input.required<any>();
+  widget = input();
 
   conversionFromRate: number = 1.3275;
   conversionToRate: number = 0.7532;
@@ -39,7 +40,7 @@ export class ExchangeWidgetComponent implements OnInit {
 
   ngOnInit() {
     if (this._dashboard && this.widget()) {
-      this._dashboard.markWidgetAsLoaded(this.widget()?.id);
+      this._dashboard.markWidgetAsLoaded(this.id());
     }
 
     this.form.get('from')

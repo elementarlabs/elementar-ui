@@ -11,7 +11,7 @@ import {
 import { LabelLayout, UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 import { ThemeManagerService } from '@elementar-ui/components/core';
-import { Dashboard, DASHBOARD, Widget } from '@elementar-ui/components/dashboard';
+import { Dashboard, DASHBOARD } from '@elementar-ui/components/dashboard';
 
 @Component({
   selector: 'emr-purchases-by-channels-widget',
@@ -28,7 +28,8 @@ export class PurchasesByChannelsWidgetComponent implements OnDestroy {
 
   readonly _chartRef = viewChild.required('chartRef', { read: ElementRef });
 
-  widget = input<Widget>();
+  id = input.required<any>();
+  widget = input();
 
   constructor() {
     afterNextRender(() => {
@@ -102,7 +103,7 @@ export class PurchasesByChannelsWidgetComponent implements OnDestroy {
       this._observer.observe(this._elementRef.nativeElement);
 
       if (this._dashboard && this.widget()) {
-        this._dashboard.markWidgetAsLoaded(this.widget()?.id);
+        this._dashboard.markWidgetAsLoaded(this.id());
       }
     });
   }

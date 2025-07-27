@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+// DEPRECATED
 @Component({
   selector: 'emr-avatar-total,[emr-avatar-total]',
   exportAs: 'emrAvatarTotal',
