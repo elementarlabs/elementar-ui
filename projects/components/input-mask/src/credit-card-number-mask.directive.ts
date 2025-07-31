@@ -1,4 +1,4 @@
-import { Directive, ElementRef, inject } from '@angular/core';
+import { Directive, ElementRef, inject, input } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 const formatCreditCardNumber = (value: string): string => {
@@ -13,15 +13,17 @@ const formatCreditCardNumber = (value: string): string => {
   exportAs: 'emrCreditCardNumberMask',
   host: {
     '(input)': 'onInput($event)',
-    '[attr.type]': '"tel"',
+    '[attr.type]': '"tel"', // Use ‘tel’ to call up the numeric keypad
     '[attr.autocomplete]': '"cc-number"',
     '[attr.inputmode]': '"numeric"',
-    '[attr.placeholder]': '"0000 0000 0000 0000"',
+    '[attr.placeholder]': 'placeholder()',
   },
 })
 export class CreditCardNumberMaskDirective {
   private readonly ngControl = inject(NgControl, { self: true, optional: true });
   private readonly hostElement = inject<ElementRef<HTMLInputElement>>(ElementRef);
+
+  readonly placeholder = input('0000 0000 0000 0000');
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
