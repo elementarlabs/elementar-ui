@@ -232,6 +232,18 @@ export class SidebarComponent implements OnInit {
           name: 'Inline Text Edit',
           link: '/forms/inline-text-edit'
         },
+        {
+          key: uuid(),
+          type: 'link',
+          name: 'Input Mask',
+          link: '/forms/input-mask'
+        },
+        // {
+        //   key: uuid(),
+        //   type: 'link',
+        //   name: 'Input Validator',
+        //   link: '/forms/input-validator'
+        // },
       ]
     },
     {

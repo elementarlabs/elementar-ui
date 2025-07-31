@@ -74,6 +74,14 @@ const routes: Routes = [
     path: 'currency-select',
     loadChildren: () => import('./currency-select/currency-select.module').then(m => m.CurrencySelectModule)
   },
+  {
+    path: 'input-mask',
+    loadChildren: () => import('./input-mask/input-mask.module').then(m => m.InputMaskModule)
+  },
+  {
+    path: 'input-validator',
+    loadChildren: () => import('./input-validator/input-validator.module').then(m => m.InputValidatorModule)
+  },
 ];
 
 @NgModule({
