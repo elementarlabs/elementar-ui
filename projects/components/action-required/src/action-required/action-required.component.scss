@@ -1,12 +1,11 @@
 @reference 'tailwindcss';
 
 :host {
-  --emr-action-required-bg: var(--color-error-container);
-  --emr-action-action-text-bg: var(--color-error-200);
-  --emr-action-text-color: var(--color-on-error-container);
+  --emr-action-required-bg: #FFCDD2;
+  --emr-action-action-text-bg: #fff;
+  --emr-action-text-color: inherit;
 
-  @apply flex;
-
+  display: flex;
   width: 100%;
   border-radius: theme(--radius-3xl);
   padding: --spacing(7);
@@ -18,8 +17,7 @@
   .action-text {
     @apply flex rounded-2xl;
     background: var(--emr-action-action-text-bg);
-    padding: --spacing(3.5);
-    // border-radius: theme(--radius-2xl);
+    padding: --spacing(2.5) --spacing(3) --spacing(2.5) --spacing(2.5);
     align-items: center;
     flex: none;
     font-size: var(--text-md);
@@ -36,5 +34,6 @@
 }
 
 :host-context(html.dark) {
-  --emr-action-action-text-bg: var(--color-error-600);
+  --emr-action-required-bg: #9C7D81;
+  --emr-action-action-text-bg: #8C7174;
 }

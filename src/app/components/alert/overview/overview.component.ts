@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 import { PlaygroundComponent } from '@meta/playground/playground.component';
 import { BasicAlertExampleComponent } from '../_examples/basic-alert-example/basic-alert-example.component';
 import { AlertVariantsExampleComponent } from '../_examples/alert-variants-example/alert-variants-example.component';
-import {
-  AlertWithBorderExampleComponent
-} from '../_examples/alert-with-border-example/alert-with-border-example.component';
 import { AlertWithIconExampleComponent } from '../_examples/alert-with-icon-example/alert-with-icon-example.component';
 import {
   AlertWithTitleExampleComponent
@@ -21,7 +18,6 @@ import { PageTitleDirective } from '@meta/page/page-title.directive';
     PlaygroundComponent,
     BasicAlertExampleComponent,
     AlertVariantsExampleComponent,
-    AlertWithBorderExampleComponent,
     AlertWithIconExampleComponent,
     AlertWithTitleExampleComponent,
     AlertActionsExampleComponent,

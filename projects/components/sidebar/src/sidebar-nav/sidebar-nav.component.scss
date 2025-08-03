@@ -37,13 +37,15 @@
   --emr-sidebar-nav-divider-bg: var(--color-border);
   --emr-sidebar-nav-divider-margin: --spacing(6) 0;
   --emr-sidebar-nav-group-toggle-has-icon-padding-end: --spacing(2);
-  --emr-sidebar-nav-group-toggle-icon-color: var(--color-neutral-400);
+  --emr-sidebar-nav-group-toggle-icon-color: var(--color-neutral-700);
   --emr-sidebar-nav-group-toggle-icon-position-end: --spacing(3);
   --emr-sidebar-nav-group-toggle-icon-size: --spacing(4);
   --emr-sidebar-nav-group-menu-padding-start: 0;
   --emr-sidebar-nav-group-toggle-bg: transparent;
   --emr-sidebar-nav-group-toggle-active-bg: var(--color-neutral-300);
   --emr-sidebar-nav-group-toggle-active-color: var(--emr-sidebar-nav-item-active-color);
+  --emr-sidebar-nav-group-toggle-hover-icon-color: var(--color-secondary-700);
+  --emr-sidebar-nav-group-toggle-active-icon-color: var(--color-secondary-700);
   --emr-sidebar-nav-nested-item-bg: transparent;
   --emr-sidebar-nav-nested-item-height: --spacing(10);
   --emr-sidebar-nav-nested-item-padding: 0 --spacing(4);
@@ -88,5 +90,8 @@
   --emr-sidebar-nav-nested-item-hover-color: var(--color-neutral-100);
   --emr-sidebar-nav-group-toggle-active-bg: var(--color-neutral-800);
   --emr-sidebar-nav-group-toggle-active-color: var(--color-neutral-100);
+  --emr-sidebar-nav-group-toggle-icon-color: var(--color-neutral-300);
+  --emr-sidebar-nav-group-toggle-hover-icon-color: var(--color-neutral-100);
+  --emr-sidebar-nav-group-toggle-active-icon-color: var(--color-neutral-100);
   --emr-sidebar-nav-group-toggle-hover-bg: var(--color-neutral-800);
 }

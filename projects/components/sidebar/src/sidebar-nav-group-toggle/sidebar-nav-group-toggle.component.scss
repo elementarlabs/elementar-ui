@@ -47,7 +47,7 @@
     align-items: center;
     justify-content: center;
     width: var(--emr-sidebar-nav-item-icon-width);
-    color: var(--emr-sidebar-nav-item-icon-color);
+    color: var(--emr-sidebar-nav-group-toggle-icon-color);
     flex: none;
 
     &:empty {
@@ -69,7 +69,7 @@
 
   &:hover {
     background-color: var(--emr-sidebar-nav-item-hover-bg);
-    color: var(--emr-sidebar-nav-item-hover-color);
+    color: var(--emr-sidebar-nav-group-toggle-hover-icon-color);
     transition: background-color .2s;
   }
 
@@ -85,7 +85,7 @@
 
   &.is-active {
     .icon {
-      color: var(--emr-sidebar-nav-item-active-icon-color);
+      color: var(--emr-sidebar-nav-group-toggle-active-icon-color);
     }
 
     .toggle {
