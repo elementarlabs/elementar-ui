@@ -1,7 +1,6 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   DoCheck,
@@ -12,7 +11,7 @@ import {
   Optional,
   Self,
   booleanAttribute, inject,
-  viewChild, input, effect, output, DestroyRef, computed
+  viewChild, input, effect, output, DestroyRef, computed, signal, AfterViewInit
 } from '@angular/core';
 import { FormGroupDirective, NG_VALIDATORS, NgControl, NgForm, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ErrorStateMatcher, MatRipple } from '@angular/material/core';
@@ -30,7 +29,6 @@ import { CountryCode } from '../data/country-code';
 import { Country } from '../model/country.model';
 import { PhoneNumberFormat } from '../model/phone-number-format.model';
 import { phoneValidator } from '../phone.validator';
-import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatDivider } from '@angular/material/divider';
 import { MatInput } from '@angular/material/input';
@@ -52,10 +50,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     ReactiveFormsModule,
     FormsModule,
     MatMenuItem,
-    NgClass,
     MatDivider,
     MatInput,
-    SearchPipe
+    SearchPipe,
   ],
   providers: [
     CountryCode,
@@ -69,13 +66,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
       multi: true,
     },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'class': 'emr-phone-input',
     '[class.is-floating]': 'shouldLabelFloat',
   }
 })
-export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
+export class PhoneInputComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
   private _destroyRef = inject(DestroyRef);
   private _changeDetectorRef = inject(ChangeDetectorRef);
   private countryCodeData = inject(CountryCode);
@@ -87,7 +83,6 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
 
   static nextId = 0;
 
-  readonly matMenu = viewChild.required(MatMenu);
   readonly menuSearchInput = viewChild<ElementRef<HTMLInputElement>>('menuSearchInput');
   readonly focusable = viewChild.required<ElementRef>('focusable');
 
@@ -105,15 +100,7 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
   preferredCountries = input<string[]>([]);
   format = input<PhoneNumberFormat>('default');
   defaultSelectedCountryCode = input<string>('us');
-
-  @Input()
-  set placeholder(value: string) {
-    this._placeholder = value;
-    this.stateChanges.next(undefined);
-  }
-  get placeholder(): string {
-    return this._placeholder || '';
-  }
+  readonly _placeholder = input<string>('', { alias: 'placeholder' });
 
   @Input({ alias: 'required', transform: booleanAttribute })
   set required(value: boolean) {
@@ -139,7 +126,6 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
 
   readonly countryChanged = output<Country>();
 
-  private _placeholder?: string;
   private _required = false;
   private _disabled = false;
   stateChanges = new Subject<void>();
@@ -148,7 +134,7 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
   phoneNumber?: string = '';
   allCountries: Country[] = [];
   preferredCountriesInDropDown: Country[] = [];
-  selectedCountry: Country;
+  selectedCountry = signal<Country | null>(null);
   numberInstance?: PhoneNumber;
   value?: any;
   searchCriteria?: string;
@@ -213,15 +199,17 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
 
     if (this.numberInstance && this.numberInstance.country) {
       // If an existing number is present, we use it to determine selectedCountry
-      this.selectedCountry = this.getCountry(this.numberInstance.country);
+      this.selectedCountry.set(this.getCountry(this.numberInstance.country));
     }
 
-    if (!this.selectedCountry) {
-      this.selectedCountry = this.allCountries.find((country) => country.shortCode === this.defaultSelectedCountryCode()) as Country;
+    if (!this.selectedCountry()) {
+      this.selectedCountry.set(
+        this.allCountries.find((country) => country.shortCode === this.defaultSelectedCountryCode()) as Country
+      );
     }
 
-    this.countryChanged.emit(this.selectedCountry);
-    this._changeDetectorRef.markForCheck();
+    this.countryChanged.emit(this.selectedCountry() as Country);
+    this._changeDetectorRef.detectChanges();
     this.stateChanges.next();
   }
 
@@ -237,6 +225,10 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   updateErrorState() {
+  }
+
+  ngAfterViewInit() {
+    this._changeDetectorRef.detectChanges();
   }
 
   ngOnDestroy() {
@@ -255,7 +247,7 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
     try {
       this.numberInstance = parsePhoneNumberFromString(
         this.phoneNumber.toString(),
-        this.selectedCountry.shortCode.toUpperCase() as CC,
+        this.selectedCountry()?.shortCode.toUpperCase() as CC,
       );
       this.formatAsYouTypeIfEnabled();
       this.value = this.numberInstance?.number;
@@ -265,11 +257,11 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
           this.phoneNumber = this.formattedPhoneNumber;
         }
         if (
-          this.selectedCountry.shortCode !== this.numberInstance.country &&
+          this.selectedCountry()?.shortCode !== this.numberInstance.country &&
           this.numberInstance.country
         ) {
-          this.selectedCountry = this.getCountry(this.numberInstance.country);
-          this.countryChanged.emit(this.selectedCountry);
+          this.selectedCountry.set(this.getCountry(this.numberInstance.country));
+          this.countryChanged.emit(this.selectedCountry() as Country);
         }
       }
     } catch (e) {
@@ -287,12 +279,12 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
       this.phoneNumber = this.numberInstance?.nationalNumber;
     }
 
-    if (this.selectedCountry !== country) {
+    if (this.selectedCountry() !== country) {
       this.reset();
     }
 
-    this.selectedCountry = country;
-    this.countryChanged.emit(this.selectedCountry);
+    this.selectedCountry.set(country);
+    this.countryChanged.emit(this.selectedCountry() as Country);
     this.onPhoneNumberChange();
     el.focus();
   }
@@ -331,7 +323,7 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
 
   setDisabledState(isDisabled: boolean): void {
     this._disabled = isDisabled;
-    this._changeDetectorRef.markForCheck();
+    this._changeDetectorRef.detectChanges();
     this.stateChanges.next(undefined);
   }
 
@@ -348,10 +340,10 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
         }
 
         setTimeout(() => {
-          this.selectedCountry = this.getCountry(countryCode);
-          this.countryChanged.emit(this.selectedCountry);
+          this.selectedCountry.set(this.getCountry(countryCode));
+          this.countryChanged.emit(this.selectedCountry() as Country);
           // Initial value is set
-          this._changeDetectorRef.markForCheck();
+          this._changeDetectorRef.detectChanges();
           this.stateChanges.next();
         }, 1);
       } else {
@@ -359,9 +351,9 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
       }
     }
 
-    // Value is set from outside using setValue()
-    this._changeDetectorRef.markForCheck();
     this.stateChanges.next(undefined);
+    // Value is set from outside using setValue()
+    this._changeDetectorRef.detectChanges();
   }
 
   setDescribedByIds(ids: string[]): void {
@@ -400,9 +392,9 @@ export class PhoneInputComponent implements OnInit, DoCheck, OnDestroy {
       return
     }
 
-    const asYouType: AsYouType = new AsYouType(this.selectedCountry.shortCode.toUpperCase() as CC);
+    const asYouType: AsYouType = new AsYouType(this.selectedCountry()?.shortCode.toUpperCase() as CC);
 
-    // To avoid caret positioning we apply formatting only if the caret is at the end:
+    // To avoid caret positioning, we apply formatting only if the caret is at the end:
     if (!this.phoneNumber) {
       return;
     }

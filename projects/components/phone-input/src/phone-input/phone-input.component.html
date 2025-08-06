@@ -6,11 +6,12 @@
     class="country-selector"
     [disabled]="isDisabled()"
     (menuOpened)="menuSearchInput()?.nativeElement?.focus()">
-    @if (selectedCountry) {
-      <emr-icon [name]="'circle-flags:' + selectedCountry.shortCode" class="flag-icon" />
-    }
-    @if (selectedCountry && selectedCountry.phoneCode) {
-      <span class="country-selector-code">{{ selectedCountry.phoneCode }}</span>
+    @if (selectedCountry()) {
+      <emr-icon [name]="'circle-flags:' + selectedCountry()?.shortCode" class="flag-icon" />
+
+      @if (selectedCountry()?.phoneCode) {
+        <span class="country-selector-code">{{ selectedCountry()?.phoneCode }}</span>
+      }
     }
     <mat-icon class="!text-lg text-neutral-500 relative -top-px">expand_more</mat-icon>
   </button>
@@ -24,24 +25,20 @@
     [(ngModel)]="phoneNumber"
     (ngModelChange)="onPhoneNumberChange()"
     [errorStateMatcher]="errorStateMatcher()"
-    [placeholder]="placeholder"
+    [placeholder]="_placeholder()"
     [disabled]="isDisabled()"
     class="grow"
     #focusable>
 </div>
 <mat-menu #menu="matMenu">
   @for (country of preferredCountriesInDropDown; track country) {
-    <button
-      type="button"
-      mat-menu-item
-      class="country-list-button"
-      (click)="onCountrySelect(country, focusable)">
-      <div class="icon-wrapper">
-        <div class="flag" [ngClass]="country.shortCode"></div>
-      </div>
-      <div class="label-wrapper">
-        {{ country.name }}
-        <span [class.whitespace-nowrap]="!searchCriteria" class="text-neutral-500">{{ country.phoneCode }}</span>
+    <button type="button" mat-menu-item (click)="onCountrySelect(country, focusable)">
+      <div class="flex items-center gap-2">
+        <emr-icon [name]="'circle-flags:' + country.shortCode" class="flag-icon" />
+        <div class="label-wrapper">
+          {{ country.name }}
+          <span [class.whitespace-nowrap]="!searchCriteria" class="text-neutral-500">{{ country.phoneCode }}</span>
+        </div>
       </div>
     </button>
   }
@@ -51,17 +48,13 @@
   }
 
   @for (country of allCountries | search : searchCriteria; track country) {
-    <button
-      type="button"
-      mat-menu-item
-      class="country-list-button"
-      (click)="onCountrySelect(country, focusable)">
-      <div class="icon-wrapper">
-        <div class="flag" [ngClass]="country.shortCode"></div>
-      </div>
-      <div>
-        {{ country.name }}
-        <span [class.whitespace-nowrap]="!searchCriteria" class="text-neutral-500">{{ country.phoneCode }}</span>
+    <button type="button" mat-menu-item (click)="onCountrySelect(country, focusable)">
+      <div class="flex items-center gap-2">
+        <emr-icon [name]="'circle-flags:' + country.shortCode" class="flag-icon" />
+        <div>
+          {{ country.name }}
+          <span [class.whitespace-nowrap]="!searchCriteria" class="text-neutral-500">{{ country.phoneCode }}</span>
+        </div>
       </div>
     </button>
   }

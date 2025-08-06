@@ -3,6 +3,7 @@
             [value]="_value"
             [aria-describedby]="userAriaDescribedBy"
             [disabled]="disabled"
+            [placeholder]="_placeholder()"
             (opened)="onSelectOpened()"
             (closed)="onSelectClosed()">
   <div class="px-3 py-3 rounded-t sticky top-0 z-1 bg-[var(--mat-select-panel-background-color)]">

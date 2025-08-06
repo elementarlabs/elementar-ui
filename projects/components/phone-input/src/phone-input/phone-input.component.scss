@@ -9,7 +9,7 @@
   }
 
   .flag-icon {
-    margin-inline-end: calc(var(--spacing) * 2);
+    margin-inline-end: --spacing(2);
   }
 
   &.is-floating {
@@ -57,11 +57,6 @@
     opacity: var(--emr-phone-input-opacity, 0);
     transition: opacity 200ms;
     border: unset;
-
-    font: {
-      size: inherit;
-      weight: inherit;
-    }
 
     &:disabled {
       opacity: .8;
