@@ -1,5 +1,5 @@
 @if (image()) {
-  <img class="image" loading="lazy" [ngSrc]="image()" fill [alt]="alt()" (load)="onImageLoaded()">
+  <img class="image" loading="lazy" [src]="image()" [alt]="alt()" (load)="onImageLoaded()">
 }
 
 @if (presenceIndicator()) {

@@ -31,6 +31,9 @@
   .svg {
     overflow: hidden;
     border-radius: inherit;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
   }
 
   &:not([class*="rounded"]),

@@ -346,7 +346,11 @@ input[type=number].emr-number-input-no-spinners {
 
 html {
   min-height: 100vh;
-  overflow: hidden;
+
+  &:has(emr-layout[windowmode]) {
+    overflow: hidden;
+  }
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 

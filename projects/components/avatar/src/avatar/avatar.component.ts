@@ -4,12 +4,13 @@ import {
   Component,
   ElementRef,
   forwardRef,
-  inject, input,
-  OnChanges, OnInit,
+  inject,
+  input,
+  OnChanges,
+  OnInit,
   SimpleChanges
 } from '@angular/core';
 import { AVATAR_ACCESSOR, AvatarPresenceIndicator } from '../types';
-import { NgOptimizedImage } from '@angular/common';
 
 const alreadyLoadedImages: string[] = [];
 
@@ -25,9 +26,6 @@ const alreadyLoadedImages: string[] = [];
       useExisting: forwardRef(() => AvatarComponent),
       multi: true
     }
-  ],
-  imports: [
-    NgOptimizedImage
   ],
   host: {
     'class': 'emr-avatar',

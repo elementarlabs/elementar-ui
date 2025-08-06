@@ -9,7 +9,6 @@ import { createAvatar } from '@dicebear/core';
 import { identicon, initials } from '@dicebear/collection';
 import { v7 as uuid } from 'uuid';
 import { SafeHtmlPipe } from '@elementar-ui/components/core';
-import { NgOptimizedImage } from '@angular/common';
 
 export interface Preset {
   style: any,
@@ -52,7 +51,6 @@ const presets: {[prop: string]: Preset} = {
   ],
   imports: [
     SafeHtmlPipe,
-    NgOptimizedImage
   ],
   host: {
     'class': 'emr-avatar emr-dicebear',

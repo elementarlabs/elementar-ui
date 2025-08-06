@@ -1,5 +1,5 @@
 @if (image()) {
-  <img class="image" loading="lazy" [ngSrc]="image()" fill
+  <img class="image" loading="lazy" [src]="image()"
        [alt]="alt() || ''" (load)="onImageLoaded()">
 }
 
@@ -11,5 +11,5 @@
 }
 
 @if (!image() && svg) {
-  <div class="w-full h-full svg absolute z-0 inset-0 svg" [innerHTML]="svg | safeHtml"></div>
+  <div class="svg" [innerHTML]="svg | safeHtml"></div>
 }
