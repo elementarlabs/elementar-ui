@@ -1,0 +1,18 @@
+<div [formGroup]="settingsForm">
+  <mat-form-field class="w-92">
+    <mat-label>Date Format</mat-label>
+    <emr-date-format-select formControlName="dateFormat" required placeholder="Select a date format"/>
+
+    @if (dateFormatControl?.hasError('required') && dateFormatControl?.touched) {
+      <mat-error>Please select the date format.</mat-error>
+    }
+  </mat-form-field>
+</div>
+
+<div class="text-sm mt-2">
+  @if (dateFormatControl?.value) {
+    <p>Selected date format: {{ dateFormatControl?.value }}</p>
+  } @else {
+    <p>No date format selected.</p>
+  }
+</div>

@@ -1,0 +1,10 @@
+<mat-select
+  [value]="value"
+  (selectionChange)="onSelectionChange($event)"
+  (focus)="onFocus()"
+  (blur)="onBlur()"
+  [placeholder]="placeholder">
+  @for (format of dateFormats(); track format.value) {
+    <mat-option [value]="format.value">{{ format.name }}</mat-option>
+  }
+</mat-select>

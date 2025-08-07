@@ -697,3 +697,7 @@ html.dark {
   --color-error-950: var(--color-error-950);
   --color-error-1000: var(--color-error-1000);
 }
+
+:root {
+  --mat-form-field-outlined-container-shape: 14px;
+}

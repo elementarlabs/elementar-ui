@@ -75,6 +75,10 @@ const routes: Routes = [
     loadChildren: () => import('./currency-select/currency-select.module').then(m => m.CurrencySelectModule)
   },
   {
+    path: 'date-format-select',
+    loadChildren: () => import('./date-format-select/date-format-select.module').then(m => m.DateFormatSelectModule)
+  },
+  {
     path: 'input-mask',
     loadChildren: () => import('./input-mask/input-mask.module').then(m => m.InputMaskModule)
   },

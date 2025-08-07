@@ -223,6 +223,12 @@ export class SidebarComponent implements OnInit {
         {
           key: uuid(),
           type: 'link',
+          name: 'Date Format Select',
+          link: '/forms/date-format-select'
+        },
+        {
+          key: uuid(),
+          type: 'link',
           name: 'Form Renderer',
           link: '/forms/form-renderer'
         },
