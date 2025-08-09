@@ -17,7 +17,7 @@ import { fromEvent, takeUntil } from 'rxjs';
 import { Directionality } from '@angular/cdk/bidi';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { _getEventTarget } from '@angular/cdk/platform';
-import { PopoverTrigger, PopoverPosition } from './types';
+import { PopoverTrigger, PopoverPosition, POPOVER_TRIGGER } from './types';
 import { PositionManager } from '@elementar-ui/components/overlay';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -145,19 +145,26 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
           if (target !== element && !element.contains(target)) {
             this._close();
           }
-        })
-      ;
+        });
     }
   }
 
   private _getPopoverContentPortal() {
+    const injector = Injector.create({
+      providers: [
+        {
+          provide: POPOVER_TRIGGER,
+          useValue: this
+        }
+      ],
+      parent: this._injector
+    });
     this._popoverPortal = new TemplatePortal(
       this.popoverTemplateRef(),
       this._viewContainerRef,
       null,
-      this._injector
+      injector
     );
-
     return this._popoverPortal;
   }
 
