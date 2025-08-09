@@ -456,6 +456,26 @@ html {
     --mat-table-row-item-outline-color: var(--color-neutral-300);
     --color-warn: theme(--color-red-500);
 
+    --color-green: #BCCDC0;
+    --color-on-green: #233529;
+    --color-green-container: #3A4B3F;
+    --color-on-green-container: #D8E9DC;
+
+    --color-blue: #B2C5D9;
+    --color-on-blue: #1D3143;
+    --color-blue-container: #34475A;
+    --color-on-blue-container: #D3E4F6;
+
+    --color-red: #FFB3B3;
+    --color-on-red: #68000A;
+    --color-red-container: #930015;
+    --color-on-red-container: #FFDAD7;
+
+    --color-orange: #FFB786;
+    --color-on-orange: #542000;
+    --color-orange-container: #783100;
+    --color-on-orange-container: #FFDCC5;
+
     @include mat.all-component-colors($m3-dark-theme);
     @include mat.system-level-colors($m3-dark-theme);
     @include mat.system-level-typography($m3-dark-theme);
@@ -579,6 +599,32 @@ html.dark {
 
   --color-white: #fff;
   --color-black: #000;
+
+  // custom green color
+  --color-green: #BFCB9A;
+  --color-on-green: #29340E;
+  --color-green-container: #E9F1D1;
+  --color-on-green-container: #3F4B23;
+  --color-green-container-high: #B0CCA9;
+  --color-on-green-container-high: #1D3621;
+
+  // custom blur color
+  --color-blue: #CADDF0;
+  --color-on-blue: #23313F;
+  --color-blue-container: #E8EEF4;
+  --color-on-blue-container: #3A4755;
+
+  // custom color red
+  --color-red: #EEB2B2;
+  --color-on-red: #4A2727;
+  --color-red-container: #F8E6E6;
+  --color-on-red-container: #684242;
+
+  // custom orange color
+  --color-orange: #EDBA96;
+  --color-on-orange: #60391C;
+  --color-orange-container: #F7E5D5;
+  --color-on-orange-container: #7C4E30;
 
   --color-default: var(--sys-outline-variant);
   --color-low: var(--sys-surface-variant);

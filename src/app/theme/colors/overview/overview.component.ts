@@ -17,6 +17,10 @@ import { OtherColorsExampleComponent } from '../_examples/other-colors-example/o
 import { PageComponent } from '@meta/page/page.component';
 import { PageContentDirective } from '@meta/page/page-content.directive';
 import { PageTitleDirective } from '@meta/page/page-title.directive';
+import { GreenColorsExampleComponent } from '../_examples/green-colors-example/green-colors-example.component';
+import { BlueColorsExampleComponent } from '../_examples/blue-colors-example/blue-colors-example.component';
+import { OrangeColorsExampleComponent } from '../_examples/orange-colors-example/orange-colors-example.component';
+import { RedColorsExampleComponent } from '../_examples/red-colors-example/red-colors-example.component';
 
 @Component({
   selector: 'app-overview',
@@ -34,7 +38,11 @@ import { PageTitleDirective } from '@meta/page/page-title.directive';
     OtherColorsExampleComponent,
     PageComponent,
     PageContentDirective,
-    PageTitleDirective
+    PageTitleDirective,
+    GreenColorsExampleComponent,
+    BlueColorsExampleComponent,
+    OrangeColorsExampleComponent,
+    RedColorsExampleComponent
   ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss'

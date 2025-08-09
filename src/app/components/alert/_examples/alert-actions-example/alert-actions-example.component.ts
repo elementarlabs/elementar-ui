@@ -6,6 +6,7 @@ import {
   AlertComponent,
   AlertTitleDirective
 } from '@elementar-ui/components/alert';
+import { MatButton, MatIconButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-alert-actions-example',
@@ -14,7 +15,9 @@ import {
     AlertActionDirective,
     AlertCloseDirective,
     AlertComponent,
-    AlertTitleDirective
+    AlertTitleDirective,
+    MatIconButton,
+    MatButton
   ],
   templateUrl: './alert-actions-example.component.html',
   styleUrl: './alert-actions-example.component.scss'

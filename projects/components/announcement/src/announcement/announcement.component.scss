@@ -4,22 +4,22 @@
 :host {
   --emr-announcement-close-icon-color: var(--color-neutral-800);
 
-  padding-inline-start: calc(var(--spacing) * 5);
-  padding-inline-end: calc(var(--spacing) * 3);
-  height: calc(var(--spacing) * 11);
+  padding-inline-start: --spacing(5);
+  padding-inline-end: --spacing(3);
+  height: --spacing(11);
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: theme(--text-sm);
 
   &:has(.icon) {
-    padding-inline-start: calc(var(--spacing) * 3.5);
+    padding-inline-start: --spacing(3.5);
   }
 
   .content {
     display: flex;
     align-items: center;
-    gap: calc(var(--spacing) * 2.5);
+    gap: --spacing(2.5);
   }
 
   .icon {
@@ -33,62 +33,57 @@
     align-items: center;
     justify-content: center;
 
-    @include mat.icon-button-overrides((
-      icon-color: var(--emr-announcement-close-icon-color),
-      state-layer-color: var(--emr-announcement-close-icon-color)
-    ));
-
     &:hover {
       opacity: 100%;
     }
   }
 
   &:has(.close) {
-    padding-inline-end: calc(var(--spacing) * 1.5);
+    padding-inline-end: --spacing(1.5);
   }
 
+  &[data-variant="default"],
   &[data-variant="neutral"] {
-    background: var(--color-neutral-300);
-    color: var(--color-neutral-900);
+    background: var(--color-surface-container);
 
     .icon {
-      color: var(--color-neutral-700);
+      color: var(--color-on-surface);
     }
   }
 
+  &[data-variant="info"],
   &[data-variant="informative"] {
-    background: var(--color-primary-200);
-    color: var(--color-primary-900);
+    background: var(--color-blue-container);
 
     .icon {
-      color: var(--color-primary-700);
+      color: var(--color-on-blue-container);
     }
   }
 
+  &[data-variant="danger"],
   &[data-variant="negative"] {
-    background: var(--color-error-200);
-    color: var(--color-error-900);
+    background: var(--color-red-container);
 
     .icon {
-      color: var(--color-error-700);
+      color: var(--color-on-red-container);
     }
   }
 
+  &[data-variant="success"],
   &[data-variant="positive"] {
-    background: theme(--color-lime-200);
-    color: theme(--color-lime-900);
+    background: var(--color-green-container);
 
     .icon {
-      color: theme(--color-lime-700);
+      color: var(--color-on-green-container);
     }
   }
 
-  &[data-variant="warning"] {
-    background: theme(--color-amber-200);
-    color: theme(--color-amber-900);
+  &[data-variant="warning"],
+  &[data-variant="notice"] {
+    background: var(--color-orange-container);
 
     .icon {
-      color: theme(--color-amber-700);
+      color: var(--color-on-orange-container);
     }
   }
 }
