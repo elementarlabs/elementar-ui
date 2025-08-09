@@ -3,9 +3,9 @@
 :host {
   --emr-popover-border: none;
   --emr-popover-shadow: theme(--shadow-lg);
-  --emr-popover-border-radius: theme(--radius-xl);
-  --emr-popover-bg: white;
-  --emr-popover-margin: calc(var(--spacing) * 2.5);
+  --emr-popover-border-radius: theme(--radius-2xl);
+  --emr-popover-bg: var(--color-surface-container-lowest);
+  --emr-popover-margin: --spacing(2.5);
 
   display: block;
   position: relative;
@@ -49,6 +49,5 @@
 }
 
 :host-context(html.dark) {
-  --emr-popover-border: none;
-  --emr-popover-bg: var(--color-neutral-500);
+  --emr-popover-bg: var(--color-neutral-1000);
 }
