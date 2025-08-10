@@ -9,7 +9,7 @@ import {
 import {
   DASHBOARD, WidgetConfig, WidgetItem
 } from '../types';
-import { AsyncPipe, NgComponentOutlet } from '@angular/common';
+import { AsyncPipe, NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import { WidgetSkeletonComponent } from '../widget-skeleton/widget-skeleton.component';
 
 @Component({
@@ -18,7 +18,8 @@ import { WidgetSkeletonComponent } from '../widget-skeleton/widget-skeleton.comp
   imports: [
     NgComponentOutlet,
     AsyncPipe,
-    WidgetSkeletonComponent
+    WidgetSkeletonComponent,
+    NgTemplateOutlet
   ],
   providers: [
     {

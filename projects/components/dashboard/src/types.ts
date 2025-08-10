@@ -18,8 +18,9 @@ export interface WidgetConfig {
 
 export interface WidgetItem {
   id: any;
-  type: string;
+  type?: string;
   columns: number;
+  children?: WidgetItem[];
   skeletonHeight?: string;
   height?: string;
   widget?: any; // widget data or nothing

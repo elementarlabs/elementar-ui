@@ -51,29 +51,80 @@ export class OverviewComponent {
     },
     {
       id: crypto.randomUUID(),
-      type: 'example-widget',
-      columns: 12,
-      height: '400px',
+      columns: 8,
+      children: [
+        {
+          id: crypto.randomUUID(),
+          type: 'example-widget',
+          columns: 12,
+          height: '300px',
+          widget: {
+            name: 'Example Widget 6',
+          }
+        },
+        {
+          id: crypto.randomUUID(),
+          type: 'example-widget',
+          columns: 6,
+          height: '178px',
+          widget: {
+            name: 'Example Widget 5',
+          }
+        },
+        {
+          id: crypto.randomUUID(),
+          type: 'example-widget',
+          columns: 6,
+          height: '178px',
+          widget: {
+            name: 'Example Widget 6',
+          }
+        },
+        {
+          id: crypto.randomUUID(),
+          type: 'example-widget',
+          columns: 6,
+          height: '100px',
+          widget: {
+            name: 'Example Widget 6',
+          }
+        },
+        {
+          id: crypto.randomUUID(),
+          type: 'example-widget',
+          columns: 6,
+          height: '100px',
+          widget: {
+            name: 'Example Widget 6',
+          }
+        },
+      ],
+    },
+    {
+      id: crypto.randomUUID(),
+      columns: 4,
+      children: [
+        {
+          id: crypto.randomUUID(),
+          type: 'example-widget',
+          columns: 12,
+          height: '300px',
+          widget: {
+            name: 'Example Widget 2',
+          }
+        },
+        {
+          id: crypto.randomUUID(),
+          type: 'example-widget',
+          columns: 12,
+          height: '300px',
+          widget: {
+            name: 'Example Widget 3',
+          }
+        },
+      ],
       widget: {
         name: 'Example Widget 4',
-      }
-    },
-    {
-      id: crypto.randomUUID(),
-      type: 'example-widget',
-      columns: 6,
-      height: '200px',
-      widget: {
-        name: 'Example Widget 5',
-      }
-    },
-    {
-      id: crypto.randomUUID(),
-      type: 'example-widget',
-      columns: 6,
-      height: '200px',
-      widget: {
-        name: 'Example Widget 6',
       }
     },
   ]);

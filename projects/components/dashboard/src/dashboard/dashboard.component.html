@@ -1,26 +1,37 @@
 <div class="dashgrid">
-  @for (item of items(); track $index) {
-    <div class="dashgrid-item" [style.--emr-dashgrid-item-colspan]="item.columns || 12">
-      <div class="widget"
-           [style.--emr-dashboard-widget-height]="item.height"
-           [class.plain]="getWidgetConfig(item.type).plain || plain()"
-           [class.hidden]="!_allLoaded()">
-        <ng-container [ngComponentOutlet]="getWidgetComponent(item.type) | async"
-                      [ngComponentOutletInputs]="getWidgetInputs(item)"/>
-      </div>
+  <ng-container *ngTemplateOutlet="itemsTpl; context: { $implicit: items() }"/>
+</div>
 
-      @if (!_allLoaded()) {
-        <div class="widget skeleton"
-             [style.--emr-dashboard-widget-skeleton-min-height]="item.skeletonHeight || item.height">
-          @let skeletonComponent = getSkeletonComponent(item.type);
-
-          @if (skeletonComponent) {
-            <ng-container [ngComponentOutlet]="skeletonComponent"/>
-          } @else {
-            <emr-widget-skeleton/>
-          }
+<ng-template #itemsTpl let-items>
+  @for (item of items; track $index) {
+    <div class="dashgrid-item"
+         [style.--emr-dashgrid-item-colspan]="item.columns || 12">
+      @if (item.children?.length > 0) {
+        <div class="dashgrid">
+          <ng-container *ngTemplateOutlet="itemsTpl; context: { $implicit: item.children }"/>
         </div>
+      } @else {
+        <div class="widget"
+             [style.--emr-dashboard-widget-height]="item.height"
+             [class.plain]="getWidgetConfig(item.type).plain || plain()"
+             [class.hidden]="!_allLoaded()">
+          <ng-container [ngComponentOutlet]="getWidgetComponent(item.type) | async"
+                        [ngComponentOutletInputs]="getWidgetInputs(item)"/>
+        </div>
+
+        @if (!_allLoaded()) {
+          <div class="widget skeleton"
+               [style.--emr-dashboard-widget-skeleton-min-height]="item.skeletonHeight || item.height">
+            @let skeletonComponent = getSkeletonComponent(item.type);
+
+            @if (skeletonComponent) {
+              <ng-container [ngComponentOutlet]="skeletonComponent"/>
+            } @else {
+              <emr-widget-skeleton/>
+            }
+          </div>
+        }
       }
     </div>
   }
-</div>
+</ng-template>
