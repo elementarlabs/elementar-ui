@@ -1,7 +1,7 @@
 import {
   booleanAttribute,
   ChangeDetectorRef,
-  Component,
+  Component, effect,
   ElementRef,
   forwardRef,
   inject, input,
@@ -41,13 +41,13 @@ export class SegmentedComponent implements OnInit, OnChanges, ControlValueAccess
   private _cdr = inject(ChangeDetectorRef);
   protected _disabled = false;
 
-  selectedValue = input();
+  value = input();
   disabled = input(false, {
     transform: booleanAttribute
   });
   size = input<SegmentedTriggerSize>('default');
 
-  readonly selectedValueChanged = output<any>();
+  readonly valueChange = output<any>();
 
   private _selectedValue = new SelectionModel<any>(false, []);
 
@@ -59,6 +59,12 @@ export class SegmentedComponent implements OnInit, OnChanges, ControlValueAccess
       isSelected: (value: any) => this._selectedValue.isSelected(value),
       select: (value: any) => this._select(value)
     };
+  }
+
+  constructor() {
+    effect(() => {
+      this._selectedValue.select(this.value());
+    });
   }
 
   ngOnInit() {
@@ -94,6 +100,7 @@ export class SegmentedComponent implements OnInit, OnChanges, ControlValueAccess
 
   private _select(value: any): void {
     this._selectedValue.select(value);
+    this.valueChange.emit(value);
     this._onChange(value);
     this._onTouched(value);
   }

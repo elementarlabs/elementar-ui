@@ -27,7 +27,7 @@ import { MatRipple } from '@angular/material/core';
 export class SegmentedButtonComponent {
   private _segmented = inject<SegmentedComponent>(EMR_SEGMENTED, { skipSelf: true });
 
-  value: any = input.required<any>();
+  value = input.required<any>();
   disabled = input(false, {
     transform: booleanAttribute
   });
