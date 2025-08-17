@@ -5,7 +5,7 @@ import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schema
 import { Schema } from './schema';
 
 const DEPENDENCIES = {
-  '@elementar-ui/components': '^0.6.1',
+  '@elementar-ui/components': '^0.6.2',
   "@dicebear/collection": "^9.2.2",
   "@dicebear/core": "^9.2.2",
   "@iconify-json/circle-flags": "^1.2.4",

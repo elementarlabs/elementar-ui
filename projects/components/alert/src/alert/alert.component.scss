@@ -85,30 +85,30 @@
   &[emr-alert-variant="default"],
   &[emr-alert-variant="neutral"] {
     --emr-alert-bg-color: var(--color-surface-container);
-    --emr-alert-thumbnail-bg: var(--color-neutral-400);
+    --emr-alert-thumbnail-bg: var(--color-surface-dim);
   }
 
   &[emr-alert-variant="info"],
   &[emr-alert-variant="informative"] {
     --emr-alert-bg-color: var(--color-blue-container);
-    --emr-alert-thumbnail-bg: var(--color-blue);
+    --emr-alert-thumbnail-bg: var(--color-blue-container-highest);
   }
 
   &[emr-alert-variant="success"],
   &[emr-alert-variant="positive"] {
     --emr-alert-bg-color: var(--color-green-container);
-    --emr-alert-thumbnail-bg: var(--color-green);
+    --emr-alert-thumbnail-bg: var(--color-green-container-highest);
   }
 
   &[emr-alert-variant="danger"],
   &[emr-alert-variant="negative"] {
     --emr-alert-bg-color: var(--color-red-container);
-    --emr-alert-thumbnail-bg: var(--color-red);
+    --emr-alert-thumbnail-bg: var(--color-red-container-highest);
   }
 
   &[emr-alert-variant="warning"],
   &[emr-alert-variant="notice"] {
     --emr-alert-bg-color: var(--color-orange-container);
-    --emr-alert-thumbnail-bg: var(--color-orange);
+    --emr-alert-thumbnail-bg: var(--color-orange-container-highest);
   }
 }
