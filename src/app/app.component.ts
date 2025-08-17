@@ -15,7 +15,7 @@ import {
   LayoutSidebarComponent, LayoutTopbarComponent
 } from '@elementar-ui/components/layout';
 import { SidebarComponent } from '@app/sidebar/sidebar.component';
-import { MatAnchor, MatIconButton } from '@angular/material/button';
+import { MatAnchor, MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { LogoComponent, TextLogoComponent } from '@elementar-ui/components/logo';
@@ -50,6 +50,7 @@ import {
     ColorSchemeLightDirective,
     ColorSchemeDarkDirective,
     SoundEffectDirective,
+    MatButton,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
