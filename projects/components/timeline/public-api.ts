@@ -5,4 +5,6 @@ export * from './src/timeline-attributes/timeline-attributes.component';
 export * from './src/timeline-description/timeline-description.component';
 export * from './src/timeline-timestamp/timeline-timestamp.component';
 export * from './src/timeline-title/timeline-title.component';
+export * from './src/timeline-subtitle/timeline-subtitle.component';
+export * from './src/timeline-content/timeline-content.component';
 export * from './src/timeline-item-indicator.directive';

@@ -1,0 +1,7 @@
+@reference 'tailwindcss';
+
+:host {
+  display: block;
+  font-size: var(--emr-timeline-item-subtitle-font-size);
+  color: var(--emr-timeline-item-subtitle-color);
+}

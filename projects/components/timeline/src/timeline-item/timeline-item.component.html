@@ -16,8 +16,14 @@
 
 <div class="content">
   <div class="content-inner">
-    <ng-content select="emr-timeline-title"/>
-    <ng-content select="emr-timeline-description"/>
-    <ng-content select="emr-timeline-attributes"/>
+    <div class="content-header">
+      <ng-content select="emr-timeline-title"/>
+      <ng-content select="emr-timeline-subtitle"/>
+      <ng-content select="emr-timeline-description"/>
+    </div>
+    <div class="content-body">
+      <ng-content select="emr-timeline-attributes"/>
+      <ng-content select="emr-timeline-content"/>
+    </div>
   </div>
 </div>
