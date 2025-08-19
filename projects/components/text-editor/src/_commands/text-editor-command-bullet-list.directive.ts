@@ -5,7 +5,7 @@ import { TEXT_EDITOR, TextEditor } from '../types';
   selector: '[emrTextEditorCommandBulletList]',
   exportAs: 'emrTextEditorCommandBulletList',
   host: {
-    '[disabled]': `textEditor && textEditor.api.isCommandDisabled('toggleBulletList')`,
+    '[attr.disabled]': `(textEditor && textEditor.api.isCommandDisabled('toggleBulletList')) ? '' : null`,
     '[class.active]': `textEditor && textEditor.api.isActive('bulletList')`,
     '(click)': `onClick()`
   }

@@ -390,7 +390,7 @@ export class SignaturePadComponent implements OnDestroy {
     return canvas.toDataURL() === tempCanvas.toDataURL();
   }
 
-  handleEscapeKey(event: KeyboardEvent): void {
+  handleEscapeKey(event: Event): void {
     this.clear();
   }
 }

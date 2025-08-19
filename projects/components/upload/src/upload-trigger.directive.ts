@@ -2,7 +2,6 @@ import {
   booleanAttribute,
   DestroyRef,
   Directive, ElementRef,
-  HostListener,
   inject,
   input, output,
   Renderer2
@@ -14,7 +13,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Directive({
   selector: '[emrUploadTrigger]',
   exportAs: 'emrUploadTrigger',
-  standalone: true
+  standalone: true,
+  host: {
+    '(click)': '_handleClick()'
+  }
 })
 export class UploadTriggerDirective {
   private _elementRef = inject(ElementRef);
@@ -28,8 +30,7 @@ export class UploadTriggerDirective {
 
   readonly fileSelected = output<UploadFileSelectedEvent>();
 
-  @HostListener('click')
-  private _handleClick() {
+  _handleClick() {
     const element: HTMLInputElement = this._renderer.createElement('input');
     this._renderer.setAttribute(element, 'type', 'file');
     let accept = this.accept();

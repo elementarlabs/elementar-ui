@@ -5,7 +5,7 @@ import { TEXT_EDITOR, TextEditor } from '../types';
   selector: '[emrTextEditorCommandBlockquote]',
   exportAs: 'emrTextEditorCommandBlockquote',
   host: {
-    '[disabled]': `textEditor && textEditor.api.isCommandDisabled('toggleBlockquote')`,
+    '[attr.disabled]': `(textEditor && textEditor.api.isCommandDisabled('toggleBlockquote')) ? '' : null`,
     '[class.active]': `textEditor && textEditor.api.isActive('blockquote')`,
     '(click)': `onClick()`
   }

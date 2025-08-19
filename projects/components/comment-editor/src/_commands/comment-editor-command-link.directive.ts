@@ -8,7 +8,7 @@ import { LinkDialog } from '../link/link.dialog';
   selector: '[emrCommentEditorCommandLink]',
   standalone: true,
   host: {
-    '[disabled]': `commentEditor && commentEditor.api.isCommandDisabled('toggleLink')`,
+    '[attr.disabled]': `(commentEditor && commentEditor.api.isCommandDisabled('toggleLink')) ? '' : null`,
     '[class.active]': `commentEditor && commentEditor.api.isActive('link')`,
     '(click)': `onClick()`
   }

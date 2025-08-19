@@ -5,7 +5,7 @@ import { TEXT_EDITOR, TextEditor } from '../types';
   selector: '[emrTextEditorCommandOrderedList]',
   exportAs: 'emrTextEditorCommandOrderedList',
   host: {
-    '[disabled]': `textEditor && textEditor.api.isCommandDisabled('toggleOrderedList')`,
+    '[attr.disabled]': `(textEditor && textEditor.api.isCommandDisabled('toggleOrderedList')) ? '' : null`,
     '[class.active]': `textEditor && textEditor.api.isActive('orderedList')`,
     '(click)': `onClick()`
   }

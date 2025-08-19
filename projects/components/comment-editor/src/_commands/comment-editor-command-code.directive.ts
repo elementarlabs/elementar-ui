@@ -5,7 +5,7 @@ import { COMMENT_EDITOR, CommentEditor } from '../types';
   selector: '[emrCommentEditorCommandCode]',
   standalone: true,
   host: {
-    '[disabled]': `commentEditor && commentEditor.api.isCommandDisabled('toggleCode')`,
+    '[attr.disabled]': `(commentEditor && commentEditor.api.isCommandDisabled('toggleCode')) ? '' : null`,
     '[class.active]': `commentEditor && commentEditor.api.isActive('code')`,
     '(click)': `onClick()`
   }

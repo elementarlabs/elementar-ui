@@ -5,7 +5,7 @@ import { TEXT_EDITOR, TextEditor } from '../types';
   selector: '[emrTextEditorCommandItalic]',
   exportAs: 'emrTextEditorCommandItalic',
   host: {
-    '[disabled]': `textEditor && textEditor.api.isCommandDisabled('toggleItalic')`,
+    '[attr.disabled]': `(textEditor && textEditor.api.isCommandDisabled('toggleItalic')) ? '' : null`,
     '[class.active]': `textEditor && textEditor.api.isActive('italic')`,
     '(click)': `onClick()`
   }

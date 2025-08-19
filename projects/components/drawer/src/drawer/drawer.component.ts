@@ -107,7 +107,7 @@ export class DrawerComponent {
     return this._isOpen();
   }
 
-  protected onKeydownHandler(event: KeyboardEvent): void {
+  protected onKeydownHandler(event: Event): void {
     if (this._isOpen()) {
       this.close();
     }

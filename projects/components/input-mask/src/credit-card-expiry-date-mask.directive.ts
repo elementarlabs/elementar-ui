@@ -40,8 +40,8 @@ const formatOnBlur = (value: string): string => {
     },
   ],
   host: {
-    '(input)': 'onInput($event.target)',
-    '(blur)': 'onBlur($event.target)',
+    '(input)': 'onInput($event)',
+    '(blur)': 'onBlur($event)',
     '[attr.placeholder]': 'placeholder()',
   }
 })
@@ -66,7 +66,10 @@ export class CreditCardExpiryDateMaskDirective implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  protected onInput(target: HTMLInputElement): void {
+  protected onInput(event: Event): void {
+    const target = event.target as HTMLInputElement | null;
+    if (!target) return;
+
     const selectionStart = target.selectionStart;
     const previousValue = target.value;
     const formattedValue = formatOnInput(target.value);
@@ -80,8 +83,11 @@ export class CreditCardExpiryDateMaskDirective implements ControlValueAccessor {
     }
   }
 
-  onBlur(target: HTMLInputElement): void {
+  onBlur(event: Event): void {
     this.onTouched();
+
+    const target = event.target as HTMLInputElement | null;
+    if (!target) return;
 
     const formattedValue = formatOnBlur(target.value);
     const modelValue = formattedValue.replace(/\//g, '');

@@ -1,4 +1,4 @@
-import { Directive, HostListener, inject, input, OnInit } from '@angular/core';
+import { Directive, inject, input, OnInit } from '@angular/core';
 import { CAROUSEL, CarouselInterface } from './types';
 
 @Directive({
@@ -7,7 +7,8 @@ import { CAROUSEL, CarouselInterface } from './types';
   standalone: true,
   host: {
     'class': 'emr-carousel-next',
-    '[attr.disabled]': '_carousel?.api.isNextDisabled()  ? true : null'
+    '[attr.disabled]': '_carousel?.api?.isNextDisabled() ? true : null',
+    '(click)': '_handleClick()'
   }
 })
 export class CarouselNextDirective implements OnInit {
@@ -23,8 +24,7 @@ export class CarouselNextDirective implements OnInit {
     }
   }
 
-  @HostListener('click')
-  private _handleClick(): void {
+  _handleClick(): void {
     this._carousel?.api.next();
   }
 }

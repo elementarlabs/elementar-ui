@@ -5,7 +5,7 @@ import { TEXT_EDITOR, TextEditor } from '../types';
   selector: '[emrTextEditorCommandHeading]',
   exportAs: 'emrTextEditorCommandHeading',
   host: {
-    '[disabled]': `isDisabled`,
+    '[attr.disabled]': `isDisabled ? '' : null`,
     '[class.active]': `isActive`,
     '(click)': `onClick()`
   }

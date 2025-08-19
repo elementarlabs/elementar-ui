@@ -5,7 +5,7 @@ import { COMMENT_EDITOR, CommentEditor } from '../types';
   selector: '[emrCommentEditorCommandOrderedList]',
   standalone: true,
   host: {
-    '[disabled]': `commentEditor && commentEditor.api.isCommandDisabled('toggleOrderedList')`,
+    '[attr.disabled]': `(commentEditor && commentEditor.api.isCommandDisabled('toggleOrderedList')) ? '' : null`,
     '[class.active]': `commentEditor && commentEditor.api.isActive('orderedList')`,
     '(click)': `onClick()`
   }

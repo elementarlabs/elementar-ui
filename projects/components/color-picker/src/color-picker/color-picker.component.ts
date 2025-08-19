@@ -125,7 +125,7 @@ export class ColorPickerComponent implements OnInit, OnChanges, ControlValueAcce
     this._setHexColor(newColor);
   }
 
-  protected _handleContextMenu(event: PointerEvent) {
+  protected _handleContextMenu(event: Event) {
     event.preventDefault();
     event.stopPropagation();
   }

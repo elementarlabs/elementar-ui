@@ -8,7 +8,7 @@ import { YoutubeDialog } from '../youtube/youtube.dialog';
   selector: '[emrTextEditorCommandYoutube]',
   exportAs: 'emrTextEditorCommandYoutube',
   host: {
-    '[disabled]': `textEditor && textEditor.api.isCommandDisabled('toggleBlockquote')`,
+    '[attr.disabled]': `(textEditor && textEditor.api.isCommandDisabled('toggleBlockquote')) ? '' : null`,
     '[class.active]': `textEditor && textEditor.api.isActive('blockquote')`,
     '(click)': `onClick()`
   }

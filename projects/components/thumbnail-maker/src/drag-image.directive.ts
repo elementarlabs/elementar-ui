@@ -1,7 +1,7 @@
 import {
   DestroyRef,
   Directive,
-  ElementRef, HostListener,
+  ElementRef,
   inject,
   input,
   numberAttribute, OnChanges,
@@ -15,7 +15,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
   selector: '[emrDragImage]',
-  standalone: true
+  standalone: true,
+  host: {
+    '(load)': 'onLoad()'
+  }
 })
 export class DragImageDirective implements OnInit, OnChanges {
   private _elementRef = inject(ElementRef);
@@ -36,7 +39,6 @@ export class DragImageDirective implements OnInit, OnChanges {
   });
   content = input.required<HTMLElement>();
 
-  @HostListener('load')
   onLoad(): void {
     this._imageLoaded = true;
   }

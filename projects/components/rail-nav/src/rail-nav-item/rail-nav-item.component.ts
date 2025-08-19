@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { v7 as uuid } from 'uuid';
 import { RAIL_NAV, RailNavComponent } from '../types';
 
@@ -10,6 +10,7 @@ import { RAIL_NAV, RailNavComponent } from '../types';
   host: {
     'class': 'emr-rail-nav-item',
     '[class.is-active]': 'isActive',
+    '(click)': 'click($event)'
   }
 })
 export class RailNavItemComponent {
@@ -25,7 +26,6 @@ export class RailNavItemComponent {
     return this._railNav.api.isActive(this.key());
   }
 
-  @HostListener('click', ['$event'])
   click(event: MouseEvent) {
     if (!this.key()) {
       return;

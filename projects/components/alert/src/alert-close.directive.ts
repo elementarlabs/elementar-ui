@@ -1,4 +1,4 @@
-import { Directive, HostListener, inject } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 import { ALERT } from './alert.properties';
 import { AlertComponent } from './alert/alert.component';
 
@@ -6,14 +6,14 @@ import { AlertComponent } from './alert/alert.component';
     selector: '[emrAlertClose]',
     exportAs: 'emrAlertClose',
     host: {
-        'class': 'emr-alert-close'
+      'class': 'emr-alert-close',
+      '(click)': '_handleClick()'
     }
 })
 export class AlertCloseDirective {
   private _alert = inject<AlertComponent>(ALERT);
 
-  @HostListener('click')
-  private _handleClick() {
+  protected _handleClick() {
     this._alert.api.close();
   }
 }

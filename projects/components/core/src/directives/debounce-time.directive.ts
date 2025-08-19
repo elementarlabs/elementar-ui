@@ -11,7 +11,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
   host: {
-    '(input)': 'handleInput($event.target.value)',
+    '(input)': 'handleInput($event)',
     '(blur)': 'handleBlur()'
   }
 })
@@ -44,8 +44,11 @@ export class DebounceTimeDirective implements ControlValueAccessor {
     this.renderer.setProperty(this.elementRef.nativeElement, 'disabled', isDisabled);
   }
 
-  protected handleInput(value: string): void {
+  protected handleInput(event: Event): void {
     clearTimeout(this.debounceTimer);
+
+    const target = event.target as HTMLInputElement | null;
+    const value = target?.value ?? '';
 
     if (!this.debounceTime()) {
       this.onChange(value);

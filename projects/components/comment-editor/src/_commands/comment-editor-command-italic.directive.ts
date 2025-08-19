@@ -5,7 +5,7 @@ import { COMMENT_EDITOR, CommentEditor } from '../types';
   selector: '[emrCommentEditorCommandItalic]',
   standalone: true,
   host: {
-    '[disabled]': `commentEditor && commentEditor.api.isCommandDisabled('toggleItalic')`,
+    '[attr.disabled]': `(commentEditor && commentEditor.api.isCommandDisabled('toggleItalic')) ? '' : null`,
     '[class.active]': `commentEditor && commentEditor.api.isActive('italic')`,
     '(click)': `onClick()`
   }

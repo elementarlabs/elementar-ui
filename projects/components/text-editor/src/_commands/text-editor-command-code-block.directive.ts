@@ -5,7 +5,7 @@ import { TEXT_EDITOR, TextEditor } from '../types';
   selector: '[emrTextEditorCommandCodeBlock]',
   exportAs: 'emrTextEditorCommandCodeBlock',
   host: {
-    '[disabled]': `textEditor && textEditor.api.isCommandDisabled('toggleCodeBlock')`,
+    '[attr.disabled]': `(textEditor && textEditor.api.isCommandDisabled('toggleCodeBlock')) ? '' : null`,
     '[class.active]': `textEditor && textEditor.api.isActive('codeBlock')`,
     '(click)': `onClick()`
   }

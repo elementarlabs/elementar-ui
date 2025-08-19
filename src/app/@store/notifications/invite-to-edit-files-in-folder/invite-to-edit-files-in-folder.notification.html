@@ -1,7 +1,7 @@
 <div class="flex-shrink-0">
   <div class="relative">
     <emr-dicebear [key]="notification().actor.id"
-                  [src]="notification().actor.avatarUrl" class="size-10"/>
+                  [image]="notification().actor.avatarUrl" class="size-10"/>
     <div class="flex absolute justify-center z-10 text-white items-center -right-0
                   -bottom-0 w-5 h-5 bg-blue-400 rounded-full border border-default border-white ">
       <mat-icon class="filled action-icon">folder</mat-icon>
@@ -13,13 +13,13 @@
     <span class="font-semibold text-on-surface">{{ notification().actor.name }}</span>
     invited you to edit files in the folder
     <span class="font-medium text-primary hover:text-tertiary cursor-pointer">
-      {{ notification().payload['folderName'] }}
+      {{ notification()['payload']['folderName'] }}
     </span>
   </div>
   <div class="mt-3">
     <div class="border border-default border-primary rounded-lg px-3 py-2 flex items-center gap-2 w-max">
       <mat-icon class="filled icon">folder</mat-icon>
-      <span class="text-xs">{{ notification().payload['folderName'] }}</span>
+      <span class="text-xs">{{ notification()['payload']['folderName'] }}</span>
     </div>
   </div>
   <div class="text-xs font-medium text-on-surface-variant mt-3">{{ notification().createdAt }}</div>

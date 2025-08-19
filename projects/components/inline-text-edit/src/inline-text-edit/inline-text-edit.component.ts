@@ -64,7 +64,7 @@ export class InlineTextEditComponent {
     this.finishEdit();
   }
 
-  onEnter(event: KeyboardEvent): void {
+  onEnter(event: Event): void {
     event.preventDefault();
     this.finishEdit();
   }

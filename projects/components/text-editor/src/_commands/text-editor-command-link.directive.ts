@@ -8,7 +8,7 @@ import { LinkDialog } from '../link/link.dialog';
   selector: '[emrTextEditorCommandLink]',
   exportAs: 'emrTextEditorCommandLink',
   host: {
-    '[disabled]': `textEditor && textEditor.api.isCommandDisabled('toggleLink')`,
+    '[attr.disabled]': `(textEditor && textEditor.api.isCommandDisabled('toggleLink')) ? '' : null`,
     '[class.active]': `textEditor && textEditor.api.isActive('link')`,
     '(click)': `onClick()`
   }

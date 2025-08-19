@@ -5,7 +5,7 @@ import { TEXT_EDITOR, TextEditor } from '../types';
   selector: '[emrTextEditorCommandBold]',
   exportAs: 'emrTextEditorCommandBold',
   host: {
-    '[disabled]': `textEditor && textEditor.api.isCommandDisabled('toggleBold')`,
+    '[attr.disabled]': `(textEditor && textEditor.api.isCommandDisabled('toggleBold')) ? '' : null`,
     '[class.active]': `textEditor && textEditor.api.isActive('bold')`,
     '(click)': `onClick()`
   }

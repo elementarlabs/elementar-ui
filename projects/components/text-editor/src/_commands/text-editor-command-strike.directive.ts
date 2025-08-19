@@ -5,7 +5,7 @@ import { TEXT_EDITOR, TextEditor } from '../types';
   selector: '[emrTextEditorCommandStrike]',
   exportAs: 'emrTextEditorCommandStrike',
   host: {
-    '[disabled]': `textEditor && textEditor.api.isCommandDisabled('toggleStrike')`,
+    '[attr.disabled]': `(textEditor && textEditor.api.isCommandDisabled('toggleStrike')) ? '' : null`,
     '[class.active]': `textEditor && textEditor.api.isActive('strike')`,
     '(click)': `onClick()`
   }

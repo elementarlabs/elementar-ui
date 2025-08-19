@@ -1,7 +1,6 @@
 import {
   booleanAttribute,
   Component,
-  HostListener,
   inject, input,
   output,
   Renderer2, signal,

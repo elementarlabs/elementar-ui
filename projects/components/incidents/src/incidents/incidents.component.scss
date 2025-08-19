@@ -1,21 +1,21 @@
 @reference 'tailwindcss';
 
 :host {
-  --emr-incidents-bar-height: calc(var(--spacing) * 24);
-  --emr-incidents-bar-bg: theme(--color-amber-200);
-  --emr-incidents-bar-padding: 0 calc(var(--spacing) * 8);
-  --emr-incidents-bar-color: var(--color-neutral-800);
+  --emr-incidents-bar-height: --spacing(24);
+  --emr-incidents-bar-bg: var(--color-orange-container);
+  --emr-incidents-bar-padding: 0 --spacing(8);
+  --emr-incidents-bar-color: var(--color-on-orange-container);
   --emr-incidents-bar-box-shadow: none;
   --emr-incidents-bar-hover-box-shadow: theme(--shadow-sm);
   --emr-incidents-list-bg: rgba(0, 0, 0, .32);
-  --emr-incidents-list-gap: calc(var(--spacing) * 5);
-  --emr-incidents-list-padding: calc(var(--spacing) * 7) 0;
+  --emr-incidents-list-gap: --spacing(5);
+  --emr-incidents-list-padding: --spacing(7) 0;
   --emr-incident-bg: white;
   --emr-incident-color: var(--color-neutral-700);
   --emr-incident-border-radius: theme(--radius-md);
-  --emr-incident-padding: calc(var(--spacing) * 4) calc(var(--spacing) * 6);
-  --emr-incident-gap: calc(var(--spacing) * 6);
-  --emr-incident-border-start: calc(var(--spacing) * 1) solid var(--color-neutral-900);
+  --emr-incident-padding: --spacing(4) --spacing(6);
+  --emr-incident-gap: --spacing(6);
+  --emr-incident-border-start: --spacing(1) solid var(--color-neutral-900);
   --emr-incident-close-color: var(--color-neutral-500);
   --emr-incident-close-hover-color: var(--color-neutral-900);
   --emr-incident-title-font-size: theme(--text-sm);
