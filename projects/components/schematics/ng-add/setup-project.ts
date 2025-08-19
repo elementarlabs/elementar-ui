@@ -7,7 +7,7 @@ import { addFonts } from './actions/add-fonts';
 export default function ngAddSetupProject(options: Schema): Rule {
   return chain([
     addStyles(options),
-    addFonts(options),
+    addFonts(),
     // externalSchematic('@angular/localize', 'ng-add', options.project ? { project: options.project } : {}),
   ]);
 }

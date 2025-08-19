@@ -1,8 +1,6 @@
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { readWorkspace } from '@schematics/angular/utility';
 
-import { Schema } from '../schema';
-
 const MATERIAL_SYMBOLS_HREF = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block';
 const OPEN_SANS_HREF = 'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap';
 
@@ -28,7 +26,7 @@ function insertIntoHead(html: string, tags: string[]): string {
   return `${before}${prefix}${contentToInsert}\n${after}`;
 }
 
-export function addFonts(options: Schema): Rule {
+export function addFonts(): Rule {
   return async (tree: Tree, context: SchematicContext) => {
     context.logger.log('info', `✅ Add Google Fonts links to index.html`);
 
