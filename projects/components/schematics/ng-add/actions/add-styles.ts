@@ -35,7 +35,7 @@ export function addStyles(options: Schema): Rule {
     const project = workspace.projects.get(projectName);
 
     if (!project) {
-      throw new SchematicsException('asfasfsaf');
+      throw new SchematicsException('Project not found');
     }
 
     const styleFilePath = getProjectStyleFile(project as any) || '';

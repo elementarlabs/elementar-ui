@@ -11,11 +11,6 @@
       "description": "Sets up the project after dependencies have been installed",
       "factory": "./ng-add/setup-project",
       "schema": "./ng-add/schema.json"
-    },
-    "ng-add-fonts": {
-      "description": "Adds font links to index.html",
-      "factory": "./ng-add/add-fonts#ngAdd",
-      "schema": "./ng-add/schema.json"
     }
   }
 }
