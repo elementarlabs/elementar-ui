@@ -4,7 +4,7 @@
   transition: border-color 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
   border: var(--mat-form-field-outlined-outline-width, 1px) solid transparent;
   outline: none;
-  border-radius: 4px;
+  border-radius: var(--mat-card-outlined-container-shape);
   cursor: text;
   margin-left: -10px;
   margin-right: -10px;
