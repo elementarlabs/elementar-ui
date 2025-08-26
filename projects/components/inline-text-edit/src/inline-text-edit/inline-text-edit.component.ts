@@ -25,8 +25,6 @@ import { isPlatformServer } from '@angular/common';
     '[attr.data-placeholder]': 'placeholder()',
     '[class.editing]': 'isEditing()',
     '[class.focused]': 'isFocused()',
-    '(mouseenter)': 'onMouseEnter()',
-    '(mouseleave)': 'onMouseLeave()',
     '(focus)': 'onFocus()',
     '(blur)': 'onBlur()',
     '(keydown.enter)': 'onEnter($event)',
@@ -58,7 +56,7 @@ export class InlineTextEditComponent implements AfterContentChecked {
   }
 
   get isContentEditable() {
-    return this.enabled() && this.isEditing();
+    return true;
   }
 
   ngAfterContentChecked() {
@@ -77,24 +75,21 @@ export class InlineTextEditComponent implements AfterContentChecked {
     const el = this.elementRef.nativeElement;
     let height = el.getBoundingClientRect().height;
 
+    if (!height || height < 1) {
+      const cs = getComputedStyle(el);
+      let lh = parseFloat(cs.lineHeight);
+
+      if (isNaN(lh) || lh <= 0) {
+        const fs = parseFloat(cs.fontSize) || 16;
+        lh = fs * 1.5;
+      }
+
+      height = lh;
+    }
+
     if (height && height > 0) {
       this.renderer.setStyle(el, 'min-height', `${Math.ceil(height)}px`);
       this.minHeightSet = true;
-    }
-  }
-
-  onMouseEnter(): void {
-    if (!this.enabled() || this.isEditing()) {
-      return;
-    }
-
-    this.previousValue = this.elementRef.nativeElement.textContent?.trim() ?? '';
-    this.isEditing.set(true);
-  }
-
-  onMouseLeave(): void {
-    if (!this.isFocused()) {
-      this.isEditing.set(false);
     }
   }
 
