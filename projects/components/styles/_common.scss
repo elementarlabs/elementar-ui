@@ -40,8 +40,9 @@ $m3-dark-theme: mat.define-theme((
 )) !default;
 
 @use 'tailwindcss';
+@source '../';
+@source not "../styles";
 @plugin '@tailwindcss/typography';
-@source '../../';
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {

@@ -3,8 +3,14 @@
 </emr-alert>
 
 <div class="w-1/2 mt-10">
-  <emr-inline-text-edit (changed)="onSaveName($event)" class="text-2xl font-bold leading-[2]">{{ projectName() }}</emr-inline-text-edit>
-  <emr-inline-text-edit (changed)="onSaveDescription($event)" class="mt-1">{{ projectDescription() }}</emr-inline-text-edit>
+  <emr-inline-text-edit
+    placeholder="Project Name"
+    (changed)="onSaveName($event)" class="text-2xl font-bold leading-[2]">
+    {{ projectName() }}
+  </emr-inline-text-edit>
+  <emr-inline-text-edit (changed)="onSaveDescription($event)" class="mt-1">
+    {{ projectDescription() }}
+  </emr-inline-text-edit>
 </div>
 
 <div class="mt-10">
