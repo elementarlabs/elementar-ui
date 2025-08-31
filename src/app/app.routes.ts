@@ -8,6 +8,11 @@ export const routes: Routes = [
     title: 'Overview'
   },
   {
+    path: 'installation',
+    loadComponent: () => import('./installation/installation').then(c => c.Installation),
+    title: 'Installation'
+  },
+  {
     path: 'theme',
     loadChildren: () => import('./theme/theme.module').then(m => m.ThemeModule)
   },

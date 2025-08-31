@@ -1,5 +1,4 @@
 @use '@angular/material' as mat;
-
 @use "../_common" with (
   $m3-light-theme: mat.define-theme((
     color: (
@@ -38,6 +37,5 @@
     ),
   ))
 );
-
 @include mat.elevation-classes();
 @include mat.app-background();

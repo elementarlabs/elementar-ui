@@ -767,3 +767,10 @@ html.dark {
 :root {
   --mat-form-field-outlined-container-shape: 14px;
 }
+
+.pre {
+  background: var(--color-surface-container);
+  padding: --spacing(3);
+  border-radius: theme(--radius-2xl);
+  margin: --spacing(3) 0;
+}

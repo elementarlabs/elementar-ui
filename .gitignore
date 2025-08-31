@@ -47,3 +47,4 @@ src/environments/environment.development.ts
 
 publish-library.sh
 create-schematics.sh
+/.junie/

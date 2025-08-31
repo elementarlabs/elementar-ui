@@ -11,7 +11,12 @@ const routes: Routes = [
     path: 'typography',
     loadComponent: () => import('./typography/typography.component').then(c => c.TypographyComponent),
     title: 'Typography'
-  }
+  },
+  {
+    path: 'customize-theme',
+    loadComponent: () => import('./customize/customize').then(c => c.Customize),
+    title: 'Customize Theme'
+  },
 ];
 
 @NgModule({

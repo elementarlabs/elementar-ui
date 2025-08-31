@@ -1,0 +1,31 @@
+<div class="px-20 py-10 mat-typography">
+  <h1 class="mat-headline-1">Customize Theme</h1>
+  <main class="w-2/3">
+    <h2>Install prebuilt theme</h2>
+    <p>
+      There are 4 prebuilt themes by default: <code class="code">default</code>, <code class="code">cyan-orange</code>,
+      <code class="code">magenta-violet</code>, <code class="code">rose-red</code>.
+    </p>
+    <p>
+      To add a pre-installed theme, simply change
+      <strong>{{ defaultTheme() }}</strong>
+      to
+      <strong>{{ roseRedTheme() }}</strong>
+    </p>
+
+    <h2>Create your own theme</h2>
+    <p>
+      Generate a new angular material theme with this command:
+    </p>
+
+    <emr-code-highlighter [code]="generateAngularTheme()"/>
+
+    <p>Then add to <code class="code">styles.scss</code>:</p>
+
+    <emr-code-highlighter [code]="addTheme()" language="scss"/>
+
+    <p>
+      <code class="code">./my-theme</code> - a path to generated angular material theme.
+    </p>
+  </main>
+</div>

@@ -269,6 +269,10 @@ const routes: Routes = [
   {
     path: 'block-loader',
     loadChildren: () => import('./block-loader/block-loader.module').then(m => m.BlockLoaderModule)
+  },
+  {
+    path: 'code-highlighter',
+    loadChildren: () => import('./code-highlighter/code-highlighter.module').then(m => m.CodeHighlighterModule)
   }
 ];
 

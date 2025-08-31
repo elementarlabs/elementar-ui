@@ -56,7 +56,14 @@ export class SidebarComponent implements OnInit {
       name: 'Overview',
       key: 'overview',
       icon: 'local_fire_department',
-      link: ''
+      link: '/'
+    },
+    {
+      type: 'link',
+      name: 'Installation',
+      key: 'installation',
+      icon: 'install_desktop',
+      link: '/installation'
     },
     {
       type: 'group',
@@ -74,7 +81,13 @@ export class SidebarComponent implements OnInit {
           type: 'link',
           name: 'Typography',
           link: '/theme/typography'
-        }
+        },
+        {
+          type: 'link',
+          name: 'Customize Theme',
+          key: 'customize',
+          link: '/theme/customize-theme'
+        },
       ]
     },
     {
@@ -256,7 +269,7 @@ export class SidebarComponent implements OnInit {
       type: 'group',
       icon: 'grid_view',
       name: 'Components',
-      badge: 65,
+      badge: 67,
       children: [
         {
           key: uuid(),
@@ -299,6 +312,12 @@ export class SidebarComponent implements OnInit {
           type: 'link',
           name: 'Cookie Popup',
           link: '/components/cookie-popup'
+        },
+        {
+          key: uuid(),
+          type: 'link',
+          name: 'Code Highlighter',
+          link: '/components/code-highlighter'
         },
         {
           key: uuid(),

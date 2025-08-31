@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PageComponent } from '@meta/page/page.component';
 import { PageContentDirective } from '@meta/page/page-content.directive';
 import { PageTitleDirective } from '@meta/page/page-title.directive';
-import { PlaygroundComponent } from '@meta/playground/playground.component';
+// import { PlaygroundComponent } from '@meta/playground/playground.component';
 
 @Component({
   selector: 'app-overview',
@@ -10,7 +10,7 @@ import { PlaygroundComponent } from '@meta/playground/playground.component';
     PageComponent,
     PageContentDirective,
     PageTitleDirective,
-    PlaygroundComponent
+    // PlaygroundComponent
   ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss'
