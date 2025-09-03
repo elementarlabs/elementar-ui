@@ -1,5 +1,10 @@
 import { Component, inject, model, OnInit } from '@angular/core';
-import { DataViewCellRenderer, DataViewColumnDef, DataViewComponent } from '@elementar-ui/components/data-view';
+import {
+  cellRenderer,
+  DataViewCellRenderer,
+  DataViewColumnDef,
+  DataViewComponent
+} from '@elementar-ui/components/data-view';
 import { HttpClient } from '@angular/common/http';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
@@ -67,22 +72,10 @@ export class DataViewCustomCellRenderersExampleComponent implements OnInit {
   ];
   data: User[] = []
   cellRenderers: DataViewCellRenderer[] = [
-    {
-      dataRenderer: 'user',
-      component: () => import('../../_prebuilt-renderers/user-cell/user-cell.renderer').then(c => c.UserCellRenderer)
-    },
-    {
-      dataRenderer: 'date',
-      component: () => import('../../_prebuilt-renderers/date-cell/date-cell.renderer').then(c => c.DateCellRenderer)
-    },
-    {
-      dataRenderer: 'enabled',
-      component: () => import('../../_prebuilt-renderers/enabled-cell/enabled-cell.renderer').then(c => c.EnabledCellRenderer)
-    },
-    {
-      dataRenderer: 'link',
-      component: () => import('../../_prebuilt-renderers/link-cell/link-cell.renderer').then(c => c.LinkCellRenderer)
-    }
+    cellRenderer('user', () => import('../../_prebuilt-renderers/user-cell/user-cell.renderer').then(c => c.UserCellRenderer)),
+    cellRenderer('date', () => import('../../_prebuilt-renderers/date-cell/date-cell.renderer').then(c => c.DateCellRenderer)),
+    cellRenderer('enabled', () => import('../../_prebuilt-renderers/enabled-cell/enabled-cell.renderer').then(c => c.EnabledCellRenderer)),
+    cellRenderer('link', () => import('../../_prebuilt-renderers/link-cell/link-cell.renderer').then(c => c.LinkCellRenderer)),
   ];
 
   ngOnInit() {
