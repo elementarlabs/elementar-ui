@@ -4,7 +4,7 @@ import {
   inject,
   input,
   OnChanges,
-  OnInit,
+  OnInit, signal,
   SimpleChanges
 } from '@angular/core';
 import { loadIcon, enableCache } from 'iconify-icon';
@@ -21,12 +21,12 @@ enableCache('all');
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'class': 'emr-icon',
-    '[innerHTML]': '_iconHtml',
+    '[innerHTML]': '_iconHtml()',
   }
 })
 export class IconComponent implements OnInit, OnChanges {
   private _sanitizer = inject(DomSanitizer);
-  protected _iconHtml: SafeHtml;
+  protected _iconHtml = signal<SafeHtml | null>(null);
 
   name = input.required<string>();
 
@@ -71,7 +71,7 @@ export class IconComponent implements OnInit, OnChanges {
     }
 
     const iconHtml = `<svg viewBox="0 0 ${data.width} ${data.height}">${body}</svg>`;
-    this._iconHtml = this._sanitizer.bypassSecurityTrustHtml(iconHtml);
+    this._iconHtml.set(this._sanitizer.bypassSecurityTrustHtml(iconHtml));
     this.loaded = true;
   }
 }
