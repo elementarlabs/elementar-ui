@@ -1,11 +1,11 @@
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 // import { readWorkspace } from '@schematics/angular/utility';
-import { addPackageToPackageJson, getPackageVersionFromPackageJson } from '../utils/package-config';
+import { addPackageToPackageJson } from '../utils/package-config';
 import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { Schema } from './schema';
 
 const DEPENDENCIES = {
-  '@elementar-ui/components': '^0.6.27',
+  '@elementar-ui/components': '^0.6.34',
   "@dicebear/collection": "^9.2.2",
   "@dicebear/core": "^9.2.2",
   "@iconify-json/circle-flags": "^1.2.4",
@@ -65,27 +65,13 @@ export function ngAdd(options: Schema): Rule {
     }
 
     // Installing dependencies
-    const angularCoreVersion = getPackageVersionFromPackageJson(tree, '@angular/core')!;
-    const angularLocalizeVersion = getPackageVersionFromPackageJson(tree, '@angular/localize', true);
-    const angularAnimationsVersion = getPackageVersionFromPackageJson(tree, '@angular/animations');
-    const angularCdkVersion = getPackageVersionFromPackageJson(tree, '@angular/cdk');
-    const angularMaterialVersion = getPackageVersionFromPackageJson(tree, '@angular/material');
+    // const angularLocalizeVersion = getPackageVersionFromPackageJson(tree, '@angular/localize', true)!;
+    // const angularCdkVersion = getPackageVersionFromPackageJson(tree, '@angular/cdk')!;
+    // const angularMaterialVersion = getPackageVersionFromPackageJson(tree, '@angular/material')!;
 
-    if (angularLocalizeVersion === null) {
-      addPackageToPackageJson(tree, '@angular/localize', angularCoreVersion, true);
-    }
-
-    if (angularAnimationsVersion === null) {
-      addPackageToPackageJson(tree, '@angular/animations', angularCoreVersion);
-    }
-
-    if (angularCdkVersion === null) {
-      addPackageToPackageJson(tree, '@angular/cdk', angularCoreVersion);
-    }
-
-    if (angularMaterialVersion === null) {
-      addPackageToPackageJson(tree, '@angular/material', angularCoreVersion);
-    }
+    addPackageToPackageJson(tree, '@angular/localize', '^20.3.4', true);
+    addPackageToPackageJson(tree, '@angular/cdk', '^20.2.8');
+    addPackageToPackageJson(tree, '@angular/material', '^20.2.8');
 
     for (const name in DEPENDENCIES) {
       // @ts-ignore

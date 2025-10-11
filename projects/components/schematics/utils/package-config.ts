@@ -15,10 +15,8 @@ export function addPackageToPackageJson(tree: Tree, pkg: string, version: string
     const dependenciesType = devDependency ? 'devDependencies' : 'dependencies';
     const dependencies = json[dependenciesType] || {};
 
-    if (!dependencies[pkg]) {
-      dependencies[pkg] = version;
-      json[dependenciesType] = sortObjectByKeys(dependencies);
-    }
+    dependencies[pkg] = version;
+    json[dependenciesType] = sortObjectByKeys(dependencies);
 
     tree.overwrite('package.json', JSON.stringify(json, null, 2));
   }
