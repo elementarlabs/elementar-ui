@@ -20,6 +20,7 @@
   .scrollable-content {
     height: 100%;
     overflow-y: scroll;
+    overflow-x: auto;
     width: 100%;
     padding-right: 0;
     box-sizing: border-box;
@@ -45,6 +46,7 @@
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
     z-index: 10;
+    pointer-events: none;
   }
 
   .scroll-thumb {
@@ -55,18 +57,45 @@
     background-color: var(--emr-overlay-scrollbar-thumb-bg);
     border-radius: theme(--radius-sm);
     transition: background-color 0.2s ease-in-out;
+    pointer-events: auto;
   }
 
-  .scroll-thumb:hover {
+  .scroll-track-x {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--emr-overlay-scrollbar-width);
+    background-color: var(--emr-overlay-scrollbar-scroll-track-bg);
+    border-radius: theme(--radius-sm);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .scroll-thumb-x {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: var(--emr-overlay-scrollbar-width);
+    background-color: var(--emr-overlay-scrollbar-thumb-bg);
+    border-radius: theme(--radius-sm);
+    transition: background-color 0.2s ease-in-out;
+    pointer-events: auto;
+  }
+
+  .scroll-thumb:hover, .scroll-thumb-x:hover {
     background-color: var(--emr-overlay-scrollbar-thumb-hover-bg);
   }
 
-  .scroll-thumb:active {
+  .scroll-thumb:active, .scroll-thumb-x:active {
     background-color: var(--emr-overlay-scrollbar-thumb-active-bg);
   }
 
   &.scrollbar-visible {
-    .scroll-track {
+    .scroll-track,
+    .scroll-track-x {
       opacity: 1;
     }
   }

@@ -56,41 +56,72 @@ export class OverlayScrollbarComponent {
   readonly scrollableContentRef = viewChild.required<ElementRef<HTMLElement>>('scrollableContent');
   readonly scrollTrackRef = viewChild.required<ElementRef<HTMLElement>>('scrollTrack');
   readonly scrollThumbRef = viewChild.required<ElementRef<HTMLElement>>('scrollThumb');
+  readonly scrollTrackXRef = viewChild.required<ElementRef<HTMLElement>>('scrollTrackX');
+  readonly scrollThumbXRef = viewChild.required<ElementRef<HTMLElement>>('scrollThumbX');
 
   readonly scrollbarWidth = input<string>('8px');
   readonly autoHide = input<boolean>(true);
-  readonly absolute = input<boolean>(false);
+  readonly absolute = input<boolean>(true);
 
   readonly isDragging = signal(false);
   readonly isHovering = signal(false);
   private readonly scrollTop = signal(0);
+  private readonly scrollLeft = signal(0);
   private readonly contentScrollHeight = signal(0);
+  private readonly contentScrollWidth = signal(0);
   private readonly contentClientHeight = signal(0);
+  private readonly contentClientWidth = signal(0);
   private readonly trackClientHeight = signal(0);
+  private readonly trackClientWidth = signal(0);
   private readonly showDueToActivity = signal(false);
 
-  readonly hasScroll = computed(() => this.contentScrollHeight() > this.contentClientHeight() + 1);
-  readonly scrollRatio = computed(() => this.hasScroll() ? this.contentClientHeight() / this.contentScrollHeight() : 1);
+  // Vertical axis
+  readonly hasScrollY = computed(() => this.contentScrollHeight() > this.contentClientHeight() + 1);
+  readonly scrollRatioY = computed(() => this.hasScrollY() ? this.contentClientHeight() / this.contentScrollHeight() : 1);
 
   readonly minThumbHeight = 20;
   readonly thumbHeight = computed(() => {
-    if (!this.hasScroll()) return 0;
+    if (!this.hasScrollY()) return 0;
     const trackHeight = this.trackClientHeight();
-    const ratio = this.scrollRatio();
+    const ratio = this.scrollRatioY();
     const calculated = trackHeight * ratio;
     return Math.max(calculated, this.minThumbHeight);
   });
   readonly maxScrollTop = computed(() => Math.max(0, this.contentScrollHeight() - this.contentClientHeight()));
   readonly maxThumbTop = computed(() => Math.max(0, this.trackClientHeight() - this.thumbHeight()));
   readonly thumbTop = computed(() => {
-    if (!this.hasScroll()) return 0;
+    if (!this.hasScrollY()) return 0;
     const maxScroll = this.maxScrollTop();
     const currentScroll = this.scrollTop();
     const maxThumb = this.maxThumbTop();
     return maxScroll > 0 ? (currentScroll / maxScroll) * maxThumb : 0;
   });
+
+  // Horizontal axis
+  readonly hasScrollX = computed(() => this.contentScrollWidth() > this.contentClientWidth() + 1);
+  readonly scrollRatioX = computed(() => this.hasScrollX() ? this.contentClientWidth() / this.contentScrollWidth() : 1);
+
+  readonly minThumbWidth = 20;
+  readonly thumbWidth = computed(() => {
+    if (!this.hasScrollX()) return 0;
+    const trackWidth = this.trackClientWidth();
+    const ratio = this.scrollRatioX();
+    const calculated = trackWidth * ratio;
+    return Math.max(calculated, this.minThumbWidth);
+  });
+  readonly maxScrollLeft = computed(() => Math.max(0, this.contentScrollWidth() - this.contentClientWidth()));
+  readonly maxThumbLeft = computed(() => Math.max(0, this.trackClientWidth() - this.thumbWidth()));
+  readonly thumbLeft = computed(() => {
+    if (!this.hasScrollX()) return 0;
+    const maxScroll = this.maxScrollLeft();
+    const currentScroll = this.scrollLeft();
+    const maxThumb = this.maxThumbLeft();
+    return maxScroll > 0 ? (currentScroll / maxScroll) * maxThumb : 0;
+  });
+
+  readonly hasAnyScroll = computed(() => this.hasScrollX() || this.hasScrollY());
   readonly isVisible = computed(() => {
-    if (!this.hasScroll()) return false;
+    if (!this.hasAnyScroll()) return false;
     if (!this.autoHide()) return true;
     return this.isHovering() || this.isDragging() || this.showDueToActivity();
   });
@@ -106,6 +137,8 @@ export class OverlayScrollbarComponent {
       this.scrollableContentRef();
       this.scrollTrackRef();
       this.scrollThumbRef();
+      this.scrollTrackXRef();
+      this.scrollThumbXRef();
 
       if (isPlatformBrowser(this.platformId) && !this.isInitialized()) {
         this.initializeComponentLogic();
@@ -123,17 +156,34 @@ export class OverlayScrollbarComponent {
     this.setupRouteChanges();
   }
 
+  private raf(cb: () => void): void {
+    // Use requestAnimationFrame in the browser, fallback to setTimeout on SSR
+    if (typeof requestAnimationFrame !== 'undefined') {
+      requestAnimationFrame(() => cb());
+    } else {
+      setTimeout(() => cb(), 0);
+    }
+  }
+
   private setupStyleEffects(): void {
+    // Vertical thickness (width) and horizontal thickness (height)
     effect(() => {
-      const width = this.scrollbarWidth();
-      const trackElement = this.scrollTrackRef().nativeElement;
-      const thumbElement = this.scrollThumbRef().nativeElement;
+      const thickness = this.scrollbarWidth();
+      const trackY = this.scrollTrackRef().nativeElement;
+      const thumbY = this.scrollThumbRef().nativeElement;
+      const trackX = this.scrollTrackXRef().nativeElement;
+      const thumbX = this.scrollThumbXRef().nativeElement;
       untracked(() => {
-        this.renderer.setStyle(trackElement, 'width', width);
-        this.renderer.setStyle(thumbElement, 'width', width);
+        // Vertical scrollbar: width is thickness
+        this.renderer.setStyle(trackY, 'width', thickness);
+        this.renderer.setStyle(thumbY, 'width', thickness);
+        // Horizontal scrollbar: height is thickness
+        this.renderer.setStyle(trackX, 'height', thickness);
+        this.renderer.setStyle(thumbX, 'height', thickness);
       });
     });
 
+    // Vertical thumb height
     effect(() => {
       const height = this.thumbHeight();
       const thumbElement = this.scrollThumbRef().nativeElement;
@@ -142,11 +192,59 @@ export class OverlayScrollbarComponent {
       });
     });
 
+    // Vertical thumb position
     effect(() => {
       const top = this.thumbTop();
       const thumbElement = this.scrollThumbRef().nativeElement;
       untracked(() => {
         this.renderer.setStyle(thumbElement, 'transform', `translateY(${top}px)`);
+      });
+    });
+
+    // Horizontal thumb width
+    effect(() => {
+      const width = this.thumbWidth();
+      const thumbElementX = this.scrollThumbXRef().nativeElement;
+      untracked(() => {
+        this.renderer.setStyle(thumbElementX, 'width', `${width}px`);
+      });
+    });
+
+    // Horizontal thumb position
+    effect(() => {
+      const left = this.thumbLeft();
+      const thumbElementX = this.scrollThumbXRef().nativeElement;
+      untracked(() => {
+        this.renderer.setStyle(thumbElementX, 'transform', `translateX(${left}px)`);
+      });
+    });
+
+    // Toggle track visibility per axis based on content
+    effect(() => {
+      const hasY = this.hasScrollY();
+      const trackY = this.scrollTrackRef().nativeElement;
+      untracked(() => {
+        this.renderer.setStyle(trackY, 'display', hasY ? 'block' : 'none');
+      });
+    });
+    effect(() => {
+      const hasX = this.hasScrollX();
+      const trackX = this.scrollTrackXRef().nativeElement;
+      untracked(() => {
+        this.renderer.setStyle(trackX, 'display', hasX ? 'block' : 'none');
+      });
+    });
+
+    // When scrollability toggles, recompute dimensions after tracks are laid out
+    effect(() => {
+      // depend on both so we run when either axis scrollability changes
+      const _hasY = this.hasScrollY();
+      const _hasX = this.hasScrollX();
+      untracked(() => {
+        // Wait for style changes (display:block/none) to apply, then measure
+        this.raf(() => {
+          this.zone.run(() => this.updateDimensions());
+        });
       });
     });
   }
@@ -177,11 +275,24 @@ export class OverlayScrollbarComponent {
   private setupEventStreams(): void {
     const scrollableElement = this.scrollableContentRef().nativeElement;
     const hostElement = this.elRef.nativeElement;
-    const thumbElement = this.scrollThumbRef().nativeElement;
+    const thumbElementY = this.scrollThumbRef().nativeElement;
+    const thumbElementX = this.scrollThumbXRef().nativeElement;
 
     const scroll$ = fromEvent(scrollableElement, 'scroll', { passive: true }).pipe(
       tap(() => {
-        this.zone.run(() => this.scrollTop.set(scrollableElement.scrollTop));
+        this.zone.run(() => {
+          this.scrollTop.set(scrollableElement.scrollTop);
+          this.scrollLeft.set(scrollableElement.scrollLeft);
+        });
+        // Imperative sync to ensure thumbs move with content during scroll
+        this.zone.runOutsideAngular(() => {
+          this.raf(() => {
+            const top = untracked(this.thumbTop);
+            const left = untracked(this.thumbLeft);
+            this.renderer.setStyle(thumbElementY, 'transform', `translateY(${top}px)`);
+            this.renderer.setStyle(thumbElementX, 'transform', `translateX(${left}px)`);
+          });
+        });
       }),
       filter(() => this.autoHide()),
       tap(() => this.zone.run(() => this.showDueToActivity.set(true))),
@@ -210,11 +321,12 @@ export class OverlayScrollbarComponent {
       }))
     );
 
-    const thumbMouseDown$ = fromEvent<MouseEvent>(thumbElement, 'mousedown');
+    const thumbMouseDownY$ = fromEvent<MouseEvent>(thumbElementY, 'mousedown');
+    const thumbMouseDownX$ = fromEvent<MouseEvent>(thumbElementX, 'mousedown');
     const mouseMove$ = fromEvent<MouseEvent>(document, 'mousemove');
     const mouseUp$ = fromEvent<MouseEvent>(document, 'mouseup');
 
-    const thumbDrag$ = thumbMouseDown$.pipe(
+    const thumbDragY$ = thumbMouseDownY$.pipe(
       tap(event => {
         event.preventDefault();
         event.stopPropagation();
@@ -255,12 +367,54 @@ export class OverlayScrollbarComponent {
       })
     );
 
+    const thumbDragX$ = thumbMouseDownX$.pipe(
+      tap(event => {
+        event.preventDefault();
+        event.stopPropagation();
+      }),
+      switchMap(startEvent => {
+        const startX = startEvent.clientX;
+        const startScrollLeft = scrollableElement.scrollLeft;
+        const initialTrackWidth = untracked(() => this.trackClientWidth());
+        const initialContentWidth = untracked(() => this.contentScrollWidth());
+
+        this.zone.run(() => this.isDragging.set(true));
+
+        return mouseMove$.pipe(
+          map(moveEvent => {
+            moveEvent.preventDefault();
+            const deltaX = moveEvent.clientX - startX;
+            const scrollDelta = initialTrackWidth > 0
+              ? (deltaX / initialTrackWidth) * initialContentWidth
+              : 0;
+            return startScrollLeft + scrollDelta;
+          }),
+          distinctUntilChanged(),
+          tap(newScrollLeft => {
+            this.renderer.setProperty(scrollableElement, 'scrollLeft', newScrollLeft);
+          }),
+          takeUntil(mouseUp$),
+          finalize(() => {
+            this.zone.run(() => {
+              this.isDragging.set(false);
+              untracked(() => {
+                if (this.autoHide() && !this.isHovering()) {
+                  this.scheduleHide();
+                }
+              })
+            });
+          })
+        );
+      })
+    );
+
     this.zone.runOutsideAngular(() => {
       this.eventsSubscription = merge(
         scroll$,
         hostEnter$,
         hostLeave$,
-        thumbDrag$
+        thumbDragY$,
+        thumbDragX$
       ).subscribe();
     });
   }
@@ -288,12 +442,14 @@ export class OverlayScrollbarComponent {
 
   private updateDimensions(): void {
     const scrollableElement = this.scrollableContentRef().nativeElement;
-    const trackElement = this.scrollTrackRef().nativeElement;
+    const trackElementY = this.scrollTrackRef().nativeElement;
+    const trackElementX = this.scrollTrackXRef().nativeElement;
 
-    if (scrollableElement && trackElement) {
+    if (scrollableElement && trackElementY && trackElementX) {
+      // Vertical metrics
       const newScrollHeight = scrollableElement.scrollHeight;
       const newClientHeight = scrollableElement.clientHeight;
-      const newTrackHeight = trackElement.clientHeight;
+      const newTrackHeight = trackElementY.clientHeight;
       const newScrollTop = scrollableElement.scrollTop;
 
       this.contentScrollHeight.set(newScrollHeight);
@@ -303,11 +459,30 @@ export class OverlayScrollbarComponent {
       if (this.scrollTop() !== newScrollTop) {
         this.scrollTop.set(newScrollTop);
       }
+
+      // Horizontal metrics
+      const newScrollWidth = scrollableElement.scrollWidth;
+      const newClientWidth = scrollableElement.clientWidth;
+      const newTrackWidth = trackElementX.clientWidth;
+      const newScrollLeft = scrollableElement.scrollLeft;
+
+      this.contentScrollWidth.set(newScrollWidth);
+      this.contentClientWidth.set(newClientWidth);
+      this.trackClientWidth.set(newTrackWidth);
+
+      if (this.scrollLeft() !== newScrollLeft) {
+        this.scrollLeft.set(newScrollLeft);
+      }
     } else {
       this.contentScrollHeight.set(0);
       this.contentClientHeight.set(0);
       this.trackClientHeight.set(0);
       this.scrollTop.set(0);
+
+      this.contentScrollWidth.set(0);
+      this.contentClientWidth.set(0);
+      this.trackClientWidth.set(0);
+      this.scrollLeft.set(0);
     }
   }
 
@@ -330,7 +505,7 @@ export class OverlayScrollbarComponent {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(() => {
-        requestAnimationFrame(() => {
+        this.raf(() => {
           this.updateDimensions();
         });
       })
