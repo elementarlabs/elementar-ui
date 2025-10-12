@@ -3,7 +3,7 @@
     <emr-panel-header class="bg-surface-container flex items-center px-6">Header</emr-panel-header>
     <emr-panel-sidebar class="border-r border-r-default w-[200px]">
       <emr-overlay-scrollbar [absolute]="true">
-        <div class="p-6 h-[1000px]">Sidebar</div>
+        <div class="p-6 h-[1000px]" [style.width.px]="width()" (click)="setSidebarLongWidth()">Sidebar</div>
       </emr-overlay-scrollbar>
     </emr-panel-sidebar>
     <emr-panel-body>

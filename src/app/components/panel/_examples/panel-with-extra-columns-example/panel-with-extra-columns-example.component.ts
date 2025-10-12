@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { OverlayScrollbarComponent } from '@elementar-ui/components/overlay-scrollbar';
 import {
   PanelAsideComponent,
@@ -23,5 +23,9 @@ import {
   styleUrl: './panel-with-extra-columns-example.component.scss'
 })
 export class PanelWithExtraColumnsExampleComponent {
+  width = signal(200);
 
+  setSidebarLongWidth() {
+    this.width.set(400);
+  }
 }

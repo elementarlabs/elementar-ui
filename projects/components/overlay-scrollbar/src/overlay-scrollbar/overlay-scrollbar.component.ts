@@ -253,22 +253,63 @@ export class OverlayScrollbarComponent {
     const scrollableElement = this.scrollableContentRef().nativeElement;
     const hostElement = this.elRef.nativeElement;
 
+    // Helper to observe all element nodes within a subtree with ResizeObserver
+    const observeSubtree = (ro: ResizeObserver, root: Element) => {
+      ro.observe(root);
+      // Observe all current descendants as well to catch size changes that don't bubble to the container
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT);
+      let node = walker.currentNode as Element | null;
+      while (node) {
+        ro.observe(node);
+        node = walker.nextNode() as Element | null;
+      }
+    };
+
     const resize$ = new Observable<ResizeObserverEntry[]>(observer => {
       const resizeObserver = new ResizeObserver(entries => this.zone.run(() => observer.next(entries)));
-      resizeObserver.observe(scrollableElement);
+      // Observe host (tracks may affect layout) and the entire subtree of scrollable content
+      observeSubtree(resizeObserver, scrollableElement);
       resizeObserver.observe(hostElement);
       return () => resizeObserver.disconnect();
     }).pipe(debounceTime(50));
 
     const mutation$ = new Observable<MutationRecord[]>(observer => {
       const mutationObserver = new MutationObserver(mutations => this.zone.run(() => observer.next(mutations)));
-      mutationObserver.observe(scrollableElement, { childList: true, subtree: true, characterData: true });
+      // Watch for any DOM changes that can affect layout including attribute/class/style changes
+      mutationObserver.observe(scrollableElement, { childList: true, subtree: true, characterData: true, attributes: true });
       return () => mutationObserver.disconnect();
-    }).pipe(debounceTime(50));
+    }).pipe(
+      tap(mutations => {
+        // If nodes were added to the subtree, start observing them for size changes as well
+        // We run outside Angular to avoid triggering change detection per node
+        this.zone.runOutsideAngular(() => {
+          // Create a temporary RO reference by reusing the one from resize$ is not trivial here,
+          // but we can trigger a dimension update directly which is enough for many cases.
+          // The resize observer above already observes the whole subtree at setup time.
+          // For dynamically added nodes, re-run a subtree observation by creating a one-shot RO.
+          const newlyAdded: Element[] = [];
+          for (const m of mutations) {
+            if (m.type === 'childList') {
+              m.addedNodes.forEach(n => { if (n.nodeType === Node.ELEMENT_NODE) newlyAdded.push(n as Element); });
+            }
+          }
+          if (newlyAdded.length) {
+            try {
+              const ro = new ResizeObserver(() => { /* no-op: purpose is to register */ });
+              newlyAdded.forEach(el => observeSubtree(ro, el));
+              // Disconnect immediately; observing once is enough for triggering initial measure via update below
+              ro.disconnect();
+            } catch {}
+          }
+        });
+      }),
+      debounceTime(50)
+    );
 
     this.observersSubscription = merge(resize$, mutation$)
       .subscribe(() => {
-        this.zone.run(() => this.updateDimensions());
+        // Use rAF to ensure layout is settled before measuring
+        this.raf(() => this.zone.run(() => this.updateDimensions()));
       });
   }
 
