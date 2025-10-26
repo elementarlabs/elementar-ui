@@ -46,6 +46,7 @@ export class FormRendererComponent implements OnInit, OnDestroy {
   readonly initialValue = input<Record<string, any> | undefined>();
   readonly formSubmit = output<any>();
   readonly valueChanges = output<any>();
+  readonly initialized = output<void>();
 
   private elementsMap: Signal<Map<string, ComponentConfig>> = computed(() => {
     const map = new Map<string, ComponentConfig>();
@@ -59,7 +60,7 @@ export class FormRendererComponent implements OnInit, OnDestroy {
     this.formGenerator.createFormGroup(this.config(), this.initialValue())
   );
 
-  private initialized = false;
+  #initialized = false;
   private valueChangesSub?: Subscription;
 
   constructor(
@@ -99,7 +100,10 @@ export class FormRendererComponent implements OnInit, OnDestroy {
             }
           }
 
-          this.initialized = true;
+          if (!this.#initialized) {
+            this.#initialized = true;
+            this.initialized.emit();
+          }
         });
     });
   }
@@ -110,7 +114,7 @@ export class FormRendererComponent implements OnInit, OnDestroy {
       .valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
-        if (!this.initialized) {
+        if (!this.#initialized) {
           return;
         }
 
