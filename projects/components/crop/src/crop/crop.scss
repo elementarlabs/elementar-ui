@@ -62,14 +62,3 @@
 .right { top: 50%; right: -5px; transform: translateY(-50%); cursor: ew-resize; }
 .bottom { bottom: -5px; left: 50%; transform: translateX(-50%); cursor: ns-resize; }
 .left { top: 50%; left: -5px; transform: translateY(-50%); cursor: ew-resize; }
-
-.controls-footer {
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translate(-50%, 100%);
-  padding: 10px;
-  background: #f0f0f0;
-  border-radius: 4px;
-  z-index: 1; /* Ensure it's above the shadow */
-}

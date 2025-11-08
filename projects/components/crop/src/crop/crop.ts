@@ -159,8 +159,4 @@ export class Crop implements AfterViewInit {
       return newSelection;
     });
   }
-
-  applySelection(): void {
-    this.selectionApplied.emit(this.selection());
-  }
 }
