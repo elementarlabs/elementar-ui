@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   ElementRef,
   inject,
   input,
@@ -46,19 +47,27 @@ export class Crop implements AfterViewInit {
   private startDragPosition = signal<{ x: number; y: number } | null>(null);
   private startDragSelection = signal<CropSelection | null>(null);
 
+  constructor() {
+    effect(() => {
+      // This effect runs when `isCircle` changes.
+      if (this.isCircle() && this.elementRef.nativeElement.isConnected) {
+        // We check `isConnected` to ensure the element is in the DOM.
+        this.resetSelectionToSquare();
+      }
+    });
+  }
+
   ngAfterViewInit(): void {
+    // This handles the initial load case.
     if (this.isCircle()) {
       const hostEl = this.elementRef.nativeElement;
-
-      // If the element already has a size (e.g., cached image), reset immediately.
-      if (hostEl.offsetWidth > 0 && hostEl.offsetHeight > 0) {
+      if (hostEl.offsetWidth > 0) {
         this.resetSelectionToSquare();
       } else {
-        // Otherwise, use ResizeObserver to wait for the host to get its final size.
         const observer = new ResizeObserver(() => {
-          if (hostEl.offsetWidth > 0 && hostEl.offsetHeight > 0) {
+          if (hostEl.offsetWidth > 0) {
             this.resetSelectionToSquare();
-            observer.disconnect(); // We only need to do this once.
+            observer.disconnect();
           }
         });
         observer.observe(hostEl);
@@ -71,7 +80,8 @@ export class Crop implements AfterViewInit {
     const hostWidth = hostEl.offsetWidth;
     const hostHeight = hostEl.offsetHeight;
 
-    // Center a square that is 80% of the smallest dimension.
+    if (hostWidth === 0 || hostHeight === 0) return;
+
     const size = Math.min(hostWidth, hostHeight) * 0.8;
     const left = (hostWidth - size) / 2;
     const top = (hostHeight - size) / 2;
