@@ -1,4 +1,4 @@
-import { Component, inject, input, ViewEncapsulation, viewChild } from '@angular/core';
+import { Component, inject, input, ViewEncapsulation, viewChild, booleanAttribute } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MarkdownComponent, provideMarkdown } from 'ngx-markdown';
@@ -23,6 +23,9 @@ export class PlaygroundComponent {
 
   exampleUrl = input<string>();
   exampleName = input<string>();
+  compact = input(false, {
+    transform: booleanAttribute
+  });
 
   htmlSrc: string;
   tsSrc: string;
@@ -74,20 +77,27 @@ export class PlaygroundComponent {
         return;
       }
 
-      this.exampleLoading = true;
-      const r = await Promise.all([
+      const urls = this.compact() ? [
+          fetch(`${this.exampleUrl()}/${this.exampleName()}/${this.exampleName()}.ts`),
+          fetch(`${this.exampleUrl()}/${this.exampleName()}/${this.exampleName()}.scss`),
+          fetch(`${this.exampleUrl()}/${this.exampleName()}/${this.exampleName()}.html`),
+        ] : [
         fetch(`${this.exampleUrl()}/${this.exampleName()}/${this.exampleName()}.component.ts`),
         fetch(`${this.exampleUrl()}/${this.exampleName()}/${this.exampleName()}.component.scss`),
         fetch(`${this.exampleUrl()}/${this.exampleName()}/${this.exampleName()}.component.html`),
-      ]).then(r => r.map(f => f.text()));
-      this.tsSrc = await r[0];
-      this.cssSrc = await r[1];
-      this.htmlSrc = await r[2];
-      this.exampleLoading = false;
-      this.alreadyLoaded = true;
-    } else {
-      this.exampleLoading = false;
-    }
+      ]
+
+      this.exampleLoading = true;
+      const r = await Promise.all(urls)
+      .then(r => r.map(f => f.text()));
+        this.tsSrc = await r[0];
+        this.cssSrc = await r[1];
+        this.htmlSrc = await r[2];
+        this.exampleLoading = false;
+        this.alreadyLoaded = true;
+      } else {
+        this.exampleLoading = false;
+      }
   }
 
   isCurrentTab(tabId: string): boolean {

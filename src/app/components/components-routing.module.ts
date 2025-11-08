@@ -55,6 +55,10 @@ const routes: Routes = [
     loadChildren: () => import('./chips/chips.module').then(m => m.ChipsModule)
   },
   {
+    path: 'crop',
+    loadChildren: () => import('./crop/crop-module').then(m => m.CropModule)
+  },
+  {
     path: 'emoji-picker',
     loadChildren: () => import('./emoji-picker/emoji-picker.module').then(m => m.EmojiPickerModule)
   },

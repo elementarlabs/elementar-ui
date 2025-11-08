@@ -316,6 +316,12 @@ export class SidebarComponent implements OnInit {
         {
           key: uuid(),
           type: 'link',
+          name: 'Crop',
+          link: '/components/crop'
+        },
+        {
+          key: uuid(),
+          type: 'link',
           name: 'Code Highlighter',
           link: '/components/code-highlighter'
         },
