@@ -12,6 +12,21 @@ import {
 } from '@angular/core';
 
 export interface CropSelection {
+  topPx: number;
+  rightPx: number;
+  bottomPx: number;
+  leftPx: number;
+  topPct: number;
+  rightPct: number;
+  bottomPct: number;
+  leftPct: number;
+  widthPx: number;
+  heightPx: number;
+  containerWidth: number;
+  containerHeight: number;
+}
+
+interface CropInset {
   top: number;
   right: number;
   bottom: number;
@@ -37,28 +52,26 @@ export class Crop implements AfterViewInit {
   minWidth = input(100);
   minHeight = input(100);
   shape = input<'rectangle' | 'circle'>('rectangle');
-  selectionApplied = output<CropSelection>();
+
+  readonly selectionApplied = output<CropSelection>();
 
   isCircle = computed(() => this.shape() === 'circle');
-  selection = signal<CropSelection>({ top: 20, right: 20, bottom: 20, left: 20 });
+  selection = signal<CropInset>({ top: 20, right: 20, bottom: 20, left: 20 });
 
   private elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private activeDragHandle = signal<DragHandle | null>(null);
   private startDragPosition = signal<{ x: number; y: number } | null>(null);
-  private startDragSelection = signal<CropSelection | null>(null);
+  private startDragSelection = signal<CropInset | null>(null);
 
   constructor() {
     effect(() => {
-      // This effect runs when `isCircle` changes.
       if (this.isCircle() && this.elementRef.nativeElement.isConnected) {
-        // We check `isConnected` to ensure the element is in the DOM.
         this.resetSelectionToSquare();
       }
     });
   }
 
   ngAfterViewInit(): void {
-    // This handles the initial load case.
     if (this.isCircle()) {
       const hostEl = this.elementRef.nativeElement;
       if (hostEl.offsetWidth > 0) {
@@ -110,7 +123,43 @@ export class Crop implements AfterViewInit {
   }
 
   onDragEnd(): void {
+    if (!this.activeDragHandle()) {
+      return;
+    }
+
     this.activeDragHandle.set(null);
+    this.emitSelection();
+  }
+
+  private emitSelection(): void {
+    const hostEl = this.elementRef.nativeElement;
+    const containerWidth = hostEl.offsetWidth;
+    const containerHeight = hostEl.offsetHeight;
+
+    if (containerWidth === 0 || containerHeight === 0) {
+      return;
+    }
+
+    const currentSelection = this.selection();
+    const { top: topPx, right: rightPx, bottom: bottomPx, left: leftPx } = currentSelection;
+
+    const widthPx = containerWidth - leftPx - rightPx;
+    const heightPx = containerHeight - topPx - bottomPx;
+
+    this.selectionApplied.emit({
+      topPx,
+      rightPx,
+      bottomPx,
+      leftPx,
+      topPct: (topPx / containerHeight) * 100,
+      rightPct: (rightPx / containerWidth) * 100,
+      bottomPct: (bottomPx / containerHeight) * 100,
+      leftPct: (leftPx / containerWidth) * 100,
+      widthPx,
+      heightPx,
+      containerWidth,
+      containerHeight,
+    });
   }
 
   onDrag(event: MouseEvent): void {

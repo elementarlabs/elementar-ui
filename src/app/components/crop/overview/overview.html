@@ -12,7 +12,11 @@
       </mat-form-field>
     </div>
 
-    <emr-crop [shape]="cropShape()">
+    @if (selection()) {
+      <div class="my-5">{{ selection() | json }}</div>
+    }
+
+    <emr-crop [shape]="cropShape()" (selectionApplied)="onSelectionApplied($event)">
       <img src="https://images.pexels.com/photos/34492076/pexels-photo-34492076.jpeg" width="500" alt="">
     </emr-crop>
   </div>
