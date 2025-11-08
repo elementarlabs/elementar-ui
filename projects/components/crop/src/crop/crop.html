@@ -1,8 +1,15 @@
-<ng-content></ng-content>
+<div class="crop-viewport">
+  <ng-content></ng-content>
+  <div
+    class="crop-selection-area"
+    [class.is-circle]="isCircle()"
+    [style]="selectionStyle()">
+  </div>
+</div>
 
+<!-- Handles are now outside the viewport to prevent clipping -->
 <div
-  class="crop-selection-area"
-  [class.is-circle]="isCircle()"
+  class="crop-handles-overlay"
   [style]="selectionStyle()">
   <div class="crop-handle move-handle" (mousedown)="onDragStart($event, 'move')"></div>
   <div class="crop-handle top-left" (mousedown)="onDragStart($event, 'top-left')"></div>

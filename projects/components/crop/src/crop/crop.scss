@@ -1,23 +1,36 @@
 :host {
-  display: inline-block; /* Important: Allows the host to size to its content */
+  display: inline-block;
   position: relative;
   user-select: none;
 }
 
+.crop-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* This is the key: it clips the box-shadow */
+}
+
 /* The projected content dictates the size */
-::ng-deep > *:first-child {
-  display: block; /* Ensure images and other elements behave predictably */
+::ng-deep > .crop-viewport > *:first-child {
+  display: block;
   max-width: 100%;
   height: auto;
 }
 
 .crop-selection-area {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  /* The selection is now defined by the box-shadow "hole" */
   box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.5);
+
+  &.is-circle {
+    border-radius: 50%;
+  }
+}
+
+.crop-handles-overlay {
+  position: absolute;
+  /* This overlay perfectly matches the selection area but has no shadow */
   border: 1px solid rgba(255, 255, 255, 0.7);
 
   &.is-circle {
