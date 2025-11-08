@@ -3,7 +3,7 @@ import {
   DestroyRef,
   Directive, ElementRef, EventEmitter,
   inject, Injector, input,
-  numberAttribute, OnDestroy, OnInit, output,
+  numberAttribute, OnDestroy, OnInit, output, signal,
   TemplateRef,
   ViewContainerRef
 } from '@angular/core';
@@ -59,6 +59,12 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
     transform: booleanAttribute
   });
   closeOnOriginMouseLeave = input(false, {
+    transform: booleanAttribute
+  });
+  hideOnScroll = input(false, {
+    transform: booleanAttribute
+  });
+  withLockedPosition = input(false, {
     transform: booleanAttribute
   });
 
@@ -192,7 +198,9 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
   private _getOverlayConfig() {
     return new OverlayConfig({
       positionStrategy: this._getOverlayPositionStrategy(),
-      scrollStrategy: this._overlay.scrollStrategies.reposition(),
+      scrollStrategy: this.hideOnScroll() ?
+        this._overlay.scrollStrategies.close() :
+        this._overlay.scrollStrategies.reposition(),
       direction: this._directionality || undefined
     });
   }
@@ -205,7 +213,7 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
       .setOrigin(origin)
       .withGrowAfterOpen()
       .withPositions(this._getOverlayPositions())
-    ;
+      .withLockedPosition(this.withLockedPosition());
   }
 
   private _getOverlayPositions(): ConnectedPosition[] {
