@@ -1,4 +1,5 @@
 import {
+  booleanAttribute,
   DestroyRef,
   Directive, ElementRef, EventEmitter,
   inject, Injector, input,
@@ -27,7 +28,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   host: {
     'class': 'emr-popover-trigger-for',
     '[class.emr-popover-trigger-for--is-open]': 'api.isOpen()',
-    '(click)': '_handleClick()',
+    '(mousedown)': '_handleClick()',
     '(mouseenter)': '_handleMouseover()',
     '(mouseleave)': '_handleMouseout()'
   }
@@ -54,6 +55,12 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
     transform: numberAttribute
   });
   origin = input<FlexibleConnectedPositionStrategyOrigin>();
+  closeOnOriginClick = input(false, {
+    transform: booleanAttribute
+  });
+  closeOnOriginMouseLeave = input(false, {
+    transform: booleanAttribute
+  });
 
   readonly opened = output<void>();
   readonly closed = output<void>();
@@ -66,6 +73,10 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
 
   protected _handleClick() {
     if (this.trigger() !== 'click') {
+      if (this.closeOnOriginClick()) {
+        this._close();
+      }
+
       return;
     }
 
@@ -83,6 +94,11 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
   protected _handleMouseout() {
     if (!this._isOpen()) {
       clearTimeout(this._openTimeout);
+    } else {
+      if (this.closeOnOriginMouseLeave()) {
+        this._close();
+        return;
+      }
     }
   }
 
@@ -141,6 +157,11 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
         .subscribe(event => {
           const target = _getEventTarget(event) as Element;
           const element = this._elementRef.nativeElement;
+
+          if (this.closeOnOriginClick() && ((target === element) || element.contains(target))) {
+            this._close();
+            return;
+          }
 
           if (target !== element && !element.contains(target)) {
             this._close();
@@ -212,6 +233,11 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
           takeUntilDestroyed(this._destroyRef)
         )
         .subscribe(event => {
+          if (this.closeOnOriginMouseLeave()) {
+            this._close();
+            return;
+          }
+
           this._closeTimeout = setTimeout(() => {
             this._close();
           }, this._closeDelay);
