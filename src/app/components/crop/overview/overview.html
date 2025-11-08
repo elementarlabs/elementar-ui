@@ -1,6 +1,35 @@
 <app-page>
-  <h1 appPageTitle>Crop</h1>
+  <h1 appPageTitle>Angular Material Crop Component</h1>
   <div appPageContent>
+    <div class="mb-10">
+      <p class="lead">Fast, modern, and easy image cropping for Angular — fully compatible with Angular Material and TailwindCSS.</p>
+      <p>
+        Add a polished, production-ready image cropping experience to your Angular app with minimal setup.
+        The component is touch-friendly, responsive, and integrates seamlessly with Angular Material dialogs, forms, and theming.
+      </p>
+      <ul class="list-disc list-inside">
+        <li>
+          <strong>✂️ Interactive cropping</strong>
+          <div>Drag to crop, pinch to zoom, and adjust with mouse or touch.</div>
+        </li>
+        <li>
+          <strong>🧩 Angular Material integration</strong>
+          <div>Works with MatDialog, reactive forms, Material themes and accessibility patterns.</div>
+        </li>
+        <li>
+          <strong>📱 Responsive & mobile-first</strong>
+          <div>Adapts to any screen size and input method.</div>
+        </li>
+      </ul>
+      <div class="mt-5"><strong>Perfect for:</strong></div>
+      <p>
+        👤 Avatar uploaders, 📰 content editors, 📦 admin dashboards, 🧠 AI tools — any app that needs a simple and powerful image cropping experience.
+      </p>
+      <p>
+        🚀 Angular Material Image Crop Component — the modern open-source solution for effortless image cropping in Angular.
+      </p>
+    </div>
+
     <h3 class="mat-title-large">Basic image crop</h3>
 
     <div class="mb-5 mt-5">
@@ -13,7 +42,7 @@
     </div>
 
     @if (selection()) {
-      <div class="my-5">{{ selection() | json }}</div>
+      <div class="mb-5">{{ selection() | json }}</div>
     }
 
     <emr-crop [shape]="cropShape()" (selectionApplied)="onSelectionApplied($event)">

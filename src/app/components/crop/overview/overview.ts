@@ -2,8 +2,6 @@ import { Component, model, signal } from '@angular/core';
 import { PageComponent } from '@meta/page/page.component';
 import { PageContentDirective } from '@meta/page/page-content.directive';
 import { PageTitleDirective } from '@meta/page/page-title.directive';
-import { PlaygroundComponent } from '@meta/playground/playground.component';
-import { BasicImageCropExample } from '../_examples/basic-image-crop-example/basic-image-crop-example';
 import { Crop, CropSelection } from '@elementar-ui/components/crop';
 import { FormsModule } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';

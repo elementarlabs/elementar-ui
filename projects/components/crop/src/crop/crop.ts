@@ -12,16 +12,21 @@ import {
 } from '@angular/core';
 
 export interface CropSelection {
-  topPx: number;
-  rightPx: number;
-  bottomPx: number;
-  leftPx: number;
-  topPct: number;
-  rightPct: number;
-  bottomPct: number;
-  leftPct: number;
-  widthPx: number;
-  heightPx: number;
+  shape: 'rectangle' | 'circle';
+  pixels: {
+    top: number;
+    right: number;
+    bottom: number;
+    left: number;
+    width: number;
+    height: number;
+  };
+  percentages: {
+    top: number;
+    right: number;
+    bottom: number;
+    left: number;
+  };
   containerWidth: number;
   containerHeight: number;
 }
@@ -52,8 +57,7 @@ export class Crop implements AfterViewInit {
   minWidth = input(100);
   minHeight = input(100);
   shape = input<'rectangle' | 'circle'>('rectangle');
-
-  readonly selectionApplied = output<CropSelection>();
+  selectionApplied = output<CropSelection>();
 
   isCircle = computed(() => this.shape() === 'circle');
   selection = signal<CropInset>({ top: 20, right: 20, bottom: 20, left: 20 });
@@ -105,6 +109,10 @@ export class Crop implements AfterViewInit {
       bottom: (hostHeight - size) / 2,
       left: left,
     });
+
+    // Emit the new selection state after it has been programmatically changed.
+    // Use a timeout to avoid potential "changed after checked" errors.
+    setTimeout(() => this.emitSelection(), 0);
   }
 
   selectionStyle = computed(() => ({
@@ -126,7 +134,6 @@ export class Crop implements AfterViewInit {
     if (!this.activeDragHandle()) {
       return;
     }
-
     this.activeDragHandle.set(null);
     this.emitSelection();
   }
@@ -140,23 +147,26 @@ export class Crop implements AfterViewInit {
       return;
     }
 
-    const currentSelection = this.selection();
-    const { top: topPx, right: rightPx, bottom: bottomPx, left: leftPx } = currentSelection;
-
-    const widthPx = containerWidth - leftPx - rightPx;
-    const heightPx = containerHeight - topPx - bottomPx;
+    const { top, right, bottom, left } = this.selection();
+    const width = containerWidth - left - right;
+    const height = containerHeight - top - bottom;
 
     this.selectionApplied.emit({
-      topPx,
-      rightPx,
-      bottomPx,
-      leftPx,
-      topPct: (topPx / containerHeight) * 100,
-      rightPct: (rightPx / containerWidth) * 100,
-      bottomPct: (bottomPx / containerHeight) * 100,
-      leftPct: (leftPx / containerWidth) * 100,
-      widthPx,
-      heightPx,
+      shape: this.shape(),
+      pixels: {
+        top,
+        right,
+        bottom,
+        left,
+        width,
+        height,
+      },
+      percentages: {
+        top: (top / containerHeight) * 100,
+        right: (right / containerWidth) * 100,
+        bottom: (bottom / containerHeight) * 100,
+        left: (left / containerWidth) * 100,
+      },
       containerWidth,
       containerHeight,
     });
