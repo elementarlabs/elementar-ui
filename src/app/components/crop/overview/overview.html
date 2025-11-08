@@ -2,7 +2,17 @@
   <h1 appPageTitle>Crop</h1>
   <div appPageContent>
     <h3 class="mat-title-large">Basic image crop</h3>
-    <emr-crop>
+
+    <div class="mb-5 mt-5">
+      <mat-form-field class="w-72">
+        <mat-select [(ngModel)]="cropShape" placeholder="Shape">
+          <mat-option value="rectangle">Rectangle</mat-option>
+          <mat-option value="circle">Circle</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <emr-crop [shape]="cropShape()">
       <img src="https://images.pexels.com/photos/34492076/pexels-photo-34492076.jpeg" width="500" alt="">
     </emr-crop>
   </div>
