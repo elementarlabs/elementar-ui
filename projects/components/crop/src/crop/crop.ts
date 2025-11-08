@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   ElementRef,
   inject,
   input,
@@ -34,8 +33,8 @@ type DragHandle =
   },
 })
 export class Crop implements AfterViewInit {
-  minWidth = input(20);
-  minHeight = input(20);
+  minWidth = input(100);
+  minHeight = input(100);
   shape = input<'rectangle' | 'circle'>('rectangle');
   selectionApplied = output<CropSelection>();
 
@@ -47,19 +46,23 @@ export class Crop implements AfterViewInit {
   private startDragPosition = signal<{ x: number; y: number } | null>(null);
   private startDragSelection = signal<CropSelection | null>(null);
 
-  constructor() {
-    effect(() => {
-      // Handles dynamic changes of the `shape` input after initialization.
-      if (this.isCircle() && this.elementRef.nativeElement.offsetWidth > 0) {
-        this.resetSelectionToSquare();
-      }
-    });
-  }
-
   ngAfterViewInit(): void {
-    // Handles the initial case when the component loads with shape="circle".
     if (this.isCircle()) {
-      this.resetSelectionToSquare();
+      const hostEl = this.elementRef.nativeElement;
+
+      // If the element already has a size (e.g., cached image), reset immediately.
+      if (hostEl.offsetWidth > 0 && hostEl.offsetHeight > 0) {
+        this.resetSelectionToSquare();
+      } else {
+        // Otherwise, use ResizeObserver to wait for the host to get its final size.
+        const observer = new ResizeObserver(() => {
+          if (hostEl.offsetWidth > 0 && hostEl.offsetHeight > 0) {
+            this.resetSelectionToSquare();
+            observer.disconnect(); // We only need to do this once.
+          }
+        });
+        observer.observe(hostEl);
+      }
     }
   }
 
@@ -75,8 +78,8 @@ export class Crop implements AfterViewInit {
 
     this.selection.set({
       top: top,
-      right: left,
-      bottom: top,
+      right: (hostWidth - size) / 2,
+      bottom: (hostHeight - size) / 2,
       left: left,
     });
   }
