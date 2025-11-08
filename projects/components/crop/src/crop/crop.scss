@@ -1,0 +1,75 @@
+:host {
+  display: inline-block; /* Important: Allows the host to size to its content */
+  position: relative;
+  user-select: none;
+}
+
+/* The projected content dictates the size */
+::ng-deep > *:first-child {
+  display: block; /* Ensure images and other elements behave predictably */
+  max-width: 100%;
+  height: auto;
+}
+
+.crop-selection-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+
+  &.is-circle {
+    border-radius: 50%;
+  }
+}
+
+.crop-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.move-handle {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  cursor: move;
+
+  .is-circle & {
+    border-radius: 50%;
+  }
+}
+
+.top-left { top: -5px; left: -5px; cursor: nwse-resize; }
+.top-right { top: -5px; right: -5px; cursor: nesw-resize; }
+.bottom-left { bottom: -5px; left: -5px; cursor: nesw-resize; }
+.bottom-right { bottom: -5px; right: -5px; cursor: nwse-resize; }
+
+.top { top: -5px; left: 50%; transform: translateX(-50%); cursor: ns-resize; }
+.right { top: 50%; right: -5px; transform: translateY(-50%); cursor: ew-resize; }
+.bottom { bottom: -5px; left: 50%; transform: translateX(-50%); cursor: ns-resize; }
+.left { top: 50%; left: -5px; transform: translateY(-50%); cursor: ew-resize; }
+
+.controls-footer {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  padding: 10px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  z-index: 1; /* Ensure it's above the shadow */
+}

@@ -4,6 +4,7 @@ import { PageContentDirective } from '@meta/page/page-content.directive';
 import { PageTitleDirective } from '@meta/page/page-title.directive';
 import { PlaygroundComponent } from '@meta/playground/playground.component';
 import { BasicImageCropExample } from '../_examples/basic-image-crop-example/basic-image-crop-example';
+import { Crop } from '@elementar-ui/components/crop';
 
 @Component({
   imports: [
@@ -11,7 +12,8 @@ import { BasicImageCropExample } from '../_examples/basic-image-crop-example/bas
     PageContentDirective,
     PageTitleDirective,
     PlaygroundComponent,
-    BasicImageCropExample
+    BasicImageCropExample,
+    Crop
   ],
   templateUrl: './overview.html',
   styleUrl: './overview.scss'

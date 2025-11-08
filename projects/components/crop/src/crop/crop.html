@@ -1,1 +1,21 @@
-<p>crop works!</p>
+<ng-content></ng-content>
+
+<div
+  class="crop-selection-area"
+  [class.is-circle]="isCircle()"
+  [style]="selectionStyle()">
+  <div class="crop-handle move-handle" (mousedown)="onDragStart($event, 'move')"></div>
+  <div class="crop-handle top-left" (mousedown)="onDragStart($event, 'top-left')"></div>
+  <div class="crop-handle top-right" (mousedown)="onDragStart($event, 'top-right')"></div>
+  <div class="crop-handle bottom-left" (mousedown)="onDragStart($event, 'bottom-left')"></div>
+  <div class="crop-handle bottom-right" (mousedown)="onDragStart($event, 'bottom-right')"></div>
+
+  <div class="crop-handle top" [class.hidden]="isCircle()" (mousedown)="onDragStart($event, 'top')"></div>
+  <div class="crop-handle right" [class.hidden]="isCircle()" (mousedown)="onDragStart($event, 'right')"></div>
+  <div class="crop-handle bottom" [class.hidden]="isCircle()" (mousedown)="onDragStart($event, 'bottom')"></div>
+  <div class="crop-handle left" [class.hidden]="isCircle()" (mousedown)="onDragStart($event, 'left')"></div>
+</div>
+
+<div class="controls-footer">
+  <button (click)="applySelection()">Apply</button>
+</div>
