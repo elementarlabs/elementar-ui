@@ -3,7 +3,7 @@ import {
   DestroyRef,
   Directive, ElementRef, EventEmitter,
   inject, Injector, input,
-  numberAttribute, OnDestroy, OnInit, output, signal,
+  numberAttribute, OnDestroy, OnInit, output,
   TemplateRef,
   ViewContainerRef
 } from '@angular/core';
@@ -28,7 +28,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   host: {
     'class': 'emr-popover-trigger-for',
     '[class.emr-popover-trigger-for--is-open]': 'api.isOpen()',
-    '(mousedown)': '_handleClick()',
+    '(click)': '_handleClick()',
     '(mouseenter)': '_handleMouseover()',
     '(mouseleave)': '_handleMouseout()'
   }
@@ -61,10 +61,7 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
   closeOnOriginMouseLeave = input(false, {
     transform: booleanAttribute
   });
-  hideOnScroll = input(false, {
-    transform: booleanAttribute
-  });
-  withLockedPosition = input(false, {
+  hasBackdrop = input(false, {
     transform: booleanAttribute
   });
 
@@ -198,10 +195,10 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
 
   private _getOverlayConfig() {
     return new OverlayConfig({
+      hasBackdrop: this.hasBackdrop(),
+      backdropClass: 'emr-popover-overlay-backdrop',
       positionStrategy: this._getOverlayPositionStrategy(),
-      scrollStrategy: this.hideOnScroll() ?
-        this._overlay.scrollStrategies.close() :
-        this._overlay.scrollStrategies.reposition(),
+      scrollStrategy: this._overlay.scrollStrategies.reposition(),
       direction: this._directionality || undefined
     });
   }
@@ -213,8 +210,7 @@ export class PopoverTriggerForDirective implements OnInit, OnDestroy {
       .flexibleConnectedTo(origin)
       .setOrigin(origin)
       .withGrowAfterOpen()
-      .withPositions(this._getOverlayPositions())
-      .withLockedPosition(this.withLockedPosition());
+      .withPositions(this._getOverlayPositions());
   }
 
   private _getOverlayPositions(): ConnectedPosition[] {
