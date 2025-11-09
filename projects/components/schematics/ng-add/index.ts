@@ -5,13 +5,13 @@ import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schema
 import { Schema } from './schema';
 
 const DEPENDENCIES = {
-  '@elementar-ui/components': '^0.6.49',
+  '@elementar-ui/components': '^0.6.50',
   "@dicebear/collection": "^9.2.2",
   "@dicebear/core": "^9.2.2",
   "@iconify-json/circle-flags": "^1.2.4",
   "@iconify-json/ph": "^1.2.2",
-  "@ngrx/signals": "^20.0.0",
-  "@ngrx/store": "^20.0.0",
+  "@ngrx/signals": "^20.1.0",
+  "@ngrx/store": "^20.1.0",
   "@tiptap/core": "2.10.2",
   "@tiptap/extension-bubble-menu": "2.10.2",
   "@tiptap/extension-code-block": "2.10.2",

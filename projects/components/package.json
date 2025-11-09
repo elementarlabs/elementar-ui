@@ -1,7 +1,7 @@
 {
   "name": "@elementar-ui/components",
   "description": "Elementar UI Components - Free and open source Angular UI components based on Material 3 and Tailwind",
-  "version": "0.6.49",
+  "version": "0.6.50",
   "repository": {
     "type": "git",
     "url": "https://github.com/elementarlabs/elementar-ui.git"
@@ -36,7 +36,7 @@
     "@types/jsdom": "^21.1.7"
   },
   "peerDependencies": {
-    "@angular/cdk": "^20.2.8",
+    "@angular/cdk": "^20.2.12",
     "@angular/common": "^20.3.0",
     "@angular/localize": "^20.3.4",
     "@angular/compiler": "^20.3.0",
