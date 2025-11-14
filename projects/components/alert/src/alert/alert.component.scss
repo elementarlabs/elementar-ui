@@ -80,6 +80,10 @@
     gap: var(--emr-alert-actions-gap);
     line-height: 0;
     flex: none;
+
+    &:empty {
+      display: none;
+    }
   }
 
   &[emr-alert-variant="default"],
