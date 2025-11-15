@@ -9,7 +9,8 @@ import {
   Renderer2,
   PLATFORM_ID,
   AfterContentChecked,
-  afterNextRender,
+  OnDestroy,
+  afterNextRender, DOCUMENT, numberAttribute, AfterViewInit,
 } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 
@@ -33,26 +34,35 @@ import { isPlatformServer } from '@angular/common';
     '(input)': 'onInput()',
   },
 })
-export class InlineTextEditComponent implements AfterContentChecked {
+export class InlineTextEditComponent implements AfterViewInit, AfterContentChecked, OnDestroy {
   private platformId = inject(PLATFORM_ID);
+  private document = inject(DOCUMENT);
 
   enabled = input(true);
   placeholder = input('');
+  delay = input(0, {
+    transform: numberAttribute
+  });
 
-  readonly changed = output<string>();
+  readonly contentChanged = output<string>();
 
   isEditing = signal(false);
   isFocused = signal(false);
 
-  private previousValue: string = '';
+  private previousValue = '';
   private minHeightSet = false;
   private elementRef = inject(ElementRef<HTMLElement>);
   private renderer = inject(Renderer2);
+  private emitTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
   constructor() {
     afterNextRender(() => {
       this.setInitialMinHeight();
     });
+  }
+
+  ngAfterViewInit() {
+    this.previousValue = this.elementRef.nativeElement.textContent;
   }
 
   get isContentEditable() {
@@ -65,6 +75,10 @@ export class InlineTextEditComponent implements AfterContentChecked {
     }
 
     this.setInitialMinHeight();
+  }
+
+  ngOnDestroy(): void {
+    this.clearPendingEmission();
   }
 
   private setInitialMinHeight(): void {
@@ -114,10 +128,11 @@ export class InlineTextEditComponent implements AfterContentChecked {
   onPaste(event: ClipboardEvent): void {
     event.preventDefault();
     const text = event.clipboardData?.getData('text/plain') ?? '';
-    document.execCommand('insertText', false, text);
+    this.document.execCommand('insertText', false, text);
   }
 
   onInput(): void {
+    this.isEditing.set(true);
     // Track live changes and normalize empty content.
     // Browsers may insert a <br> (or wrappers like <div><br></div>) in empty contenteditable elements.
     const el = this.elementRef.nativeElement;
@@ -145,7 +160,8 @@ export class InlineTextEditComponent implements AfterContentChecked {
     const newValue = this.elementRef.nativeElement.textContent?.trim() ?? '';
 
     if (newValue !== this.previousValue) {
-      this.changed.emit(newValue);
+      this.previousValue = newValue;
+      this.emitWithDelay(newValue);
     }
 
     this.isEditing.set(false);
@@ -157,6 +173,53 @@ export class InlineTextEditComponent implements AfterContentChecked {
     }
 
     this.elementRef.nativeElement.textContent = this.previousValue;
+    // Keep focus and move caret to the end of the restored content for better UX.
+    this.placeCaretAtEnd();
     this.isEditing.set(false);
+    // Cancel any pending emission since the edit was canceled.
+    this.clearPendingEmission();
+  }
+
+  private placeCaretAtEnd(): void {
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+
+    const el = this.elementRef.nativeElement;
+    // Ensure the host is focused so caret positioning is visible.
+    el.focus();
+
+    const selection = this.document.getSelection?.();
+    if (!selection) {
+      return;
+    }
+
+    const range = this.document.createRange();
+    range.selectNodeContents(el);
+    range.collapse(false); // collapse to end
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+
+  private emitWithDelay(value: string): void {
+    const d = this.delay();
+    // Always clear a previous scheduled emission to ensure only the latest value is emitted
+    this.clearPendingEmission();
+
+    if (d > 0) {
+      this.emitTimeoutId = setTimeout(() => {
+        this.emitTimeoutId = null;
+        this.contentChanged.emit(value);
+      }, d);
+    } else {
+      this.contentChanged.emit(value);
+    }
+  }
+
+  private clearPendingEmission(): void {
+    if (this.emitTimeoutId) {
+      clearTimeout(this.emitTimeoutId);
+      this.emitTimeoutId = null;
+    }
   }
 }
