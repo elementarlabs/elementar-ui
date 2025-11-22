@@ -40,11 +40,11 @@
 
     ::ng-deep {
       .emr-sidebar-full-view-mode {
-        display: none;
+        display: block;
       }
 
       .emr-sidebar-compact-view-mode {
-        display: block;
+        display: none;
       }
     }
   }
@@ -160,6 +160,20 @@
     border-bottom-left-radius: calc(var(--emr-sidebar-nav-nested-item-height) / 4);
     border-left: 1px solid var(--emr-sidebar-nav-group-tree-lines-color);
     border-bottom: 1px solid var(--emr-sidebar-nav-group-tree-lines-color);
+  }
+}
+
+:host-context(.emr-sidebar.compact) {
+  .text {
+    ::ng-deep {
+      .emr-sidebar-full-view-mode {
+        display: none;
+      }
+
+      .emr-sidebar-compact-view-mode {
+        display: block;
+      }
+    }
   }
 }
 

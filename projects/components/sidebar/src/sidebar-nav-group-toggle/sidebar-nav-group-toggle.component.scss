@@ -25,11 +25,11 @@
 
     ::ng-deep {
       .emr-sidebar-full-view-mode {
-        display: none;
+        display: block;
       }
 
       .emr-sidebar-compact-view-mode {
-        display: block;
+        display: none;
       }
     }
   }
@@ -107,6 +107,21 @@
     padding-inline-end: var(--emr-sidebar-nav-group-toggle-has-icon-padding-end);
   }
 }
+
+:host-context(.emr-sidebar.compact) {
+  .text {
+    ::ng-deep {
+      .emr-sidebar-full-view-mode {
+        display: none;
+      }
+
+      .emr-sidebar-compact-view-mode {
+        display: block;
+      }
+    }
+  }
+}
+
 
 :host-context(.emr-sidebar.compact:hover) {
   .text {
