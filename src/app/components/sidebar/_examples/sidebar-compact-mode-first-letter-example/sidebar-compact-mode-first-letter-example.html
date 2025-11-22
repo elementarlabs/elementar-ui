@@ -1,0 +1,70 @@
+<div>
+  <mat-slide-toggle [(ngModel)]="compact">Compact</mat-slide-toggle>
+</div>
+<div class="h-[600px] relative mt-10">
+  <emr-sidebar [compact]="compact" class="border border-default rounded-2xl">
+    <emr-sidebar-header class="h-20 border-b border-b-default font-bold text-primary">
+      <div emrSidebarCompactViewMode>El</div>
+      <div emrSidebarFullViewMode>Elementar</div>
+    </emr-sidebar-header>
+    <emr-sidebar-body>
+      <emr-sidebar-nav>
+        @for (navItem of navItems; track navItem) {
+          @switch (navItem.type) {
+            @case ('group') {
+              <emr-sidebar-nav-group>
+                <emr-sidebar-nav-group-toggle>
+                  <ng-container emrSidebarNavItemIcon>
+                    @if (navItem.icon) {
+                      <mat-icon>{{ navItem.icon }}</mat-icon>
+                    }
+                  </ng-container>
+                  <span emrSidebarFullViewMode>{{ navItem.label }}</span>
+                  <span emrSidebarCompactViewMode>{{ trancate(navItem.label) }}</span>
+                  <mat-icon emrSidebarNavGroupToggleIcon>arrow_drop_down</mat-icon>
+                </emr-sidebar-nav-group-toggle>
+                <emr-sidebar-nav-group-menu>
+                  @for (childNavItem of navItem.children; track childNavItem) {
+                    <emr-sidebar-nav-item [key]="childNavItem.key">
+                      <ng-container emrSidebarNavItemIcon>
+                        @if (childNavItem.icon) {
+                          <mat-icon>{{ navItem.icon }}</mat-icon>
+                        }
+                      </ng-container>
+                      {{ navItem.label }}
+                    </emr-sidebar-nav-item>
+                  }
+                </emr-sidebar-nav-group-menu>
+              </emr-sidebar-nav-group>
+            }
+            @case ('heading') {
+              <emr-sidebar-nav-heading>{{ navItem.label }}</emr-sidebar-nav-heading>
+            }
+            @case ('divider') {
+              <emr-sidebar-nav-divider/>
+            }
+            @default {
+              <emr-sidebar-nav-item [key]="navItem.key">
+                <ng-container emrSidebarNavItemIcon>
+                  @if (navItem.icon) {
+                    <mat-icon>{{ navItem.icon }}</mat-icon>
+                  }
+                </ng-container>
+                <span emrSidebarFullViewMode>{{ navItem.label }}</span>
+                <span emrSidebarCompactViewMode class="text-center">{{ navItem.label[0] }}</span>
+              </emr-sidebar-nav-item>
+            }
+          }
+        }
+      </emr-sidebar-nav>
+    </emr-sidebar-body>
+    <emr-sidebar-footer class="h-20 border-t border-t-default whitespace-nowrap text-sm">
+      <div emrSidebarFullViewMode>
+        Copyright &copy; 2024
+      </div>
+      <div emrSidebarCompactViewMode>
+        2024
+      </div>
+    </emr-sidebar-footer>
+  </emr-sidebar>
+</div>

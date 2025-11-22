@@ -8,6 +8,9 @@ import {
   SidebarWithCustomIconsExampleComponent
 } from '../_examples/sidebar-with-custom-icons-example/sidebar-with-custom-icons-example.component';
 import { PageTitleDirective } from '@meta/page/page-title.directive';
+import {
+  SidebarCompactModeFirstLetterExample
+} from '../_examples/sidebar-compact-mode-first-letter-example/sidebar-compact-mode-first-letter-example';
 
 @Component({
   imports: [
@@ -17,7 +20,8 @@ import { PageTitleDirective } from '@meta/page/page-title.directive';
     PageComponent,
     SidebarCompactExampleComponent,
     SidebarWithCustomIconsExampleComponent,
-    PageTitleDirective
+    PageTitleDirective,
+    SidebarCompactModeFirstLetterExample
   ],
     templateUrl: './overview.component.html',
     styleUrl: './overview.component.scss'
