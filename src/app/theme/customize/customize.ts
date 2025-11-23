@@ -12,7 +12,7 @@ import { CodeHighlighter } from '@elementar-ui/components/code-highlighter';
 export class Customize {
   defaultTheme = signal(`@use '@elementar-ui/components/styles/themes/default';`);
   roseRedTheme = signal(`@use '@elementar-ui/components/styles/themes/magenta-violet';`);
-  generateAngularTheme = signal(`ng g @elementar/angular:theme my-theme`);
+  generateAngularTheme = signal(`ng generate @angular/material:theme-color my-theme`);
   addTheme = signal(`@use './my-theme' as themeColors;
 @use '@angular/material' as mat;
 @use "@elementar-ui/components/styles/common" with (
