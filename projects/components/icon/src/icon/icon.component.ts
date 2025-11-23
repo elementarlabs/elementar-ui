@@ -7,10 +7,9 @@ import {
   OnInit, signal,
   SimpleChanges
 } from '@angular/core';
-import { loadIcon, enableCache } from 'iconify-icon';
+import { loadIcon } from 'iconify-icon';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { v7 as uuid } from 'uuid';
-enableCache('all');
 
 @Component({
   selector: 'emr-icon',
